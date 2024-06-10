@@ -7,7 +7,7 @@ local d6_side_info = SMODS.D6_Side({
 		},
 		label = "Pure: Calmness"
 	},
-	config = {hand_size = 4},
+	config = {hand_size = 6},
 	atlas = "d6_side_pure",
 	icon_pos = {x=7, y=5},
 	pos = {x=0, y=1},

@@ -4,7 +4,7 @@
 --- MOD_AUTHOR: [ItsFlowwey]
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
---- VERSION: 0.5.12
+--- VERSION: 0.5.13
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
@@ -99,7 +99,7 @@ SMODS.D6_Side = SMODS.GameObject:extend {
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
             end
-            if other_joker and other_joker ~= card and other_joker.ability.extra.local_d6_sides then
+            if other_joker and other_joker ~= card and other_joker.ability.extra and other_joker.ability.extra.local_d6_sides then
 				if other_joker.ability.extra.chaos_selected_die then return SMODS.D6_Sides[other_joker.ability.extra.chaos_selected_die].key
 				else return SMODS.D6_Sides[other_joker.ability.extra.local_d6_sides[other_joker.ability.extra.selected_d6_face]].key end
             end
@@ -170,7 +170,8 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 				if SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
 					SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:remove_from_deck(card, nil, true)
 				end
-				card.ability.extra.selected_d6_face = (context.blind.key == "bl_dsix_the_die1" and 1) or pseudorandom("d6_joker"..card.config.center.key, 1, 6)
+				card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
+
 				if SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].add_to_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].add_to_deck) == "function" then
 					SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:add_to_deck(card, nil, true)
 				end
@@ -218,6 +219,10 @@ function mod_mult(_mult)
 	local curr_mult = mod_chips_ref(_mult)
 	return math.max(curr_mult, 0)
 end
+
+--Blame Cryptid for this
+function math.clamp(low, n, high) return math.min(math.max(low, n), high) end
+function math.round(n, deci) deci = 10^(deci or 0) return math.floor(n*deci+.5)/deci end
 
 function Card:align_h_popup()
 	local focused_ui = self.children.focused_ui and true or false

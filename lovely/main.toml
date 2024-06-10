@@ -52,6 +52,7 @@ payload = '''
             if card.config and (card.config.center and card.config.center.d6_joker) then
                 test_thingy = Moveable(44, 53, 1.5, 1.5)
                 is_d6_joker = true
+                card.ability.extra.selected_d6_face = math.clamp(1, math.round(card.ability.extra.selected_d6_face), 6)
                 local base_d6_sprite = Sprite(44, 53, 1.5, 1.5, G.ASSET_ATLAS["dsix_base_test_d6_art"], {x=0, y=0})
                 local test_d6_selector = Sprite(44, 53, 1.5, 1.5, G.ASSET_ATLAS["dsix_d6_test_selector"], {x=(card.ability.extra.selected_d6_face or 1)-1, y=0})
                 for i, v in ipairs(card.ability.extra.local_d6_sides) do

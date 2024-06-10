@@ -10,12 +10,12 @@ local d6_joker_info = SMODS.D6_Joker({
 	},
 	discovered = true,
 	d6_sides = {
-		[1] = "pure_slayer_side",
-		[2] = "pure_calmness_side",
-		[3] = "pure_slayer_side",
-		[4] = "pure_calmness_side",
-		[5] = "pure_slayer_side",
-		[6] = "pure_calmness_side"
+		[1] = "pure_calmness_side",
+		[2] = "pure_slayer_side",
+		[3] = "pure_calmness_side",
+		[4] = "pure_slayer_side",
+		[5] = "pure_calmness_side",
+		[6] = "pure_slayer_side"
 	},
 	rarity = 4,
 	cost = 20,

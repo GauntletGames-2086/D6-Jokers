@@ -8,7 +8,7 @@ local d6_side_info = SMODS.D6_Side({
 		},
 		label = "Pure: Slayer"
 	},
-	config = {score_decrease = 0.25},
+	config = {score_decrease = 0.5},
 	atlas = "d6_side_pure",
 	icon_pos = {x=6, y=5},
 	pos = {x=0, y=0},
