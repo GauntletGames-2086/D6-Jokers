@@ -17,7 +17,7 @@ local d6_side_info = SMODS.D6_Side({
 		return {vars = {self.config.count}}
 	end,
 	calculate = function(self, card, context)
-		if context.selling_self then
+		if context.selling_self and not context.blueprint then
 			G.E_MANAGER:add_event(Event({
 				func = (function()
 					add_tag(Tag("tag_orbital", false, 'Small'))

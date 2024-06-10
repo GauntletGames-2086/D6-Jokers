@@ -17,7 +17,7 @@ local d6_side_info = SMODS.D6_Side({
 		return {vars = {self.config.count}}
 	end,
 	calculate = function(self, card, context)
-		if context.selling_self then
+		if context.selling_self and not context.blueprint then
 			local total_card_pack_tags = {}
 			for k, v in pairs(G.P_TAGS) do
 				if v.config["type"] and v.config.type == 'new_blind_choice' and k ~= "tag_boss" then total_card_pack_tags[#total_card_pack_tags+1] = k end
