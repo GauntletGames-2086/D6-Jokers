@@ -120,18 +120,22 @@ payload = '''
 				}}
 				end
 			end
-			--ADDED CODE FROM D6 JOKERS
-            
-'''
 
-# G.UIDEF.card_h_popup()
-[[patches]]
-[patches.regex]
-target = 'functions/UI_definitions.lua'
-pattern = '(?<indent>[\t ]*)desc_from_rows\(AUT\.main\),'
-position = 'after'
-payload = '''
-					d6_joker_UI_code,
+            if is_d6_joker then 
+                return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
+                {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes={
+                  {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
+                    {n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
+                      name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
+                      desc_from_rows(AUT.main),
+                      d6_joker_UI_code,
+                      badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
+                      }}
+                    }}
+                  }},
+                }}
+            end
+			--ADDED CODE FROM D6 JOKERS
 '''
 
 # info_tip_from_rows()
