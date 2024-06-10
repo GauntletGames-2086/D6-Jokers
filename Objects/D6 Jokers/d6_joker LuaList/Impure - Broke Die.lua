@@ -24,7 +24,7 @@ local d6_joker_info = SMODS.D6_Joker({
 	config = {extra = {money_required = 100}},
 	loc_vars = function(self, info_queue, card)
 		SMODS.D6_Joker.loc_vars(self, info_queue, card)
-		return {vars = {card.ability.extra.money_requiredd}}
+		return {vars = {card.ability.extra.money_required}}
 	end,
 	calculate = function(self, card, context)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
