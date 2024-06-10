@@ -196,7 +196,7 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 			SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:remove_from_deck(card, from_debuff, false)
 		end
 	end,
-	calc_dollar_bonus = function(card)
+	calc_dollar_bonus = function(self, card)
 		if card.ability.extra.chaos_selected_die and (SMODS.D6_Sides[card.ability.extra.chaos_selected_die].calc_dollar_bonus and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].calc_dollar_bonus) == "function") then
 			local o = SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:calc_dollar_bonus(card)
 			if o then return o end

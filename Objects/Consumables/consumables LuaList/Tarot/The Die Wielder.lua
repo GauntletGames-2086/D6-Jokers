@@ -22,7 +22,7 @@ local tarot_info = SMODS.Consumable({
 			play_sound('timpani')
 			local valid_keys = {}
 			for k, v in pairs(SMODS.D6_Jokers) do
-				valid_keys[#valid_keys+1] = k
+				if not v.impure then valid_keys[#valid_keys+1] = k end
 			end
 			local _card = create_card('Joker', G.jokers, nil, nil, nil, nil, pseudorandom_element(valid_keys, pseudoseed("the_die_wielder_spawn")))
 			_card:add_to_deck()
