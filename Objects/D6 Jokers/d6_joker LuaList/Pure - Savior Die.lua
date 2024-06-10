@@ -1,7 +1,7 @@
 local d6_joker_info = SMODS.D6_Joker({
-	key = "pure_saviour_die",
+	key = "pure_savior_die",
 	loc_txt = {
-		name = "Pure: Saviour Die",
+		name = "Pure: Savior Die",
 		text = {
 			"The pinacle of strength and might",
 			"No blind can hold it's own",

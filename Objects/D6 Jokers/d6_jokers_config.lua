@@ -21,7 +21,7 @@ local order_list = {
 	["j_dsix_insurance_plus_die"] = {order = 20},
 	["j_dsix_impure_gutless_die"] = {order = 21},
 	["j_dsix_impure_broke_die"] = {order = 22},
-	["j_dsix_pure_saviour_die"] = {order = 23},
+	["j_dsix_pure_savior_die"] = {order = 23},
 	["j_dsix_pure_exchange_die"] = {order = 24}
 }
 
