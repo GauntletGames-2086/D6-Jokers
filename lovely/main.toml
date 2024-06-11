@@ -11,8 +11,10 @@ pattern = '(?<indent>[\t ]*)for _, v in pairs\(G\.DISCOVER_TALLIES\) do'
 position = 'before'
 payload = '''
     --ADDED CODE FROM D6 JOKERS
-    for _, v in ipairs(SMODS.D6_Side.obj_buffer) do
-  	  G.DISCOVER_TALLIES["d6_sides"] = {tally = 0, of = 0}
+    if SMODS.D6_Side then
+        for _, v in ipairs(SMODS.D6_Side.obj_buffer) do
+            G.DISCOVER_TALLIES["d6_sides"] = {tally = 0, of = 0}
+        end
     end
     --ADDED CODE FROM D6 JOKERS
 
@@ -26,13 +28,15 @@ pattern = '(?<indent>[\t ]*)for _, v in pairs\(G\.P_BLINDS\) do'
 position = 'before'
 payload = '''
   --ADDED CODE FROM D6 JOKERS
-  for _, v in pairs(G.P_D6_SIDES) do
-      G.DISCOVER_TALLIES.total.of = G.DISCOVER_TALLIES.total.of+1
-      G.DISCOVER_TALLIES.d6_sides.of = G.DISCOVER_TALLIES.d6_sides.of+1
-      if v.discovered then 
-          G.DISCOVER_TALLIES.d6_sides.tally = G.DISCOVER_TALLIES.d6_sides.tally+1
-          G.DISCOVER_TALLIES.total.tally = G.DISCOVER_TALLIES.total.tally+1
-      end
+  if SMODS.D6_Side then
+    for _, v in pairs(G.P_D6_SIDES) do
+        G.DISCOVER_TALLIES.total.of = G.DISCOVER_TALLIES.total.of+1
+        G.DISCOVER_TALLIES.d6_sides.of = G.DISCOVER_TALLIES.d6_sides.of+1
+        if v.discovered then 
+            G.DISCOVER_TALLIES.d6_sides.tally = G.DISCOVER_TALLIES.d6_sides.tally+1
+            G.DISCOVER_TALLIES.total.tally = G.DISCOVER_TALLIES.total.tally+1
+        end
+    end
   end
   --ADDED CODE FROM D6 JOKERS
 
@@ -148,7 +152,7 @@ position = 'before'
 payload = '''
     --ADDED CODE FROM D6 JOKERS
 	local d6_side_config = nil
-	if SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[name]] ~= nil then
+	if SMODS.D6_Sides and SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[name]] ~= nil then
 		local d6_side_icon_pos = SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[name]].icon_pos
 		local d6_icon_sprite = Sprite(18, 18, 0.75, 0.75, G.ASSET_ATLAS["dsix_d6_side_icons"], d6_side_icon_pos)
 		d6_icon_sprite:define_draw_steps({{shader = 'dissolve', no_tilt = true}})
@@ -174,5 +178,5 @@ target = 'functions/UI_definitions.lua'
 pattern = '''(?<indent>[\t ]*)UIBox_button\(\{button = 'your_collection_blinds', label = \{localize\('b_blinds'\)\}, count = G\.DISCOVER_TALLIES\.blinds, minw = 5, minh = 2.0, id = 'your_collection_blinds', focus_args = \{snap_to = true\}\}\),'''
 position = 'after'
 payload = '''
-UIBox_button({button = 'your_collection_d6_sides', label = {localize('b_d6_sides')}, count = G.DISCOVER_TALLIES.d6_sides, minw = 5, minh = 2.0, id = 'your_collection_d6_sides', focus_args = {snap_to = true}}),
+SMODS.D6_Sides and UIBox_button({button = 'your_collection_d6_sides', label = {localize('b_d6_sides')}, count = G.DISCOVER_TALLIES.d6_sides, minw = 5, minh = 2.0, id = 'your_collection_d6_sides', focus_args = {snap_to = true}}) or nil,
 '''

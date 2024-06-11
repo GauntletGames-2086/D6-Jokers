@@ -5,6 +5,7 @@
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
 --- VERSION: 0.5.13
+--- LOADER_VERSION_GEQ: 1.0.0-ALPHA-0609b
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
