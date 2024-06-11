@@ -14,13 +14,11 @@ local d6_side_info = SMODS.D6_Side({
 	icon_pos = {x=0, y=4},
 	upgrade = "chaos_plus_side",
 	loc_vars = function(self, info_queue, card)
-		sendInfoMessage("card: "..tostring(card))
-		if card then sendInfoMessage("chaos_selected_die: "..tostring(card.ability.extra.chaos_selected_die)) end
 		if not (card and card.ability.extra.chaos_selected_die) then return {vars = {localize("k_na")}}
 		else return {vars = {localize{type = 'name_text', key = card.ability.extra.chaos_selected_die, set = 'Other'}}}
 		end
 	end,
-	add_to_deck = function(self, card, from_debuff)
+	add_to_deck = function(self, card, from_debuff, from_roll)
 		local viable_die_sides = {}
 		for k, v in pairs(G.P_D6_SIDES) do
 			if k ~= self.key then viable_die_sides[#viable_die_sides+1] = k end

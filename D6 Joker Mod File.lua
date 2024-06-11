@@ -47,7 +47,8 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 	obj_buffer = {},
 	required_params = {
 		'key',
-		'loc_txt'
+		'loc_txt',
+		'atlas'
 	},
 	set = "D6 Side",
 	atlas = "d6_side_nothing",
@@ -115,12 +116,8 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 			return total_d6_sides
 		end
 	end,
-	is_die_side = function(die_to_check, die_key, card, ignore_bypass)
-		if ignore_bypass then
-			return card.config.center.bypass[die_side_key]
-		else
-			return die_to_check == die_key
-		end
+	is_die_side = function(die_key_to_check, die_key, card)
+		return die_key_to_check == die_key
 	end,
 }
 
@@ -134,7 +131,7 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 	},
 	d6_joker = true,
 	set_ability = function(self, card, initial, delay_sprites)
-		card.ability.extra.selected_d6_face = math.random(1, 6)
+		card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
 		card.ability.extra.local_d6_sides = copy_table(card.config.center.d6_sides)
 	end,
 	process_loc_text = function(self)
@@ -148,7 +145,6 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		--Inject logic into the config so jokers extending this don't need to add it manually
 		G.P_CENTERS[self.key].config.extra["selected_d6_face"] = 1 
 		G.P_CENTERS[self.key].config.extra["d6_joker_spawned"] = false
-		G.P_CENTERS[self.key]["bypass"] = {}
 		SMODS.D6_Jokers[self.key] = self
 	end,
 	loc_vars = function(self, info_queue, card)
