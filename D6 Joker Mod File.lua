@@ -100,16 +100,16 @@ SMODS.D6_Side = SMODS.GameObject:extend {
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
             end
-            if other_joker and other_joker ~= card and other_joker.ability.extra and other_joker.ability.extra.local_d6_sides then
+            if other_joker and other_joker ~= card and not (ignore_debuff ~= true and not other_joker.debuff) and other_joker.ability.extra and other_joker.ability.extra.local_d6_sides then
 				if other_joker.ability.extra.chaos_selected_die then return SMODS.D6_Sides[other_joker.ability.extra.chaos_selected_die].key
 				else return SMODS.D6_Sides[other_joker.ability.extra.local_d6_sides[other_joker.ability.extra.selected_d6_face]].key end
             end
 		elseif context == "count" then
 			local total_d6_sides = {}
 			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i].config.center.d6_joker and G.jokers.cards[i].ability.extra.local_d6_sides[G.jokers.cards[i].ability.extra.selected_d6_face] == die_side_key then 
+				if (ignore_debuff ~= true and not G.jokers.cards[i].debuff) and G.jokers.cards[i].config.center.d6_joker and G.jokers.cards[i].ability.extra.local_d6_sides[G.jokers.cards[i].ability.extra.selected_d6_face] == die_side_key then 
 					total_d6_sides[#total_d6_sides+1] = {card = G.jokers.cards[i], side_config = SMODS.D6_Sides[G.jokers.cards[i].ability.extra.local_d6_sides[G.jokers.cards[i].ability.extra.selected_d6_face]]}
-				elseif  G.jokers.cards[i].config.center.d6_joker and G.jokers.cards[i].ability.extra.chaos_selected_die and G.jokers.cards[i].ability.extra.chaos_selected_die == die_side_key then
+				elseif (ignore_debuff ~= true and not G.jokers.cards[i].debuff) and G.jokers.cards[i].config.center.d6_joker and G.jokers.cards[i].ability.extra.chaos_selected_die and G.jokers.cards[i].ability.extra.chaos_selected_die == die_side_key then
 					total_d6_sides[#total_d6_sides+1] = {card = G.jokers.cards[i], side_config = SMODS.D6_Sides[G.jokers.cards[i].ability.extra.chaos_selected_die]}
 				end
 			end
