@@ -9,7 +9,7 @@ local tarot_info = SMODS.Consumable({
 		}
 	},
 	pos = {x=0, y=0},
-	cost = 4,
+	cost = 3,
 	discovered = true,
 	can_use = function(self, card)
 		local d6_joker_selected = false

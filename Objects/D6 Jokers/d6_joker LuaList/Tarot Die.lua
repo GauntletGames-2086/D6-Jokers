@@ -16,8 +16,8 @@ local d6_joker_info = SMODS.D6_Joker({
 		[5] = "cartomancy_side",
 		[6] = "cartomancy_plus_side"
 	},
-	rarity = 2,
-	cost = 8,
+	rarity = 1,
+	cost = 6,
 	upgrade = "tarot_plus_die",
 	register = function(self, order)
 		if order and order == self.order then

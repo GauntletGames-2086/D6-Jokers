@@ -16,7 +16,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		[5] = "planetarium_side",
 		[6] = "planetarium_plus_side"
 	},
-	rarity = 2,
+	rarity = 1,
 	cost = 8,
 	upgrade = "planet_plus_die",
 	register = function(self, order)

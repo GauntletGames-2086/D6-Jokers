@@ -1,11 +1,11 @@
 local d6_side_info = SMODS.D6_Side({
-	key = "pure_calmness_side",
+	key = "pure_worship_side",
 	loc_txt = {
-		name = "{C:blue}Pure: Calmness{}",
+		name = "{C:blue}Pure: Worship{}",
 		text = {
 			"{C:attention}+#1#{C:blue} Hand Size",
 		},
-		label = "Pure: Calmness"
+		label = "Pure: Worship"
 	},
 	config = {hand_size = 6},
 	atlas = "d6_side_pure",

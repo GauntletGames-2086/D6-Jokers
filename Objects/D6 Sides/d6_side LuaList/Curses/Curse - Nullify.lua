@@ -16,16 +16,26 @@ local d6_side_info = SMODS.D6_Side({
 	pos = {x=0, y=0},
 	add_to_deck = function(self, card, from_debuff, from_roll)
 		card.pinned = true
-		local other_joker = nil
-		for i = 1, #G.jokers.cards do
-			if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
-		end
-		if other_joker and other_joker ~= card then
-			other_joker.debuff = true
-		end
 	end,
 	remove_from_deck = function(self, card, from_debuff, from_roll)
 		card.pinned = false
+		for i = 1, #G.jokers.cards do
+			if G.jokers.cards[i].ability and G.jokers.cards[i].ability.debuffed_by_nullify then G.jokers.cards[i].ability.debuffed_by_nullify = nil end
+		end
+	end,
+	update = function(self, card, dt)
+		local other_joker = nil
+		for i = 1, #G.jokers.cards do
+			if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
+			if G.jokers.cards[i].ability and G.jokers.cards[i].ability.debuffed_by_nullify then 
+				G.jokers.cards[i].ability.debuffed_by_nullify = nil 
+				G.jokers.cards[i].debuff = false
+			end
+		end
+		if other_joker and other_joker ~= card then
+			other_joker.debuff = true
+			other_joker.ability["debuffed_by_nullify"] = true
+		end
 	end,
 	register = function(self, order)
 		if order and order == self.order then

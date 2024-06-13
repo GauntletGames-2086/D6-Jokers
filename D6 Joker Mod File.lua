@@ -12,26 +12,26 @@
 
 local mod_path = SMODS.current_mod.path
 --D6 Sides art
-SMODS.Atlas{key = "d6_side_nothing", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_nothing.png"}
-SMODS.Atlas{key = "d6_side_chips", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_chips.png"}
-SMODS.Atlas{key = "d6_side_mult", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_mult.png"}
-SMODS.Atlas{key = "d6_side_xmult", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_xmult.png"}
-SMODS.Atlas{key = "d6_side_planetarium", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_planetarium.png"}
-SMODS.Atlas{key = "d6_side_cartomancy", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_cartomancy.png"}
-SMODS.Atlas{key = "d6_side_payout", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_payout.png"}
-SMODS.Atlas{key = "d6_side_cardist", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_cardist.png"}
-SMODS.Atlas{key = "d6_side_juggler", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_juggler.png"}
-SMODS.Atlas{key = "d6_side_drunkard", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_drunkard.png"}
-SMODS.Atlas{key = "d6_side_chaos", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_chaos.png"}
-SMODS.Atlas{key = "d6_side_selling_self", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_selling_self.png"}
-SMODS.Atlas{key = "d6_side_all_in", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_all_in.png"}
-SMODS.Atlas{key = "d6_side_other", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_other.png"}
-SMODS.Atlas{key = "d6_side_curse", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_curse.png"}
-SMODS.Atlas{key = "d6_side_pure", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_side_atlas_pure.png"}
+SMODS.Atlas{key = "d6_side_nothing", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_nothing.png"}
+SMODS.Atlas{key = "d6_side_chips", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_chips.png"}
+SMODS.Atlas{key = "d6_side_mult", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_mult.png"}
+SMODS.Atlas{key = "d6_side_xmult", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_xmult.png"}
+SMODS.Atlas{key = "d6_side_planetarium", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_planetarium.png"}
+SMODS.Atlas{key = "d6_side_cartomancy", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_cartomancy.png"}
+SMODS.Atlas{key = "d6_side_payout", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_payout.png"}
+SMODS.Atlas{key = "d6_side_cardist", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_cardist.png"}
+SMODS.Atlas{key = "d6_side_juggler", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_juggler.png"}
+SMODS.Atlas{key = "d6_side_drunkard", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_drunkard.png"}
+SMODS.Atlas{key = "d6_side_chaos", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_chaos.png"}
+SMODS.Atlas{key = "d6_side_selling_self", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_selling_self.png"}
+SMODS.Atlas{key = "d6_side_all_in", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_all_in.png"}
+SMODS.Atlas{key = "d6_side_other", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_other.png"}
+SMODS.Atlas{key = "d6_side_curse", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_curse.png"}
+SMODS.Atlas{key = "d6_side_pure", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_side_atlas_pure.png"}
 --D6 Side UI
-SMODS.Atlas{key = "base_test_d6_art", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_test_sprite.png"}
-SMODS.Atlas{key = "d6_test_selector", atlas_table = "ASSET_ATLAS", px = 44, py = 53, path = "d6_test_selector.png"}
-SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 18, py = 18, path = "d6_side_icons.png"}
+SMODS.Atlas{key = "base_test_d6_art", atlas_table = "ASSET_ATLAS", px = 88, py = 102, path = "d6_test_sprite2.png"}
+SMODS.Atlas{key = "d6_test_selector", atlas_table = "ASSET_ATLAS", px = 88, py = 104, path = "d6_test_selector.png"}
+SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_side_icons.png"}
 --Other atlases
 SMODS.Atlas{key = "d6_blinds", atlas_table = "ANIMATION_ATLAS", px = 34, py = 34, path = "dsix_blind_chips.png", frames = 21}
 
@@ -49,10 +49,10 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 	required_params = {
 		'key',
 		'loc_txt',
-		'atlas'
 	},
 	set = "D6 Side",
 	atlas = "d6_side_nothing",
+	icon_atlas = "d6_side_icons",
 	config = {},
 	pos = { x = 0, y = 0 },
 	unlocked = true,
@@ -66,8 +66,6 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 		if not G.P_CENTER_POOLS[self.set] then G.P_CENTER_POOLS[self.set] = {} end
 		SMODS.insert_pool(G.P_CENTER_POOLS[self.set], self)
 		self.reverse_lookup_name[self.loc_txt.label] = self.key
-		if not G["shared_d6_sides"] then G["shared_d6_sides"] = {} end
-		G.shared_d6_sides[self.key] = Sprite(0, 0, G.CARD_W, G.CARD_H, G.ASSET_ATLAS[self.atlas] or G.ASSET_ATLAS["stickers"], self.pos)
 	end,
 	process_loc_text = function(self)
 		if not G.localization.descriptions["D6 Side"] then G.localization.descriptions["D6 Side"] = {} end
@@ -205,6 +203,13 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 			if o then return o end
 		end
 	end,
+	update = function(self, card, dt)
+		if card.ability.extra.chaos_selected_die and (SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update) == "function") then
+			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:update(card, dt)
+		elseif SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].update and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].update) == "function" then
+			SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:update(card, dt)
+		end
+	end,
 }
 
 local mod_chips_ref = mod_chips
@@ -253,7 +258,7 @@ function Card:align_h_popup()
 				popup_direction == 'tm' and -0.13 or
 				popup_direction == 'bm' and 0.1 or
 				0
-		},  
+		}, 
 		type = popup_direction,
 		--lr_clamp = true
 	}
@@ -281,11 +286,11 @@ function create_UIBox_your_collection_d6_Sides(exit)
 	for k, v in ipairs(d6_side_tab) do
 	    local discovered = v.discovered
   
-		local s = 1.3*1.25
+		local s = 1.3*1.25*1.25
 		if math.ceil(#d6_side_tab/6) > 6 then
 			s = s * 6/math.ceil(#d6_side_tab/6)
 		end
-		local temp_d6_side = Sprite(18,18,s,s, G.ASSET_ATLAS["dsix_d6_side_icons"], v.icon_pos)
+		local temp_d6_side = Sprite(34,34,s,s, G.ASSET_ATLAS["dsix_d6_side_icons"], v.icon_pos)
 		temp_d6_side:define_draw_steps({
 			{shader = 'dissolve', shadow_height = 0.05},
 			{shader = 'dissolve'}
