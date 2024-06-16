@@ -6,6 +6,7 @@
 --- PREFIX: dsix
 --- VERSION: 0.5.13
 --- LOADER_VERSION_GEQ: 1.0.0-ALPHA-0609b
+--- PRIORITY: -900
 
 ----------------------------------------------
 ------------MOD CODE -------------------------
@@ -34,6 +35,7 @@ SMODS.Atlas{key = "d6_test_selector", atlas_table = "ASSET_ATLAS", px = 88, py =
 SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_side_icons.png"}
 --Other atlases
 SMODS.Atlas{key = "d6_blinds", atlas_table = "ANIMATION_ATLAS", px = 34, py = 34, path = "dsix_blind_chips.png", frames = 21}
+SMODS.Atlas{key = "modicon", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_jokers_mod_tag.png"}
 
 function SMODS.current_mod.process_loc_text()
 	SMODS.process_loc_text(G.localization.misc.dictionary, 'k_na', "N/A")
@@ -100,7 +102,7 @@ SMODS.D6_Side = SMODS.GameObject:extend {
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
             end
-            if other_joker and other_joker ~= card and (other_joker.debuff ~= true ) and other_joker.ability.extra and other_joker.ability.extra.local_d6_sides then
+            if other_joker and other_joker ~= card and (other_joker.debuff ~= true) and other_joker.ability.extra and type(other_joker.ability.extra) == "table" and other_joker.ability.extra.local_d6_sides then
 				if other_joker.ability.extra.chaos_selected_die then return SMODS.D6_Sides[other_joker.ability.extra.chaos_selected_die].key
 				else return SMODS.D6_Sides[other_joker.ability.extra.local_d6_sides[other_joker.ability.extra.selected_d6_face]].key end
             end
@@ -204,10 +206,14 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		end
 	end,
 	update = function(self, card, dt)
-		if card.ability.extra.chaos_selected_die and (SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update) == "function") then
-			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:update(card, dt)
-		elseif SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].update and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].update) == "function" then
-			SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:update(card, dt)
+		if card.ability.extra.selected_d6_face % 1 > 0 then card.ability.extra.selected_d6_face = math.round(card.ability.extra.selected_d6_face) end
+		card.ability.extra.selected_d6_face = math.clamp(1, card.ability.extra.selected_d6_face, 6)
+		if G.jokers then
+			if card.ability.extra.chaos_selected_die and (SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update) == "function") then
+				SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:update(card, dt)
+			elseif SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].update and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].update) == "function" then
+				SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:update(card, dt)
+			end
 		end
 	end,
 }

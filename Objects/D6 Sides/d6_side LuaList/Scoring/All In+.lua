@@ -18,7 +18,6 @@ local d6_side_info = SMODS.D6_Side({
 	calculate = function(self, card, context)
 		if context.joker_main then
 			local mult_chance = pseudorandom("all_in_plus")
-			sendInfoMessage("mult_chance: "..tostring(mult_chance))
 			if mult_chance >= 0.5 then
 				return {
 					message = localize{type='variable',key='a_mult',vars={self.config.mult}},

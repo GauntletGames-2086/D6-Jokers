@@ -14,14 +14,15 @@ local init_d6_jokers = function(base_file_path)
 		end
 	end
 
+	--Sort by order
 	table.sort(d6_jokers_to_inject, function(a, b) return a.order < b.order end)
+
+	--Register the joker (in the sorted order)
 	local curr_d6_joker_order = 1
 	for _, d6_joker in pairs(d6_jokers_to_inject) do
 		d6_jokers_to_inject[curr_d6_joker_order]:register(d6_joker.order)
-		print("d6_joker.order: "..tostring(d6_joker.order))
 		curr_d6_joker_order = curr_d6_joker_order + 1
 	end
-
 end
 
 return {init_func = init_d6_jokers}

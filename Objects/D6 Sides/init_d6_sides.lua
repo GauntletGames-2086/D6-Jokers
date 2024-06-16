@@ -21,7 +21,6 @@ local init_d6_sides = function(base_file_path)
 	local curr_d6_side_order = 1
 	for _, d6_side in pairs(d6_sides_to_inject) do
 		d6_sides_to_inject[curr_d6_side_order]:register(d6_side.order)
-		print("Registered D6 Side: "..d6_side.key)
 		curr_d6_side_order = curr_d6_side_order + 1
 	end
 

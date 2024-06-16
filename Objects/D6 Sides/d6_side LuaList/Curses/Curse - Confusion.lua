@@ -16,12 +16,6 @@ local d6_side_info = SMODS.D6_Side({
 	loc_vars = function(self, info_queue)
 		return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), self.config.odds}}
 	end,
-	calculate = function(self, card, context)
-		if context.cardarea == G.jokers and context.after then
-			local o = card:calculate({setting_blind = true, blind = G.GAME.round_resets.blind})
-			if o then return o end
-		end
-	end,
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
