@@ -4,9 +4,8 @@ local d6_side_info = SMODS.D6_Side({
 		name = "{C:purple}Curse: Nullify{}",
 		text = {
 			"{C:purple}This Joker is {C:attention}Pinned",
-			"{C:purple}The joker to the left",
+			"{C:purple}The Joker to the right",
 			"{C:purple}is {C:attention}Debuffed",
-			"{C:purple}for the rest of the blind",
 		},
 		label = "Curse: Nullify"
 	},

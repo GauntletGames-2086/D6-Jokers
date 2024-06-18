@@ -15,7 +15,12 @@ local d6_side_info = SMODS.D6_Side({
 	upgrade = "chaos_plus_side",
 	loc_vars = function(self, info_queue, card)
 		if not (card and card.ability.extra.chaos_selected_die) then return {vars = {localize("k_na")}}
-		else return {vars = {localize{type = 'name_text', key = card.ability.extra.chaos_selected_die, set = 'Other'}}}
+		else 
+			local selected_chaos_die = SMODS.D6_Sides[card.ability.extra.chaos_selected_die]
+			local loc_vars
+			if selected_chaos_die.loc_vars and type(selected_chaos_die.loc_vars) == "function" then loc_vars = selected_chaos_die:loc_vars(info_queue, card) end
+			info_queue[#info_queue+1] = {key = card.ability.extra.chaos_selected_die, set = "Other", vars = loc_vars and loc_vars.vars or {}}
+			return {vars = {localize{type = 'name_text', key = card.ability.extra.chaos_selected_die, set = 'Other'}}}
 		end
 	end,
 	add_to_deck = function(self, card, from_debuff, from_roll)

@@ -4,7 +4,7 @@
 --- MOD_AUTHOR: [ItsFlowwey]
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
---- VERSION: 0.5.13
+--- VERSION: 0.5.15
 --- LOADER_VERSION_GEQ: 1.0.0-ALPHA-0609b
 --- PRIORITY: -900
 
@@ -34,6 +34,7 @@ SMODS.Atlas{key = "base_test_d6_art", atlas_table = "ASSET_ATLAS", px = 88, py =
 SMODS.Atlas{key = "d6_test_selector", atlas_table = "ASSET_ATLAS", px = 88, py = 104, path = "d6_test_selector.png"}
 SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_side_icons.png"}
 --Other atlases
+SMODS.Atlas{key = "d6_jokers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_jokers_atlas.png"}
 SMODS.Atlas{key = "d6_blinds", atlas_table = "ANIMATION_ATLAS", px = 34, py = 34, path = "dsix_blind_chips.png", frames = 21}
 SMODS.Atlas{key = "modicon", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_jokers_mod_tag.png"}
 
@@ -133,6 +134,8 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		'd6_sides'
 	},
 	d6_joker = true,
+	pos = {x=0, y=0},
+	atlas = "dsix_d6_jokers",
 	set_ability = function(self, card, initial, delay_sprites)
 		card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
 		card.ability.extra.local_d6_sides = copy_table(card.config.center.d6_sides)
@@ -207,6 +210,7 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 	end,
 	update = function(self, card, dt)
 		if card.ability.extra.selected_d6_face % 1 > 0 then card.ability.extra.selected_d6_face = math.round(card.ability.extra.selected_d6_face) end
+		if card.ability.extra.selected_d6_face < 0 then card.ability.extra.selected_d6_face = card.ability.extra.selected_d6_face*-1 end
 		card.ability.extra.selected_d6_face = math.clamp(1, card.ability.extra.selected_d6_face, 6)
 		if G.jokers then
 			if card.ability.extra.chaos_selected_die and (SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].update) == "function") then

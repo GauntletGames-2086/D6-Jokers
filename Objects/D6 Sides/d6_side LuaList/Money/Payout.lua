@@ -3,7 +3,7 @@ local d6_side_info = SMODS.D6_Side({
 	loc_txt = {
 		name = "{C:attention}Payout{}",
 		text = {
-			"Earn {C:money}$#1#{C:attention} at",
+			"{C:attention}Earn {C:money}$#1#{C:attention} at",
 			"{C:attention}end of round"
 		},
 		label = "Payout"

@@ -25,11 +25,13 @@ local tarot_info = SMODS.Consumable({
 			if v.highlighted == true then selected_card = v end
 		end
         G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.4, func = function()
+			local card_edition = selected_card.edition or nil
 			local card = create_card('Joker', G.jokers, nil, 0, nil, nil, "j_dsix_"..selected_card.config.center.upgrade)
 			selected_card:start_dissolve()
 			card:add_to_deck()
 			G.jokers:emplace(card)
 			card:start_materialize()
+			card:set_edition(card_edition, true, true)
             return true 
 		end }))
 	end,
