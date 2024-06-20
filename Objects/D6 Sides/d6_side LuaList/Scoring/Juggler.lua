@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "juggler_side",
-	loc_txt = {
-		name = "{C:attention}Juggler{}",
-		text = {
-			"{C:attention}+#1# Hand Size",
-			"{C:attention}when die is rolled",
-		},
-		label = "Juggler"
-	},
+	loc_txt = {},
 	config = {hand_size = 1, triggered = true},
 	atlas = "d6_side_juggler",
 	icon_pos = {x=4, y=3},

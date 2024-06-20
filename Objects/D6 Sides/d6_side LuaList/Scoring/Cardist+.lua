@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "cardist_plus_side",
-	loc_txt = {
-		name = "{C:attention}Cardist+{}",
-		text = {
-			"{C:attention}Gain +#1# hands",
-			"{C:attention}when die is rolled",
-		},
-		label = "Cardist+"
-	},
+	loc_txt = {},
 	config = {hands = 2, triggered = true},
 	atlas = "d6_side_cardist",
 	icon_pos = {x=7, y=3},

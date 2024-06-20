@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_bankruptcy_side",
-	loc_txt = {
-		name = "{C:purple}Curse: Bankruptcy{}",
-		text = {
-			"{C:purple}Lose {C:red}$#1#{C:purple}",
-			"{C:purple}at end of round",
-		},
-		label = "Curse: Bankruptcy"
-	},
+	loc_txt = {},
 	config = {money_loss = 15},
 	atlas = "d6_side_curse",
 	icon_pos = {x=0, y=6},

@@ -1,14 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "impure_gutless_die",
-	loc_txt = {
-		name = "Impure: Gutless Die",
-		text = {
-			"Even the pinacle of dice wielders",
-			"cower in fear",
-			"Nobody knows it's true power...",
-			"{C:inactive}(Total blinds defeated: {C:attention}#1#/#2#{C:inactive})"
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "curse_challenge_side",

@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "all_in_plus_side",
-	loc_txt = {
-		name = "{C:attention}All In+{}",
-		text = {
-			"{C:attention}50% chance of {C:mult}+#1#{C:attention} Mult",
-			"{C:attention}50% chance of {C:mult}-#2#{C:attention} Mult"
-		},
-		label = "All In+"
-	},
+	loc_txt = {},
 	config = {mult = 80},
 	atlas = "d6_side_all_in",
 	icon_pos = {x=3, y=4},

@@ -1,14 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_nullify_side",
-	loc_txt = {
-		name = "{C:purple}Curse: Nullify{}",
-		text = {
-			"{C:purple}This Joker is {C:attention}Pinned",
-			"{C:purple}The Joker to the right",
-			"{C:purple}is {C:attention}Debuffed",
-		},
-		label = "Curse: Nullify"
-	},
+	loc_txt = {},
 	config = {},
 	atlas = "d6_side_curse",
 	icon_pos = {x=2, y=5},

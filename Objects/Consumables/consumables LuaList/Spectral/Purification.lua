@@ -1,12 +1,7 @@
 local tarot_info = SMODS.Consumable({
 	key = "purification",
 	set = "Spectral",
-	loc_txt = {
-		name = "Purification",
-		text = {
-			"Spawn an {C:legendary}Impure{} die"
-		}
-	},
+	loc_txt = {},
 	pos = {x=0, y=0},
 	discovered = true,
 	can_use = function(self, card)

@@ -1,12 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "nothing_plus_side",
-	loc_txt = {
-		name = "{C:attention}Nothing+{}",
-		text = {
-			"{C:attention}Does nothing*2"
-		},
-		label = "Nothing+"
-	},
+	loc_txt = {},
 	config = {},
 	atlas = "d6_side_nothing",
 	icon_pos = {x=1, y=0},

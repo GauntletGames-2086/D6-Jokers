@@ -1,14 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "blocker_side",
-	loc_txt = {
-		name = "{C:attention}Blocker{}",
-		text = {
-			"{C:attention}Blocks all negative",
-			"{C:attention}effects of the",
-			"{C:attention}die to the right"
-		},
-		label = "Blocker"
-	},
+	loc_txt = {},
 	config = {},
 	atlas = "d6_side_other",
 	icon_pos = {x=7, y=0},

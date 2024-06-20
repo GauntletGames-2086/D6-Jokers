@@ -1,14 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "pure_exchange_die",
-	loc_txt = {
-		name = "Pure: Exchange Die",
-		text = {
-			"This die is capapble of turning",
-			"small amounts of cash into billions",
-			"Extremely popular with die wielders",
-			"who work at Wall Street"
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "pure_return_investment_side",

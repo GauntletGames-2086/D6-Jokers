@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "payout_plus2_side",
-	loc_txt = {
-		name = "{C:attention}Payout++{}",
-		text = {
-			"{C:attention}Earn {C:money}$#1#{C:attention} at",
-			"{C:attention}end of round"
-		},
-		label = "Payout++"
-	},
+	loc_txt = {},
 	config = {money = 24},
 	atlas = "d6_side_payout",
 	icon_pos = {x=5, y=2},

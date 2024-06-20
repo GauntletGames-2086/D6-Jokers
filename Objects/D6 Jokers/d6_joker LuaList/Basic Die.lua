@@ -1,11 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "basic_die",
-	loc_txt = {
-		name = "Basic Die",
-		text = {
-			"Just a basic die, nothing more",
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "chips_side",

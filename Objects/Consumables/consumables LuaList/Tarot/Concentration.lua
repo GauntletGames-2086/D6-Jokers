@@ -1,13 +1,7 @@
 local tarot_info = SMODS.Consumable({
 	key = "concentration",
 	set = "Tarot",
-	loc_txt = {
-		name = "Concentration",
-		text = {
-			"{C:attention}Upgrade{} all die faces on",
-			"selected {C:attention}D6 Joker{}"
-		}
-	},
+	loc_txt = {},
 	pos = {x=0, y=0},
 	cost = 3,
 	discovered = true,

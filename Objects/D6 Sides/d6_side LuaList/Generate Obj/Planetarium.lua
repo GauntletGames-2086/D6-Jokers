@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "planetarium_side",
-	loc_txt = {
-		name = "{C:attention}Planetarium{}",
-		text = {
-			"{C:attention}Creates #1# {C:planet}Planet",
-			"{C:attention}card when die is rolled"
-		},
-		label = "Planetarium"
-	},
+	loc_txt = {},
 	config = {planet_cards_gained = 1},
 	atlas = "d6_side_planetarium",
 	icon_pos = {x=6, y=2},

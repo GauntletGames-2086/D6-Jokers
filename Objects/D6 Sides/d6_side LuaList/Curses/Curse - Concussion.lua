@@ -1,12 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_concussion_side",
-	loc_txt = {
-		name = "{C:purple}Curse: Concussion{}",
-		text = {
-			"{C:attention}-#1#{C:purple} Hand Size",
-		},
-		label = "Curse: Concussion"
-	},
+	loc_txt = {},
 	config = {hand_size = 3, triggered = true},
 	atlas = "d6_side_curse",
 	icon_pos = {x=5, y=5},

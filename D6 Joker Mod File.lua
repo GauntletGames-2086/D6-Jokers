@@ -4,7 +4,7 @@
 --- MOD_AUTHOR: [ItsFlowwey]
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
---- VERSION: 0.5.161
+--- VERSION: 0.5.17
 --- LOADER_VERSION_GEQ: 1.0.0-ALPHA-0609b
 --- PRIORITY: -900
 
@@ -38,12 +38,6 @@ SMODS.Atlas{key = "d6_jokers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, pa
 SMODS.Atlas{key = "d6_blinds", atlas_table = "ANIMATION_ATLAS", px = 34, py = 34, path = "dsix_blind_chips.png", frames = 21}
 SMODS.Atlas{key = "modicon", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_jokers_mod_tag.png"}
 
-function SMODS.current_mod.process_loc_text()
-	SMODS.process_loc_text(G.localization.misc.dictionary, 'k_na', "N/A")
-	SMODS.process_loc_text(G.localization.misc.dictionary, 'k_created', "Created!")
-	SMODS.process_loc_text(G.localization.misc.v_dictionary, 'k_amount_of', "#1#/#2#")
-end
-
 -- SMODS.D6_Sides API. 
 SMODS.D6_Sides = {}
 SMODS.D6_Side = SMODS.GameObject:extend {
@@ -68,16 +62,16 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 		G.P_D6_SIDES[self.key] = self
 		if not G.P_CENTER_POOLS[self.set] then G.P_CENTER_POOLS[self.set] = {} end
 		SMODS.insert_pool(G.P_CENTER_POOLS[self.set], self)
-		self.reverse_lookup_name[self.loc_txt.label] = self.key
+		self.reverse_lookup_name[G.localization.descriptions["D6 Side"][self.key:lower()].label or self.loc_txt.label] = self.key
 	end,
 	process_loc_text = function(self)
-		if not G.localization.descriptions["D6 Side"] then G.localization.descriptions["D6 Side"] = {} end
-		SMODS.process_loc_text(G.localization.descriptions["D6 Side"], self.key:lower(), self.loc_txt)
-		SMODS.process_loc_text(G.localization.descriptions.Other, self.key, {name = self.loc_txt.label, text = self.loc_txt.text})
-		SMODS.process_loc_text(G.localization.misc.dictionary, 'b_d6_sides', "D6 Sides")
+		--Creates the tooltip info
+		SMODS.process_loc_text(G.localization.descriptions.Other, self.key, {
+			name = G.localization.descriptions["D6 Side"][self.key:lower()].label or self.loc_txt.label, 
+			text = G.localization.descriptions["D6 Side"][self.key:lower()].text or self.loc_txt.text
+		})
 	end,
 	generate_ui = function(self, info_queue, card, desc_nodes, specific_vars, full_UI_table)
-		--Same as Tags
 		local target = { type = 'descriptions', key = self.key, set = self.set, nodes = desc_nodes, vars =
 		specific_vars }
 		local res = {}
@@ -139,10 +133,6 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 	set_ability = function(self, card, initial, delay_sprites)
 		card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
 		card.ability.extra.local_d6_sides = copy_table(card.config.center.d6_sides)
-	end,
-	process_loc_text = function(self)
-		SMODS.Joker.process_loc_text(self)
-		SMODS.process_loc_text(G.localization.misc.v_dictionary, 'd6_joker_roll', "Rolled: #1#")
 	end,
 	inject = function(self)
 		-- call the parent function to ensure all pools are set

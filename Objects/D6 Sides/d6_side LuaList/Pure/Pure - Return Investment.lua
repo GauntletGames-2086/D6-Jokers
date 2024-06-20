@@ -1,12 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "pure_return_investment_side",
-	loc_txt = {
-		name = "{C:blue}Pure: Return Investment{}",
-		text = {
-			"{C:blue}Earn {C:money}$#1#{C:blue} per {C:money}$#2#{C:blue} spent",
-		},
-		label = "Pure: Return Investment"
-	},
+	loc_txt = {},
 	config = {money_gained = 1, money_to_spend = 2},
 	atlas = "d6_side_pure",
 	icon_pos = {x=3, y=6},

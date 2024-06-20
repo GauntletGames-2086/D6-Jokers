@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "orbital_plus_side",
-	loc_txt = {
-		name = "{C:attention}Orbital+{}",
-		text = {
-			"{C:attention}Gain #1# Orbital Tag",
-			"{C:attention}when this joker is sold",
-		},
-		label = "Orbital+"
-	},
+	loc_txt = {},
 	config = {count = 2},
 	atlas = "d6_side_selling_self",
 	icon_pos = {x=7, y=4},

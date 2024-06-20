@@ -1,14 +1,7 @@
 local tarot_info = SMODS.Consumable({
 	key = "transplant",
 	set = "Spectral",
-	loc_txt = {
-		name = "Transplant",
-		text = {
-			"Set selected D6 Joker's die face",
-			"in position 1 to die face",
-			"in position 6"
-		}
-	},
+	loc_txt = {},
 	pos = {x=0, y=0},
 	cost = 4,
 	discovered = true,

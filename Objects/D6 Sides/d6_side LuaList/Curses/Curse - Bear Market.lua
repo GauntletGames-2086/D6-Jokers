@@ -1,12 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_bear_market_side",
-	loc_txt = {
-		name = "{C:purple}Curse: Bear Market{}",
-		text = {
-			"{C:purple}Payout screen is {C:attention}disabled",
-		},
-		label = "Curse: Bear Market"
-	},
+	loc_txt = {},
 	config = {money_loss = 15},
 	atlas = "d6_side_curse",
 	icon_pos = {x=1, y=6},

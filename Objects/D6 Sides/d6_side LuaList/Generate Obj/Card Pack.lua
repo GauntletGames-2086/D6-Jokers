@@ -1,14 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "card_pack_side",
-	loc_txt = {
-		name = "{C:attention}Card Pack{}",
-		text = {
-			"{C:attention}Gain #1# Card Pack Tag",
-			"{C:attention}when this joker is sold",
-			"{C:inactive}(Ethereal, Standard, etc.)"
-		},
-		label = "Card Pack"
-	},
+	loc_txt = {},
 	config = {count = 1},
 	atlas = "d6_side_selling_self",
 	icon_pos = {x=4, y=4},

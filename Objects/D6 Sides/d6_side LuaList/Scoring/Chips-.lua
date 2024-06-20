@@ -1,12 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "chips_minus_side",
-	loc_txt = {
-		name = "{C:attention}Chips-{}",
-		text = {
-			"{C:chips}-#1#{C:attention} Chips"
-		},
-		label = "Chips-"
-	},
+	loc_txt = {},
 	config = {chips = 75},
 	atlas = "d6_side_chips",
 	icon_pos = {x=0, y=1},

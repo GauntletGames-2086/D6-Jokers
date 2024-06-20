@@ -1,14 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_confusion_side",
-	loc_txt = {
-		name = "{C:purple}Curse: Confusion{}",
-		text = {
-			"{C:purple}All cards drawn have a",
-			"{C:green}#1# in #2#{C:purple} chance to",
-			"{C:purple}be drawn face down"
-		},
-		label = "Curse: Confusion"
-	},
+	loc_txt = {},
 	config = {odds = 2},
 	atlas = "d6_side_curse",
 	icon_pos = {x=4, y=5},

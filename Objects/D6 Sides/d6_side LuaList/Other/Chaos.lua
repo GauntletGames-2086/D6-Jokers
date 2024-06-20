@@ -1,14 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "chaos_side",
-	loc_txt = {
-		name = "{C:attention}Chaos{}",
-		text = {
-			"{C:attention}Copies ability of a",
-			"{C:attention}random die when rolled",
-			"{C:inactive}(Copied die: {C:attention}#1#{C:inactive})"
-		},
-		label = "Chaos"
-	},
+	loc_txt = {},
 	config = {},
 	atlas = "d6_side_chaos",
 	icon_pos = {x=0, y=4},

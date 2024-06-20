@@ -1,13 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "self_selling_die",
-	loc_txt = {
-		name = "Self-Selling Die",
-		text = {
-			"This die really doesn't want",
-			"to be taking up a joker slot, huh?",
-			"{C:inactive}(Cannot be Perishable)"
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "card_pack_side",

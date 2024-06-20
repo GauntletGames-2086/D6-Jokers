@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "cartomancy_plus_side",
-	loc_txt = {
-		name = "{C:attention}Cartomancy+{}",
-		text = {
-			"{C:attention}Creates #1# {C:tarot}Tarot cards",
-			"{C:attention}when die is rolled"
-		},
-		label = "Cartomancy+"
-	},
+	loc_txt = {},
 	config = {tarot_cards_gained = 2},
 	atlas = "d6_side_cartomancy",
 	icon_pos = {x=1, y=3},

@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "root_beer_side",
-	loc_txt = {
-		name = "{C:attention}Root Beer{}",
-		text = {
-			"{C:attention}Gain #1# Double Tag",
-			"{C:attention}when this joker is sold",
-		},
-		label = "Root Beer"
-	},
+	loc_txt = {},
 	config = {count = 1},
 	atlas = "d6_side_selling_self",
 	icon_pos = {x=0, y=5},

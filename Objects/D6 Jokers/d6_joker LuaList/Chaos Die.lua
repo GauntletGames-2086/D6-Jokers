@@ -1,12 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "chaos_die",
-	loc_txt = {
-		name = "Chaos Die",
-		text = {
-			"Unstable, prone to",
-			"increased randomness",
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "chaos_side",

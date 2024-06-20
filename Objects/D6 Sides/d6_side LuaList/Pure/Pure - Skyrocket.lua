@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "pure_skyrocket_side",
-	loc_txt = {
-		name = "{C:blue}Pure: Skyrocket{}",
-		text = {
-			"{C:blue}Interest earned is",
-			"{C:blue}increased by {C:attention}#1#X"
-		},
-		label = "Pure: Skyrocket"
-	},
+	loc_txt = {},
 	config = {interest_buff = 3},
 	atlas = "d6_side_pure",
 	icon_pos = {x=2, y=6},

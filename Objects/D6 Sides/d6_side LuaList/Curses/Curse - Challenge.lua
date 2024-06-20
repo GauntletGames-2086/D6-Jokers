@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_challenge_side",
-	loc_txt = {
-		name = "{C:purple}Curse: Challenge{}",
-		text = {
-			"{C:purple}Increase the current score",
-			"{C:purple}requirement by {C:attention}#1#X"
-		},
-		label = "Curse: Challenge"
-	},
+	loc_txt = {},
 	config = {score_increase = 2},
 	atlas = "d6_side_curse",
 	icon_pos = {x=3, y=5},

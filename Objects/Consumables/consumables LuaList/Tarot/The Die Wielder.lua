@@ -1,12 +1,7 @@
 local tarot_info = SMODS.Consumable({
 	key = "the_die_wielder",
 	set = "Tarot",
-	loc_txt = {
-		name = "The Die Wielder",
-		text = {
-			"Spawn a random {C:attention}D6 Joker",
-		}
-	},
+	loc_txt = {},
 	pos = {x=0, y=0},
 	cost = 3,
 	discovered = true,

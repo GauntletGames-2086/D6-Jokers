@@ -1,11 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "golden_plus2_die",
-	loc_txt = {
-		name = "Golden Die++",
-		text = {
-			"Feels like 22K gold",
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "payout_plus_side",

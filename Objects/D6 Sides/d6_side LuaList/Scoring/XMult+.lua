@@ -1,12 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "xmult_plus_side",
-	loc_txt = {
-		name = "{C:attention}XMult+{}",
-		text = {
-			"{X:mult,C:white}X#1#{C:attention} Mult"
-		},
-		label = "XMult+"
-	},
+	loc_txt = {},
 	config = {xmult = 3},
 	atlas = "d6_side_xmult",
 	icon_pos = {x=1, y=2},

@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "pure_slayer_side",
-	loc_txt = {
-		name = "{C:blue}Pure: Slayer{}",
-		text = {
-			"{C:blue}Decrease the current score",
-			"{C:blue}requirement by {C:attention}#1#X"
-		},
-		label = "Pure: Slayer"
-	},
+	loc_txt = {},
 	config = {score_decrease = 0.5},
 	atlas = "d6_side_pure",
 	icon_pos = {x=6, y=5},

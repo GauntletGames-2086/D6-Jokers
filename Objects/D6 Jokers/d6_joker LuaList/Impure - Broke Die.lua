@@ -1,14 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "impure_broke_die",
-	loc_txt = {
-		name = "Impure: Broke Die",
-		text = {
-			"This die was \"gifted\" to die wielders",
-			"deemed responsible for the",
-			"2008 housing market crash",
-			"{C:inactive}(Money required after payout: {C:attention}#1#{C:inactive})"
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "curse_bankruptcy_side",

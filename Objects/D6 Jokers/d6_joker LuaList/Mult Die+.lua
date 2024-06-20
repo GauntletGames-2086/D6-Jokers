@@ -1,12 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "mult_plus_die",
-	loc_txt = {
-		name = "Mult Die+",
-		text = {
-			"Just a really good basic mult",
-			"die, nothing more",
-		}
-	},
+	loc_txt = {},
 	discovered = true,
 	d6_sides = {
 		[1] = "mult_minus_side",

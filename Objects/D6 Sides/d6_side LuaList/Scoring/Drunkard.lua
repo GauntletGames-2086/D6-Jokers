@@ -1,13 +1,6 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "drunkard_side",
-	loc_txt = {
-		name = "{C:attention}Drunkard{}",
-		text = {
-			"{C:attention}Gain {C:red}+#1#{C:attention} discard",
-			"{C:attention}when die is rolled",
-		},
-		label = "Drunkard"
-	},
+	loc_txt = {},
 	config = {discards = 1, triggered = true},
 	atlas = "d6_side_drunkard",
 	icon_pos = {x=2, y=3},
