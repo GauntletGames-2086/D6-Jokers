@@ -9,8 +9,9 @@ local init_d6_sides = function(base_file_path)
 		for _, file in ipairs(d6_side_files) do
 			if string.find(file, ".lua") then
 				local d6_side = NFS.load(base_file_path.."/d6_side LuaList/"..metafile.."/"..file)()
-				d6_side.order = order_list[d6_side.key].order
-				d6_side["upgrade_level"] = order_list[d6_side.key].upgrade_level
+				d6_side.order = (order_list[d6_side.key] and order_list[d6_side.key].order) or #order_list
+				d6_side["upgrade_level"] = (order_list[d6_side.key] and order_list[d6_side.key].upgrade_level) or 1
+				if not order_list[d6_side.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..d6_side.key) end
 				d6_sides_to_inject[#d6_sides_to_inject+1] = d6_side
 			end
 		end

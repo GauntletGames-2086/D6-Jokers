@@ -43,14 +43,14 @@ local order_list = {
 	["the_end_side"] = {order = 42, upgrade_level = 1},
 	["curse_challenge_side"] = {order = 43, upgrade_level = 1},
 	["curse_nullify_side"] = {order = 44, upgrade_level = 1},
-	["curse_confusion_side"] = {order = 44, upgrade_level = 1},
-	["curse_concussion_side"] = {order = 45, upgrade_level = 1},
-	["curse_bankruptcy_side"] = {order = 46, upgrade_level = 1},
-	["curse_bear_market_side"] = {order = 47, upgrade_level = 1},
-	["pure_slayer_side"] = {order = 48, upgrade_level = 1},
-	["pure_worship_side"] = {order = 49, upgrade_level = 1},
-	["pure_skyrocket_side"] = {order = 50, upgrade_level = 1},
-	["pure_return_investment_side"] = {order = 51, upgrade_level = 1}
+	["curse_confusion_side"] = {order = 45, upgrade_level = 1},
+	["curse_concussion_side"] = {order = 46, upgrade_level = 1},
+	["curse_bankruptcy_side"] = {order = 47, upgrade_level = 1},
+	["curse_bear_market_side"] = {order = 48, upgrade_level = 1},
+	["pure_slayer_side"] = {order = 49, upgrade_level = 1},
+	["pure_worship_side"] = {order = 50, upgrade_level = 1},
+	["pure_skyrocket_side"] = {order = 51, upgrade_level = 1},
+	["pure_return_investment_side"] = {order = 52, upgrade_level = 1}
 }
 
 return order_list

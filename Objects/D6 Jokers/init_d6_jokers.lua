@@ -9,7 +9,8 @@ local init_d6_jokers = function(base_file_path)
 			local d6_joker = NFS.load(base_file_path.."/d6_joker LuaList/"..file)()
 			if not d6_joker.config["extra"] then d6_joker.config.extra = {} end
 			d6_joker.config.extra["local_d6_sides"] = {}
-			d6_joker["order"] = order_list[d6_joker.key].order
+			d6_joker["order"] = (order_list[d6_joker.key] and order_list[d6_joker.key].order) or #order_list
+			if not order_list[d6_joker.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..d6_joker.key) end
 			d6_jokers_to_inject[#d6_jokers_to_inject+1] = d6_joker
 		end
 	end

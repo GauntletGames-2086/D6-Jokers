@@ -5,6 +5,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		text = {
 			"This die really doesn't want",
 			"to be taking up a joker slot, huh?",
+			"{C:inactive}(Cannot be Perishable)"
 		}
 	},
 	discovered = true,
@@ -16,6 +17,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		[5] = "orbital_side",
 		[6] = "orbital_side"
 	},
+	perishable_compat = false,
 	rarity = 2,
 	cost = 6,
 	register = function(self, order)

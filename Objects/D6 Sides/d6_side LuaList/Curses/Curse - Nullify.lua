@@ -34,7 +34,7 @@ local d6_side_info = SMODS.D6_Side({
 				G.jokers.cards[i].debuff = false
 			end
 		end
-		if other_joker and other_joker ~= card then
+		if other_joker and other_joker ~= card and not other_joker.config.center.impure then
 			other_joker.debuff = true
 			other_joker.ability["debuffed_by_nullify"] = true
 		end

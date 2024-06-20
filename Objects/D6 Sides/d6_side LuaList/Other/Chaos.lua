@@ -14,7 +14,7 @@ local d6_side_info = SMODS.D6_Side({
 	icon_pos = {x=0, y=4},
 	upgrade = "chaos_plus_side",
 	loc_vars = function(self, info_queue, card)
-		if not (card and card.ability.extra.chaos_selected_die) then return {vars = {localize("k_na")}}
+		if not (card and card.ability.extra and card.ability.extra.chaos_selected_die) then return {vars = {localize("k_na")}}
 		else 
 			local selected_chaos_die = SMODS.D6_Sides[card.ability.extra.chaos_selected_die]
 			local loc_vars
@@ -34,10 +34,11 @@ local d6_side_info = SMODS.D6_Side({
 		end
 	end,
 	remove_from_deck = function(self, card, from_debuff)
-		if card.ability.extra.chaos_selected_die ~= nil and SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck) == "function" then
+		if type(card.ability.extra) ~= "table" then sendErrorMessage("D6 Jokers print. CARD.ABILITY.EXTRA IS NOT A TABLE") else sendInfoMessage(tprint(card.ability.extra)) end
+		if card.ability.extra and type(card.ability.extra) ~= "table" and card.ability.extra.chaos_selected_die ~= nil and SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck) == "function" then
 			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:remove_from_deck(card, from_debuff)
+			card.ability.extra["chaos_selected_die"] = nil
 		end
-		card.ability.extra["chaos_selected_die"] = nil
 	end,
 	register = function(self, order)
 		if order and order == self.order then
