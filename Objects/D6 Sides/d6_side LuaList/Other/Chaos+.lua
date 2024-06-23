@@ -18,7 +18,7 @@ local d6_side_info = SMODS.D6_Side({
 	add_to_deck = function(self, card, from_debuff)
 		local viable_die_sides = {}
 		for k, v in pairs(G.P_D6_SIDES) do
-			if k ~= self.key and k ~= "chaos_side" and v.upgrade_level > 1 then viable_die_sides[#viable_die_sides+1] = k end
+			if k ~= self.key and k ~= "chaos_side" and v.upgrade_level > 1 and not (v.curse or v.pure) then viable_die_sides[#viable_die_sides+1] = k end
 		end
 		card.ability.extra["chaos_selected_die"] = pseudorandom_element(viable_die_sides, pseudoseed("chaos_selected_die"))
 		if SMODS.D6_Sides[card.ability.extra.chaos_selected_die].add_to_deck and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].add_to_deck) == "function" then

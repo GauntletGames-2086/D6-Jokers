@@ -8,12 +8,12 @@ local d6_side_info = SMODS.D6_Side({
 	loc_vars = function(self, info_queue)
 		return {vars = {self.config.hand_size}}
 	end,
-	add_to_deck = function(self, card, from_debuff, from_roll)
+	add_to_deck = function(self, card, from_debuff, other)
 		G.hand:change_size(self.config.hand_size)
 		card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] = true
 	end,
-	remove_from_deck = function(self, card, from_debuff)
-		if card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] then
+	remove_from_deck = function(self, card, from_debuff, other, from_copy)
+		if card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] or other.from_chaos then
 			G.hand:change_size(-self.config.hand_size)
 			card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] = nil
 		end
@@ -23,6 +23,7 @@ local d6_side_info = SMODS.D6_Side({
 			SMODS.GameObject.register(self)
 		end
 	end,
+	pure = true,
 	order = 5,
 })
 

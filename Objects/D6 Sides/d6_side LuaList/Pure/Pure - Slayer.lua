@@ -8,14 +8,14 @@ local d6_side_info = SMODS.D6_Side({
 	loc_vars = function(self, info_queue)
 		return {vars = {self.config.score_decrease}}
 	end,
-	add_to_deck = function(self, card, from_debuff, from_roll)
-		if from_roll then
+	add_to_deck = function(self, card, from_debuff, other)
+		if other.from_roll then
 			G.GAME.blind.chips = G.GAME.blind.chips*(1-self.config.score_decrease)
 			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 		end
 	end,
-	remove_from_deck = function(self, card, from_debuff, from_roll)
-		if G.GAME.blind and from_roll == false then 
+	remove_from_deck = function(self, card, from_debuff, other)
+		if G.GAME.blind and other.from_roll == false then 
 			G.GAME.blind.chips = G.GAME.blind.chips/(1-self.config.score_decrease)
 			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 		end
@@ -25,6 +25,7 @@ local d6_side_info = SMODS.D6_Side({
 			SMODS.GameObject.register(self)
 		end
 	end,
+	pure = true,
 	order = 5,
 })
 

@@ -11,6 +11,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		[6] = "curse_bear_market_side"
 	},
 	impure = true,
+	pure_upgrade = "j_dsix_pure_exchange_die",
 	rarity = 4,
 	cost = 20,
 	config = {extra = {money_required = 100}},
@@ -24,7 +25,7 @@ local d6_joker_info = SMODS.D6_Joker({
 				G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     func = function() 
-						local _card = create_card('Joker', G.jokers, nil, 0, nil, nil, "j_dsix_pure_exchange_die")
+						local _card = create_card('Joker', G.jokers, nil, 0, nil, nil, self.pure_upgrade)
 						_card:add_to_deck()
 						G.jokers:emplace(_card)
 						_card:start_materialize()
@@ -42,6 +43,7 @@ local d6_joker_info = SMODS.D6_Joker({
 			SMODS.Joker.register(self)
 		end
 	end,
+	yes_pool_flag = "impure_joker",
 	order = 1,
 })
 

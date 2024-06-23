@@ -1,7 +1,7 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "mult_minus2_side",
 	loc_txt = {},
-	config = {mult = 60},
+	config = {mult = 75},
 	atlas = "d6_side_mult",
 	icon_pos = {x=6, y=1},
 	pos = {x=0, y=4},

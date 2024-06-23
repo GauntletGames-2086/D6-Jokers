@@ -9,8 +9,8 @@ local d6_side_info = SMODS.D6_Side({
 		if card.ability.perishable == true then card.ability.perishable = nil end
 		card.ability.eternal = true
 	end,
-	remove_frm_deck = function(self, card, from_debuff, from_roll)
-		if from_roll then
+	remove_frm_deck = function(self, card, from_debuff, other)
+		if other.from_roll then
 			card.ability["perma_debuff"] = false
 			card.ability.eternal = false
 		end

@@ -4,7 +4,7 @@ local d6_side_info = SMODS.D6_Side({
 	config = {xmult = 2},
 	atlas = "d6_side_xmult",
 	icon_pos = {x=0, y=2},
-	upgrade = "mult_plus_side",
+	upgrade = "xmult_plus_side",
 	loc_vars = function(self, info_queue)
 		return {vars = {self.config.xmult}}
 	end,

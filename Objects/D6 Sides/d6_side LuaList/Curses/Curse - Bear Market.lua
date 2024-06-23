@@ -10,6 +10,7 @@ local d6_side_info = SMODS.D6_Side({
 			SMODS.GameObject.register(self)
 		end
 	end,
+	curse = true,
 	order = 5,
 })
 

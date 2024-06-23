@@ -1,6 +1,7 @@
 local tarot_info = SMODS.Consumable({
 	key = "transplant",
 	set = "Spectral",
+	name = "Transplant",
 	loc_txt = {},
 	pos = {x=0, y=0},
 	cost = 4,
@@ -31,9 +32,10 @@ local tarot_info = SMODS.Consumable({
 	end,
 	register = function(self, order)
 		if order and order == self.order then
-			SMODS.Joker.register(self)
+			SMODS.Consumable.super.register(self)
 		end
 	end,
+	d6_consumable = true,
 	order = 1,
 })
 

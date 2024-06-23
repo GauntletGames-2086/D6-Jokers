@@ -5,10 +5,10 @@ local d6_side_info = SMODS.D6_Side({
 	atlas = "d6_side_curse",
 	icon_pos = {x=2, y=5},
 	pos = {x=0, y=0},
-	add_to_deck = function(self, card, from_debuff, from_roll)
+	add_to_deck = function(self, card, from_debuff, other)
 		card.pinned = true
 	end,
-	remove_from_deck = function(self, card, from_debuff, from_roll)
+	remove_from_deck = function(self, card, from_debuff, other)
 		card.pinned = false
 		for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].ability and G.jokers.cards[i].ability.debuffed_by_nullify then 
@@ -36,6 +36,7 @@ local d6_side_info = SMODS.D6_Side({
 			SMODS.GameObject.register(self)
 		end
 	end,
+	curse = true,
 	order = 5,
 })
 

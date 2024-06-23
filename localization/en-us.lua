@@ -8,9 +8,42 @@ return {
 			["k_na"] = "N/A",
 			["k_created"] = "Created!",
 			["b_d6_sides"] = "D6 Sides",
+			["k_d6_booster_pack"] = "D6 Booster Pack",
 		},
 	},
 	["descriptions"] = {
+		["Other"] = {
+			["p_dsix_d6_jokers_pack"] = {
+				["name"] = "D6 Jokers Pack",
+				["text"] = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:joker} D6 Jokers{}",
+				},
+			},
+			["p_dsix_d6_support_pack"] = {
+				["name"] = "D6 Support Pack",
+				["text"] = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:joker} D6 Consumables{}",
+				},
+			},
+			["p_dsix_d6_booster_pack"] = {
+				["name"] = "D6 Booster Pack",
+				["text"] = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:joker} D6 Jokers{}",
+					"or {C:joker}D6 Consumables",
+				},
+			},
+			["p_dsix_d6_mega_booster_pack"] = {
+				["name"] = "Mega D6 Booster Pack",
+				["text"] = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:joker} D6 Jokers{}",
+					"or {C:joker}D6 Consumables",
+				},
+			},
+		},
 		["Joker"] = {
 			["j_dsix_casino_die"] = {
 				["name"] = "Casino Die",
@@ -192,7 +225,7 @@ return {
 		},
 		["Tarot"] = {
 			["c_dsix_concentration"] = {
-				["name"] = "专注",
+				["name"] = "Concentration",
 				["text"] = {
 					"{C:attention}Upgrade{} all die faces on",
                     "selected {C:attention}D6 Joker{}",

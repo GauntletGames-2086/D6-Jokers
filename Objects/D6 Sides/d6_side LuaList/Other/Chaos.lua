@@ -15,20 +15,20 @@ local d6_side_info = SMODS.D6_Side({
 			return {vars = {localize{type = 'name_text', key = card.ability.extra.chaos_selected_die, set = 'Other'}}}
 		end
 	end,
-	add_to_deck = function(self, card, from_debuff, from_roll)
+	add_to_deck = function(self, card, from_debuff, other)
 		local viable_die_sides = {}
 		for k, v in pairs(G.P_D6_SIDES) do
-			if k ~= self.key and k ~= "chaos_plus_side" then viable_die_sides[#viable_die_sides+1] = k end
+			if k ~= self.key and k ~= "chaos_plus_side" and not (v.curse or v.pure) then viable_die_sides[#viable_die_sides+1] = k end
 		end
 		card.ability.extra["chaos_selected_die"] = pseudorandom_element(viable_die_sides, pseudoseed("chaos_selected_die"))
 		if SMODS.D6_Sides[card.ability.extra.chaos_selected_die].add_to_deck and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].add_to_deck) == "function" then
-			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:add_to_deck(card, from_debuff)
+			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:add_to_deck(card, from_debuff, {from_chaos = true})
 		end
 	end,
 	remove_from_deck = function(self, card, from_debuff)
 		if type(card.ability.extra) ~= "table" then sendErrorMessage("D6 Jokers print. CARD.ABILITY.EXTRA IS NOT A TABLE") else sendInfoMessage(tprint(card.ability.extra)) end
 		if card.ability.extra and type(card.ability.extra) ~= "table" and card.ability.extra.chaos_selected_die ~= nil and SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck) == "function" then
-			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:remove_from_deck(card, from_debuff)
+			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:remove_from_deck(card, from_debuff, {from_chaos = true})
 			card.ability.extra["chaos_selected_die"] = nil
 		end
 	end,

@@ -188,3 +188,56 @@ position = 'after'
 payload = '''
 SMODS.D6_Sides and UIBox_button({button = 'your_collection_d6_sides', label = {localize('b_d6_sides')}, count = G.DISCOVER_TALLIES.d6_sides, minw = 5, minh = 2.0, id = 'your_collection_d6_sides', focus_args = {snap_to = true}}) or nil,
 '''
+
+# align_h_popup()
+[[patches]]
+[patches.regex]
+target = 'card.lua'
+pattern = '(?<indent>[\t ]*)return \{\n[\s\S]*major = self\.children\.focused_ui or self,'
+position = 'before'
+payload = '''
+    --ADDED CODE FROM D6 JOKERS
+	if self.config.center.d6_joker then 
+		popup_direction = (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'cl' or 
+		(self.T.y < G.CARD_H*0.8*2) and 'bm' or
+		'tm'
+	end
+    --ADDED CODE FROM D6 JOKERS
+'''
+
+### From a branch of Steamodded, fixes some spawning errors
+
+## G.GAME.used_jokers now checks keys, not names
+# Card:set_ability()
+[[patches]]
+[patches.regex]
+target = "card.lua"
+pattern = '''
+(?<indent>[\t ]*)for k, v in pairs\(G\.P_CENTERS\) do
+[\t ]*if v\.name == self\.ability\.name then
+[\t ]*G\.GAME\.used_jokers\[k\] = true
+[\t ]*end
+[\t ]*end'''
+position = "at"
+payload = '''
+if self.config.center_key then G.GAME.used_jokers[self.config.center_key] = true end
+'''
+line_prepend = "$indent"
+# Card:remove()
+[[patches]]
+[patches.regex]
+target = "card.lua"
+pattern = '''
+(?<indent>[\t ]*)for k, v in pairs\(G\.P_CENTERS\) do
+[\t ]*if v\.name == self\.ability\.name then
+[\t ]*if not next\(find_joker\(self\.ability\.name, true\)\) then 
+[\t ]*G\.GAME\.used_jokers\[k\] = nil
+[\t ]*end
+[\t ]*end
+[\t ]*end'''
+position = "at"
+payload = '''
+if self.config.center_key and not next(SMODS.find_card(self.config.center_key, true)) then
+    G.GAME.used_jokers[self.config.center_key] = nil
+end'''
+line_prepend = "$indent"
