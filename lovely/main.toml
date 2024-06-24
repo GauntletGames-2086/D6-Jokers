@@ -9,14 +9,12 @@ priority = 0
 target = 'functions/misc_functions.lua'
 pattern = '(?<indent>[\t ]*)for _, v in pairs\(G\.DISCOVER_TALLIES\) do'
 position = 'before'
-payload = '''
-    --ADDED CODE FROM D6 JOKERS
-    if SMODS.D6_Side then
+payload = ''' 
+    if SMODS.D6_Side ~= nil then
         for _, v in ipairs(SMODS.D6_Side.obj_buffer) do
             G.DISCOVER_TALLIES["d6_sides"] = {tally = 0, of = 0}
         end
     end
-    --ADDED CODE FROM D6 JOKERS
 
 '''
 
@@ -26,9 +24,8 @@ payload = '''
 target = 'functions/misc_functions.lua'
 pattern = '(?<indent>[\t ]*)for _, v in pairs\(G\.P_BLINDS\) do'
 position = 'before'
-payload = '''
-  --ADDED CODE FROM D6 JOKERS
-  if SMODS.D6_Side then
+payload = ''' 
+  if SMODS.D6_Side ~= nil and G.P_D6_SIDES ~= nil then
     for _, v in pairs(G.P_D6_SIDES) do
         G.DISCOVER_TALLIES.total.of = G.DISCOVER_TALLIES.total.of+1
         G.DISCOVER_TALLIES.d6_sides.of = G.DISCOVER_TALLIES.d6_sides.of+1
@@ -38,7 +35,6 @@ payload = '''
         end
     end
   end
-  --ADDED CODE FROM D6 JOKERS
 
 '''
 

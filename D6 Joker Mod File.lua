@@ -617,12 +617,12 @@ end
 local file_groups = NFS.getDirectoryItems(mod_path.."Objects")
 local function init_file_groups()
 	for k, file_group in pairs(file_groups) do
-		local init_files = NFS.getDirectoryItems(mod_path.."Objects\\"..file_group)
+		local init_files = NFS.getDirectoryItems(mod_path.."Objects/"..file_group)
 		for kk, v in pairs(init_files) do
 			if string.find(v, ".lua") then
-				local init_obj_filepath = tostring(mod_path.."Objects\\"..file_group)
-				local f, err = NFS.load(mod_path.."Objects\\"..file_group.."\\"..v)
-				if err then sendErrorMessage("Couldn't load object file from D6 Jokers: "..err); sendErrorMessage("Object file path: "..tostring(mod_path.."Objects\\"..file_group.."\\"..v)) else
+				local init_obj_filepath = tostring(mod_path.."Objects/"..file_group)
+				local f, err = NFS.load(mod_path.."Objects/"..file_group.."/"..v)
+				if err then sendErrorMessage("Couldn't load object file from D6 Jokers: "..err); sendErrorMessage("Object file path: "..tostring(mod_path.."Objects/"..file_group.."/"..v)) else
 					local init_obj_file = f()
 					if init_obj_file.init_func and type(init_obj_file.init_func) == "function" then init_obj_file.init_func(init_obj_filepath) end
 				end
