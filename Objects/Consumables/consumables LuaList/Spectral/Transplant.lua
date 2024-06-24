@@ -16,15 +16,23 @@ local tarot_info = SMODS.Consumable({
 		return d6_joker_selected
 	end,
 	use = function(self, card, area, copier)
-		local selected_card
+		local selected_card = nil
 		for k, v in ipairs(G.jokers.cards) do
 			if v.highlighted == true then selected_card = v end
 		end
 		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+			sendInfoMessage("Transplant being handled")
 			if selected_card.ability.extra.selected_d6_face == 1 then 
-				SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:remove_from_deck(selected_card, nil, true)
+				sendInfoMessage("SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]: "..tostring(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]))
+				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
+					SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]:remove_from_deck(selected_card, from_debuff, {from_roll = true})
+				end
+				sendInfoMessage("Die side removed")
 				selected_card.ability.extra.local_d6_sides[1] = selected_card.ability.extra.local_d6_sides[6]
-				SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:add_to_deck(selected_card, nil, true)
+				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck) == "function" then
+					SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]:add_to_deck(selected_card, from_debuff, {from_roll = true})
+				end
+				sendInfoMessage("Die side added")
 			else
 				selected_card.ability.extra.local_d6_sides[1] = selected_card.ability.extra.local_d6_sides[6]
 			end

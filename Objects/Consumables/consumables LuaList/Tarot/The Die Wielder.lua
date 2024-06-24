@@ -19,7 +19,7 @@ local tarot_info = SMODS.Consumable({
 			local _card = create_card("d6_jokers", G.jokers, nil, nil, nil, nil, nil, 'dsix_jokers')
 			_card:add_to_deck()
 			G.jokers:emplace(_card)
-			card:juice_up(0.3, 0.5)
+			_card:juice_up(0.3, 0.5)
 			return true end }))
 		delay(0.6)
 	end,

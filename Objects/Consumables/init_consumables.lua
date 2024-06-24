@@ -8,10 +8,16 @@ local init_consumables = function(base_file_path)
 		local consumable_files = NFS.getDirectoryItems(base_file_path.."/consumables LuaList/"..metafile)
 		for _, file in ipairs(consumable_files) do
 			if string.find(file, ".lua") then
-				local consumable = NFS.load(base_file_path.."/consumables LuaList/"..metafile.."/"..file)()
-				consumable["order"] = (order_list[consumable.key] and order_list[consumable.key].order) or #order_list
-				if not order_list[consumable.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..consumable.key) end
-				consumables_to_inject[#consumables_to_inject+1] = consumable
+				local f, err = NFS.load(base_file_path.."/consumables LuaList/"..metafile.."/"..file)
+				if err then 
+					sendErrorMessage("Couldn't load object from D6 Jokers: "..err)
+					sendErrorMessage("Object path: "..tostring(base_file_path.."/consumables LuaList/"..metafile.."/"..file)) 
+				else
+					local consumable = f()
+					consumable["order"] = (order_list[consumable.key] and order_list[consumable.key].order) or #order_list
+					if not order_list[consumable.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..consumable.key) end
+					consumables_to_inject[#consumables_to_inject+1] = consumable
+				end
 			end
 		end
 	end

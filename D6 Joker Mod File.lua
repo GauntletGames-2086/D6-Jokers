@@ -137,6 +137,8 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 	inject = function(self)
 		-- call the parent function to ensure all pools are set
 		SMODS.Joker.inject(self)
+		if not self.config["extra"] then self.config.extra = {} end
+		self.config.extra["local_d6_sides"] = {}
 		if not G.P_CENTERS[self.key].config["extra"] then G.P_CENTERS[self.key].config["extra"] = {} end
 		--Inject logic into the config so jokers extending this don't need to add it manually
 		G.P_CENTERS[self.key].config.extra["selected_d6_face"] = 1 
@@ -167,7 +169,7 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 				card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
 				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='d6_joker_roll',vars={card.ability.extra.selected_d6_face}}, colour = G.C.BLUE})
 
-				if #SMODS.find_card("j_oops") > 0 then 
+				if #SMODS.find_card("j_oops") > 0 and card.ability.extra.selected_d6_face ~= 6 then 
 					local oops_card = nil
 					for i, v in ipairs(G.jokers.cards) do
 						if v.config.center_key == "j_oops" then oops_card = v; break end 

@@ -6,12 +6,13 @@ local init_d6_jokers = function(base_file_path)
 	--assemble list of d6_jokers_to_inject
 	for k, file in pairs(d6_joker_files) do
 		if string.find(file, ".lua") then
-			local d6_joker = NFS.load(base_file_path.."/d6_joker LuaList/"..file)()
-			if not d6_joker.config["extra"] then d6_joker.config.extra = {} end
-			d6_joker.config.extra["local_d6_sides"] = {}
-			d6_joker["order"] = (order_list[d6_joker.key] and order_list[d6_joker.key].order) or #order_list
-			if not order_list[d6_joker.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..d6_joker.key) end
-			d6_jokers_to_inject[#d6_jokers_to_inject+1] = d6_joker
+			local f, err = NFS.load(base_file_path.."/d6_joker LuaList/"..file)
+			if err then sendErrorMessage("Couldn't load object from D6 Jokers: "..err); sendErrorMessage("Object path: "..tostring(base_file_path.."/d6_joker LuaList/"..file)) else
+				local d6_joker = f()
+				d6_joker["order"] = (order_list[d6_joker.key] and order_list[d6_joker.key].order) or #order_list
+				if not order_list[d6_joker.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..d6_joker.key) end
+				d6_jokers_to_inject[#d6_jokers_to_inject+1] = d6_joker
+			end
 		end
 	end
 
