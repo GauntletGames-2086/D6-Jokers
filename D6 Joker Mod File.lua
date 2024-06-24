@@ -4,7 +4,7 @@
 --- MOD_AUTHOR: [ItsFlowwey]
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
---- VERSION: 0.5.2
+--- VERSION: 0.5.21
 --- LOADER_VERSION_GEQ: 1.0.0-ALPHA-0622c
 --- PRIORITY: -900
 
@@ -158,17 +158,30 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 	end,
 	calculate = function(self, card, context)
 		if not card.debuff then 
+			--D6 Joker logic
 			if context.setting_blind and not card.getting_sliced and not context.blueprint_card then
 				if SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
 					SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:remove_from_deck(card, nil, {from_roll = true})
 				end
+
 				card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
+				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='d6_joker_roll',vars={card.ability.extra.selected_d6_face}}, colour = G.C.BLUE})
+
+				if #SMODS.find_card("j_oops") > 0 then 
+					local oops_card = nil
+					for i, v in ipairs(G.jokers.cards) do
+						if v.config.center_key == "j_oops" then oops_card = v; break end 
+					end
+					card_eval_status_text(oops_card, 'extra', nil, nil, nil, {message = localize('k_oops'), colour = G.C.GREEN})
+					card.ability.extra.selected_d6_face = 6
+					card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='d6_joker_roll',vars={card.ability.extra.selected_d6_face}}, colour = G.C.BLUE})
+				end
 
 				if SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].add_to_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].add_to_deck) == "function" then
 					SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]]:add_to_deck(card, from_debuff, {from_roll = true})
 				end
-				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='d6_joker_roll',vars={card.ability.extra.selected_d6_face}}, colour = G.C.BLUE})
 			end
+			--D6 Sides calculate
 			if card.ability.extra.chaos_selected_die and (SMODS.D6_Sides[card.ability.extra.chaos_selected_die].calculate and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].calculate) == "function") then
 				local o = SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:calculate(card, context)
 				if o then return o end

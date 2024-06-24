@@ -51,11 +51,11 @@ position = 'before'
 payload = '''
 			--ADDED CODE FROM D6 JOKERS
 			local test_thingy = nil
-            local is_d6_joker = nil
+            local has_d6_sides = nil
             local d6_joker_UI_code = nil
-            if card.config and (card.config.center and card.config.center.d6_joker) then
+            if card.config and (card.config.center and card.config.center.d6_sides) then
                 test_thingy = Moveable(88, 102, 2, 2)
-                is_d6_joker = true
+                has_d6_sides = true
                 card.ability.extra.selected_d6_face = math.clamp(1, math.round(card.ability.extra.selected_d6_face), 6)
                 local base_d6_sprite = Sprite(88, 102, 2, 2, G.ASSET_ATLAS["dsix_base_test_d6_art"], {x=0, y=0})
                 local test_d6_selector = Sprite(88, 102, 2.1, 2.1, G.ASSET_ATLAS["dsix_d6_test_selector"], {x=(card.ability.extra.selected_d6_face or 1)-1, y=0})
@@ -96,7 +96,7 @@ payload = '''
                     local d6_side_AUT_info_organized = {}
                     local remaining_AUT_info = {}
                     for k, v in ipairs(AUT.info) do
-                        if is_d6_joker and (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[v.name]]) then d6_side_AUT_info_organized[#d6_side_AUT_info_organized+1] = v
+                        if has_d6_sides and (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[v.name]]) then d6_side_AUT_info_organized[#d6_side_AUT_info_organized+1] = v
                         else remaining_AUT_info[#remaining_AUT_info+1] = v end
                     end
                     table.sort(d6_side_AUT_info_organized, function(a, b) return (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[a.name]].order) < (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[b.name]].order) end)
@@ -118,7 +118,7 @@ payload = '''
                     end
                 end
 
-                if is_d6_joker then 
+                if has_d6_sides then 
                     return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
                     {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes={
                     {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
@@ -204,40 +204,3 @@ payload = '''
 	end
     --ADDED CODE FROM D6 JOKERS
 '''
-
-### From a branch of Steamodded, fixes some spawning errors
-
-## G.GAME.used_jokers now checks keys, not names
-# Card:set_ability()
-[[patches]]
-[patches.regex]
-target = "card.lua"
-pattern = '''
-(?<indent>[\t ]*)for k, v in pairs\(G\.P_CENTERS\) do
-[\t ]*if v\.name == self\.ability\.name then
-[\t ]*G\.GAME\.used_jokers\[k\] = true
-[\t ]*end
-[\t ]*end'''
-position = "at"
-payload = '''
-if self.config.center_key then G.GAME.used_jokers[self.config.center_key] = true end
-'''
-line_prepend = "$indent"
-# Card:remove()
-[[patches]]
-[patches.regex]
-target = "card.lua"
-pattern = '''
-(?<indent>[\t ]*)for k, v in pairs\(G\.P_CENTERS\) do
-[\t ]*if v\.name == self\.ability\.name then
-[\t ]*if not next\(find_joker\(self\.ability\.name, true\)\) then 
-[\t ]*G\.GAME\.used_jokers\[k\] = nil
-[\t ]*end
-[\t ]*end
-[\t ]*end'''
-position = "at"
-payload = '''
-if self.config.center_key and not next(SMODS.find_card(self.config.center_key, true)) then
-    G.GAME.used_jokers[self.config.center_key] = nil
-end'''
-line_prepend = "$indent"

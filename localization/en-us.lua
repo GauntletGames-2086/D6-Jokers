@@ -9,6 +9,7 @@ return {
 			["k_created"] = "Created!",
 			["b_d6_sides"] = "D6 Sides",
 			["k_d6_booster_pack"] = "D6 Booster Pack",
+			["k_oops"] = "Oops!",
 		},
 	},
 	["descriptions"] = {
