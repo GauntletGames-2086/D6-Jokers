@@ -24,12 +24,12 @@ local tarot_info = SMODS.Consumable({
 			sendInfoMessage("Transplant being handled")
 			if selected_card.ability.extra.selected_d6_face == 1 then 
 				sendInfoMessage("SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]: "..tostring(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]))
-				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
+				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
 					SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]:remove_from_deck(selected_card, from_debuff, {from_roll = true})
 				end
 				sendInfoMessage("Die side removed")
 				selected_card.ability.extra.local_d6_sides[1] = selected_card.ability.extra.local_d6_sides[6]
-				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck) == "function" then
+				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck) == "function" then
 					SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]:add_to_deck(selected_card, from_debuff, {from_roll = true})
 				end
 				sendInfoMessage("Die side added")
