@@ -10,8 +10,8 @@ local d6_joker_info = SMODS.D6_Joker({
 		[5] = "nothing_side",
 		[6] = "blocker_side"
 	},
-	rarity = 2,
-	cost = 6,
+	rarity = 1,
+	cost = 4,
 	upgrade = "insurance_plus_die",
 	register = function(self, order)
 		if order and order == self.order then

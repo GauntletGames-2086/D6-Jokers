@@ -26,7 +26,6 @@ local d6_side_info = SMODS.D6_Side({
 		end
 	end,
 	remove_from_deck = function(self, card, from_debuff)
-		if type(card.ability.extra) ~= "table" then sendErrorMessage("D6 Jokers print. CARD.ABILITY.EXTRA IS NOT A TABLE") else sendInfoMessage(tprint(card.ability.extra)) end
 		if card.ability.extra and type(card.ability.extra) == "table" and card.ability.extra.chaos_selected_die ~= nil and SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.chaos_selected_die].remove_from_deck) == "function" then
 			SMODS.D6_Sides[card.ability.extra.chaos_selected_die]:remove_from_deck(card, from_debuff, {from_chaos = true})
 			card.ability.extra["chaos_selected_die"] = nil

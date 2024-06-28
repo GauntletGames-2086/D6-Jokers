@@ -1,7 +1,6 @@
 local tarot_info = SMODS.Consumable({
 	key = "purification",
 	set = "Spectral",
-	name = "Purification",
 	loc_txt = {},
 	pos = {x=0, y=0},
 	discovered = true,

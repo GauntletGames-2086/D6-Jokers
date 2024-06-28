@@ -8,8 +8,10 @@ return {
 			["k_na"] = "N/A",
 			["k_created"] = "Created!",
 			["b_d6_sides"] = "D6 Sides",
-			["k_d6_booster_pack"] = "D6 Booster Pack",
 			["k_oops"] = "Oops!",
+			["d6_jokers_pack"] = "D6 Jokers Pack",
+			["d6_support_pack"] = "D6 Support Pack",
+			["d6_booster_pack"] = "D6 Booster Pack",
 		},
 	},
 	["descriptions"] = {
@@ -21,8 +23,22 @@ return {
 					"{C:attention}#2#{C:joker} D6 Jokers{}",
 				},
 			},
+			["p_dsix_mega_d6_jokers_pack"] = {
+				["name"] = "Mega D6 Jokers Pack",
+				["text"] = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:joker} D6 Jokers{}",
+				},
+			},
 			["p_dsix_d6_support_pack"] = {
 				["name"] = "D6 Support Pack",
+				["text"] = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:joker} D6 Consumables{}",
+				},
+			},
+			["p_dsix_mega_d6_support_pack"] = {
+				["name"] = "Mega D6 Support Pack",
 				["text"] = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{C:joker} D6 Consumables{}",
@@ -36,7 +52,7 @@ return {
 					"or {C:joker}D6 Consumables",
 				},
 			},
-			["p_dsix_d6_mega_booster_pack"] = {
+			["p_dsix_mega_d6_booster_pack"] = {
 				["name"] = "Mega D6 Booster Pack",
 				["text"] = {
 					"Choose {C:attention}#1#{} of up to",
@@ -107,7 +123,8 @@ return {
 					"Even the pinacle of dice wielders",
 					"cower in fear",
 					"Nobody knows it's true power...",
-					"{C:inactive}(Total blinds defeated: {C:attention}#1#/#2#{C:inactive})",
+					"{C:inactive}Purification condition:",
+					"{C:inactive}Total blinds defeated: {C:attention}#1#/#2#{C:inactive}",
 				},
 			},
 			["j_dsix_support_die"] = {
@@ -142,7 +159,8 @@ return {
 					"This die was \"gifted\" to die wielders",
 					"deemed responsible for the",
 					"2008 housing market crash",
-					"{C:inactive}(Money required after payout: {C:attention}#1#{C:inactive})",
+					"{C:inactive}Purification condition:",
+					"{C:inactive}Dollars after payout: {C:attention}#1#{C:inactive}",
 				},
 			},
 			["j_dsix_tarot_die"] = {
@@ -244,20 +262,28 @@ return {
 					"{C:attention}Upgrade{} selected {C:attention}D6 Joker{}",
 				},
 			},
-		},
-		["Spectral"] = {
 			["c_dsix_transplant"] = {
 				["name"] = "Transplant",
 				["text"] = {
-					"Set selected D6 Joker's die face",
-					"in position 1 to die face",
-					"in position 6",
+					"Set {C:attention}D6 Joker{} die face",
+					"in {C:attention}position 1{} to die face",
+					"in {C:attention}position 6{}",
 				},
 			},
+		},
+		["Spectral"] = {
 			["c_dsix_purification"] = {
 				["name"] = "Purification",
 				["text"] = {
-					"Spawn an {C:legendary}Impure{} die",
+					"Spawn an {C:legendary}Impure Die{}",
+				},
+			},
+			["c_dsix_override"] = {
+				["name"] = "Override",
+				["text"] = {
+					"Set all {C:attention}D6 Sides",
+					"to this cards",
+					"selected {C:attention}D6 Side"
 				},
 			},
 		},
@@ -282,7 +308,7 @@ return {
 				["label"] = "Root Beer+",
 				["name"] = "{C:attention}Root Beer+{}",
 				["text"] = {
-					"{C:attention}Gain #1# Double Tag",
+					"{C:attention}Gain #1# Double Tags",
 					"{C:attention}when this joker is sold",
 				},
 			},
@@ -398,7 +424,7 @@ return {
 				["name"] = "{C:attention}Nothing+++{}",
 				["text"] = {
 					"{C:attention}IT DOES SOMETHING?!",
-					"{C:attention}jk. Does nothing*4"
+					"{X:mult,C:white}X#1#{C:attention} Mult",
 				},
 			},
 			["nothing_side"] = {
@@ -435,7 +461,8 @@ return {
 				["label"] = "Pure: Return Investment",
 				["name"] = "{C:blue}Pure: Return Investment{}",
 				["text"] = {
-					"{C:blue}Earn {C:money}$#1#{C:blue} per {C:money}$#2#{C:blue} spent",
+					"{C:blue}Earn {C:money}$#1#{C:blue} per",
+					"{C:money}$#2#{C:blue} lost or spent",
 				},
 			},
 			["xmult_plus_side"] = {

@@ -14,7 +14,7 @@ local d6_joker_info = SMODS.D6_Joker({
 	pure_upgrade = "j_dsix_pure_exchange_die",
 	rarity = 4,
 	cost = 20,
-	config = {extra = {money_required = 100}},
+	config = {extra = {money_required = 150}},
 	loc_vars = function(self, info_queue, card)
 		SMODS.D6_Joker.loc_vars(self, info_queue, card)
 		return {vars = {card.ability.extra.money_required}}

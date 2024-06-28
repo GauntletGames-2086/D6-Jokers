@@ -1,10 +1,9 @@
 local tarot_info = SMODS.Consumable({
 	key = "transplant",
-	set = "Spectral",
-	name = "Transplant",
+	set = "Tarot",
 	loc_txt = {},
 	pos = {x=0, y=0},
-	cost = 4,
+	cost = 3,
 	discovered = true,
 	can_use = function(self, card)
 		local d6_joker_selected = false
@@ -23,16 +22,13 @@ local tarot_info = SMODS.Consumable({
 		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
 			sendInfoMessage("Transplant being handled")
 			if selected_card.ability.extra.selected_d6_face == 1 then 
-				sendInfoMessage("SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]: "..tostring(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]))
 				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
 					SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]:remove_from_deck(selected_card, from_debuff, {from_roll = true})
 				end
-				sendInfoMessage("Die side removed")
 				selected_card.ability.extra.local_d6_sides[1] = selected_card.ability.extra.local_d6_sides[6]
 				if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]].add_to_deck) == "function" then
 					SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[selected_card.ability.extra.selected_d6_face]]:add_to_deck(selected_card, from_debuff, {from_roll = true})
 				end
-				sendInfoMessage("Die side added")
 			else
 				selected_card.ability.extra.local_d6_sides[1] = selected_card.ability.extra.local_d6_sides[6]
 			end

@@ -81,62 +81,51 @@ payload = '''
                     {shader = 'dissolve', no_tilt = true, other_obj = base_d6_sprite}
                     })
                 
-                local D6_AUT = generate_card_ui(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]], nil, nil, nil, nil, nil, nil, nil, card)
-                AUT.main[#AUT.main+1] = D6_AUT.name
-                for k, v in pairs(D6_AUT.main) do
-                    AUT.main[#AUT.main+1] = v
+                if not card.config.center.omit_d6_sides_desc then
+
+                    local D6_AUT = generate_card_ui(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]], nil, nil, nil, nil, nil, nil, nil, card)
+                    AUT.main[#AUT.main+1] = D6_AUT.name
+                    for k, v in pairs(D6_AUT.main) do
+                        AUT.main[#AUT.main+1] = v
+                    end
+
+                    if AUT.info then
+                        local d6_side_AUT_info_organized = {}
+                        local remaining_AUT_info = {}
+                        for k, v in ipairs(AUT.info) do
+                            if has_d6_sides and (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[v.name]]) then d6_side_AUT_info_organized[#d6_side_AUT_info_organized+1] = v
+                            else remaining_AUT_info[#remaining_AUT_info+1] = v end
+                        end
+                        table.sort(d6_side_AUT_info_organized, function(a, b) return (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[a.name]].order) < (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[b.name]].order) end)
+                        for k, v in ipairs(d6_side_AUT_info_organized) do
+                            info_boxes[#info_boxes+1] =
+                            {n=G.UIT.R, config={align = "cm"}, nodes={
+                            {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+                            info_tip_from_rows(v, v.name),
+                            }}
+                        }}
+                        end
+                        for k, v in ipairs(remaining_AUT_info) do
+                            info_boxes[#info_boxes+1] =
+                            {n=G.UIT.R, config={align = "cm"}, nodes={
+                            {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
+                            info_tip_from_rows(v, v.name),
+                            }}
+                        }}
+                        end
+                    end
                 end
+
                 d6_joker_UI_code = {n=G.UIT.R, config={align = "cm", padding = 0.1, r = 0.1}, nodes={{n=G.UIT.O, config={object = test_thingy}}}}
 
-                if AUT.info then
-                    local d6_side_AUT_info_organized = {}
-                    local remaining_AUT_info = {}
-                    for k, v in ipairs(AUT.info) do
-                        if has_d6_sides and (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[v.name]]) then d6_side_AUT_info_organized[#d6_side_AUT_info_organized+1] = v
-                        else remaining_AUT_info[#remaining_AUT_info+1] = v end
-                    end
-                    table.sort(d6_side_AUT_info_organized, function(a, b) return (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[a.name]].order) < (SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[b.name]].order) end)
-                    for k, v in ipairs(d6_side_AUT_info_organized) do
-                        info_boxes[#info_boxes+1] =
-                        {n=G.UIT.R, config={align = "cm"}, nodes={
-                        {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
-                        info_tip_from_rows(v, v.name),
-                        }}
-                    }}
-                    end
-                    for k, v in ipairs(remaining_AUT_info) do
-                        info_boxes[#info_boxes+1] =
-                        {n=G.UIT.R, config={align = "cm"}, nodes={
-                        {n=G.UIT.R, config={align = "cm", colour = lighten(G.C.JOKER_GREY, 0.5), r = 0.1, padding = 0.05, emboss = 0.05}, nodes={
-                        info_tip_from_rows(v, v.name),
-                        }}
-                    }}
-                    end
-                end
-
-                if has_d6_sides then 
-                    return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
-                    {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes={
+                return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
+                  {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes={
                     {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
-                        {n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
+                      {n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
                         name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
                         desc_from_rows(AUT.main),
                         d6_joker_UI_code,
                         badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
-                        }}
-                        }}
-                    }},
-                    }}
-                end
-
-                return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
-                {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes={
-                  {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
-                    {n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
-                      name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
-                      desc_from_rows(AUT.main),
-                      d6_joker_UI_code,
-                      badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
                       }}
                     }}
                   }},
@@ -193,7 +182,7 @@ pattern = '(?<indent>[\t ]*)return \{\n[\s\S]*major = self\.children\.focused_ui
 position = 'before'
 payload = '''
     --ADDED CODE FROM D6 JOKERS
-	if self.config.center.d6_joker then 
+	if self.config.center.d6_sides then 
 		popup_direction = (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'cl' or 
 		(self.T.y < G.CARD_H*0.8*2) and 'bm' or
 		'tm'

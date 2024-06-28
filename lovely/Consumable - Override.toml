@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# new_round()
+[[patches]]
+[patches.regex]
+target = 'functions/state_events.lua'
+pattern = '''(?<indent>[\t ]*)delay\(0\.4\)\n[\s\S]{13}G\.E_MANAGER:add_event\(Event\(\{'''
+position = 'before'
+payload = ''' 
+            for i = 1, #G.consumeables.cards do
+                G.consumeables.cards[i]:calculate_joker({setting_blind = true, blind = G.GAME.round_resets.blind})
+            end'''

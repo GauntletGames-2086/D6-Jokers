@@ -1,7 +1,6 @@
 local tarot_info = SMODS.Consumable({
 	key = "the_die_wielder",
 	set = "Tarot",
-	name = "The Die Wielder",
 	loc_txt = {},
 	pos = {x=0, y=0},
 	cost = 3,
