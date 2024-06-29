@@ -22,7 +22,7 @@ local d6_joker_info = SMODS.D6_Joker({
 	calculate = function(self, card, context)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
 			card.ability.extra.current_blinds_defeated = card.ability.extra.current_blinds_defeated + 1
-			if card.ability.extra.current_blinds_defeated == card.ability.extra.blinds_required then
+			if card.ability.extra.current_blinds_defeated >= card.ability.extra.blinds_required then
 				G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     func = function() 
