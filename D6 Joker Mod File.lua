@@ -244,7 +244,7 @@ SMODS.Booster{
 
 SMODS.Booster{
 	key = "mega_d6_jokers_pack",
-	weight = 1000,
+	weight = 1,
 	cost = 8,
 	config = {extra = 5, choose = 2},
 	discovered = true,
