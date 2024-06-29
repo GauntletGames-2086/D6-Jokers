@@ -4,7 +4,7 @@
 --- MOD_AUTHOR: [ItsFlowwey]
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
---- VERSION: 0.5.3
+--- VERSION: 0.5.31
 --- LOADER_VERSION_GEQ: 1.0.0-ALPHA-0628a
 --- PRIORITY: -900
 
@@ -244,7 +244,7 @@ SMODS.Booster{
 
 SMODS.Booster{
 	key = "mega_d6_jokers_pack",
-	weight = 1,
+	weight = 0.25,
 	cost = 8,
 	config = {extra = 5, choose = 2},
 	discovered = true,
@@ -271,7 +271,7 @@ SMODS.Booster{
 
 SMODS.Booster{
 	key = "mega_d6_support_pack",
-	weight = 1,
+	weight = 0.25,
 	cost = 8,
 	config = {extra = 5, choose = 2},
 	discovered = true,
@@ -283,7 +283,7 @@ SMODS.Booster{
 
 SMODS.Booster{
 	key = "d6_booster_pack",
-	weight = 1,
+	weight = 0.8,
 	cost = 6,
 	config = {extra = 4, choose = 1},
 	discovered = true,
@@ -303,7 +303,7 @@ SMODS.Booster{
 
 SMODS.Booster{
 	key = "mega_d6_booster_pack",
-	weight = 1,
+	weight = 0.15,
 	cost = 8,
 	config = {extra = 4, choose = 2},
 	discovered = true,
