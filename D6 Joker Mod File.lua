@@ -57,7 +57,7 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 	discovered = true,
 	colour = HEX("9151b5"),
 	reverse_lookup_name = {},
-	omit_prefix = true,
+	prefix_config = {key = false},
 	inject = function(self)
 		if not G["P_D6_SIDES"] then G["P_D6_SIDES"] = {} end
 		G.P_D6_SIDES[self.key] = self
@@ -90,7 +90,10 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 			desc_nodes[#desc_nodes + 1] = res.main_end
 		end
 	end,
-	get_obj = function(self, key) return G.P_D6_SIDES[key] end,
+	get_obj = function(key) 
+		if not G.P_D6_SIDES then G.P_D6_SIDES = {} end
+		return G.P_D6_SIDES[key]
+	end,
 	get_die_info = function(context, die_side_key, card, ignore_debuff)
 		if context == "left" then
 			local other_joker = nil
@@ -329,7 +332,7 @@ SMODS.Obj_Pool = SMODS.GameObject:extend {
 	required_params = {
 		'key',
 	},
-	omit_prefix = true,
+	prefix_config = {key = false},
 	inject = function(self) end, --There is nothing to inject into the game here, so skip over injection
 	get_obj_pool = function(self, _type, _rarity, _legendary, _append, preset)
 		-- Return the pool ref as this is the best way to make a "default" pool func compatible with other mod shenanigans. 
