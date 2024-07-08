@@ -90,7 +90,7 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 			desc_nodes[#desc_nodes + 1] = res.main_end
 		end
 	end,
-	get_obj = function(key) 
+	get_obj = function(self, key) 
 		if not G.P_D6_SIDES then G.P_D6_SIDES = {} end
 		return G.P_D6_SIDES[key]
 	end,
