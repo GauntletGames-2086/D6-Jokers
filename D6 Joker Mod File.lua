@@ -162,7 +162,7 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		end
 	end,
 	calculate = function(self, card, context)
-		if not card.debuff then 
+		if not card.debuff and not context.sdm_adding_card then --SDM_0's Stuff compat, we don't use it anyways
 			--D6 Joker logic
 			if context.setting_blind and not card.getting_sliced and not context.blueprint_card then
 				if SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].remove_from_deck and type(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]].remove_from_deck) == "function" then
