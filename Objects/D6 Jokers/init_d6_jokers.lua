@@ -113,6 +113,54 @@ local init_d6_jokers = function(base_file_path)
 			return _pool, _pool_key
 		end,
 	}
+
+	-- JokerDisplay support
+	if _G["JokerDisplay"] then
+		for _, d6_joker in pairs(d6_jokers_to_inject) do
+			JokerDisplay.Definitions[d6_joker.key] = {
+				calc_function = function (card)
+					if card.ability.extra then
+						local side_key = card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]
+						if side_key ~= card.joker_display_values.d6_side then
+							card.joker_display_values.d6_side = side_key
+							card.children.joker_display:remove_text()
+							card.children.joker_display_small:remove_text()
+							card.children.joker_display:remove_reminder_text()
+							card.children.joker_display:remove_extra()
+							if JokerDisplay.D6_Side_Definitions and JokerDisplay.D6_Side_Definitions[side_key] then
+								if JokerDisplay.D6_Side_Definitions[side_key].calc_function then
+									JokerDisplay.D6_Side_Definitions[side_key].calc_function(card)
+								end
+								if JokerDisplay.D6_Side_Definitions[side_key].text then
+									card.children.joker_display:add_text(JokerDisplay.D6_Side_Definitions[side_key].text, JokerDisplay.D6_Side_Definitions[side_key].text_config)
+									card.children.joker_display_small:add_text(JokerDisplay.D6_Side_Definitions[side_key].text, JokerDisplay.D6_Side_Definitions[side_key].text_config)
+								end
+								if JokerDisplay.D6_Side_Definitions[side_key].reminder_text then
+									local reminder_text_config = JokerDisplay.D6_Side_Definitions[side_key].reminder_text_config or {}
+									reminder_text_config.colour = reminder_text_config.colour or G.C.UI.TEXT_INACTIVE
+        							reminder_text_config.scale = reminder_text_config.scale or 0.3
+									card.children.joker_display:add_reminder_text(JokerDisplay.D6_Side_Definitions[side_key].reminder_text, reminder_text_config)
+								end
+								if JokerDisplay.D6_Side_Definitions[side_key].extra then
+									card.children.joker_display:add_extra(JokerDisplay.D6_Side_Definitions[side_key].extra, JokerDisplay.D6_Side_Definitions[side_key].extra_config)
+								end
+							end
+							if side_key then
+								local name_config = JokerDisplay.D6_Side_Definitions and JokerDisplay.D6_Side_Definitions[side_key] and JokerDisplay.D6_Side_Definitions[side_key].name_config or { }
+								name_config.colour = name_config.colour or G.C.ORANGE
+								name_config.scale = name_config.scale or 0.3
+								card.children.joker_display:add_extra({{{ text = G.localization.descriptions["D6 Side"][side_key].label or "" },}}, name_config)
+							end
+						elseif JokerDisplay.D6_Side_Definitions and JokerDisplay.D6_Side_Definitions[side_key] then
+							if JokerDisplay.D6_Side_Definitions[side_key].calc_function then
+								JokerDisplay.D6_Side_Definitions[side_key].calc_function(card)
+							end
+						end
+					end
+				end
+			}
+		end
+	end
 end
 
 return {init_func = init_d6_jokers}
