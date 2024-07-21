@@ -23,5 +23,6 @@ pattern = "dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME
 position = 'at'
 match_indent = true
 payload = '''
-dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)*skyrocket_mult
+local skyrocket_mult2 = SMODS.D6_Side and (#SMODS.D6_Side.get_die_info("count", "pure_skyrocket_side") > 0 and 3) or 1
+dollars = dollars + G.GAME.interest_amount*math.min(math.floor(G.GAME.dollars/5), G.GAME.interest_cap/5)*skyrocket_mult2
 '''
