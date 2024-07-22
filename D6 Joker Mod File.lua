@@ -378,7 +378,7 @@ function math.round(n, deci) deci = 10^(deci or 0) return math.floor(n*deci+.5)/
 
 SMODS.current_mod.custom_collection_tabs = function()
 	return {
-		UIBox_button({button = 'your_collection_d6_sides', label = {localize('b_d6_sides')}, count = G.ACTIVE_MOD_UI and modsCollectionTally(G.P_D6_SIDES) or G.DISCOVER_TALLIES.d6_sides, minw = 5, minh = 2.0, id = 'your_collection_d6_sides', focus_args = {snap_to = true}, func = 'is_collection_empty'})
+		UIBox_button({button = 'your_collection_d6_sides', label = {localize('b_d6_sides')}, count = G.ACTIVE_MOD_UI and modsCollectionTally(G.P_D6_SIDES) or G.DISCOVER_TALLIES.d6_sides, minw = 5, minh = 2.0, id = 'your_collection_d6_sides', focus_args = {snap_to = true}})
 	}
 end
 
