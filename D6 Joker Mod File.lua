@@ -291,11 +291,14 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		end
 	end,
 	update = function(self, card, dt)
-		if G.jokers then
+		if G.jokers and card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face] then
 			local d6_side = SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key]
 			if d6_side.update and type(d6_side.update) == "function" then
 				d6_side:update(card, dt, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
 			end
+		elseif card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face] == nil then
+			sendWarnMessage("D6 Joker does not have local_d6_sides info. Printing extra now: ")
+			print(tprint(card.ability.extra))
 		end
 	end,
 }
