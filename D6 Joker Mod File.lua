@@ -175,14 +175,16 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 			edition = nil,
 		}
 
-		if gen_config.edition.forced_edition then
+		if gen_config.edition.forced_edition and G.P_D6_EDITIONS[gen_config.edition.forced_edition] then
 			local edi_config = copy_table(G.P_D6_EDITIONS[gen_config.edition.forced_edition])
 			target.edition = {key = edi_config.key, shaders = edi_config.shaders, config = edi_config.config}
 		elseif not gen_config.edition.no_edition then
 			local edition = poll_edition("d6_side_gen", nil, nil, gen_config.edition.guaranteed or false, {'e_polychrome', 'e_holo', 'e_foil'}) --base game editions
-			if edition then 
+			if edition and G.P_D6_EDITIONS[edition] then 
 				local edi_config = copy_table(G.P_D6_EDITIONS[edition])
 				target.edition = {key = edi_config.key, shaders = edi_config.shaders, config = edi_config.config}
+			elseif edition ~= nil and G.P_D6_EDITIONS[edition] == nil then
+				sendWarnMessage("D6 JOKERS | Failed to apply edition to D6 Side: "..tostring(edition)..". does not exist in P_D6_EDITIONS")
 			end
 		end
 
