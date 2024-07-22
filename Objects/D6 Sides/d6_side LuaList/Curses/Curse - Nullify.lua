@@ -8,7 +8,7 @@ local d6_side_info = SMODS.D6_Side({
 	add_to_deck = function(self, card, from_debuff, other, d6_side)
 		card.pinned = true
 	end,
-	remove_from_deck = function(self, card, from_debuff, other)
+	remove_from_deck = function(self, card, from_debuff, other, d6_side)
 		card.pinned = false
 		for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].ability and G.jokers.cards[i].ability.debuffed_by_nullify then 

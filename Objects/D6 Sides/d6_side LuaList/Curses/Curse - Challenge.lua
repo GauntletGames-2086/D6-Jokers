@@ -14,7 +14,7 @@ local d6_side_info = SMODS.D6_Side({
 			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 		end
 	end,
-	remove_from_deck = function(self, card, from_debuff, other)
+	remove_from_deck = function(self, card, from_debuff, other, d6_side)
 		if G.GAME.blind and other.from_roll == false then 
 			G.GAME.blind.chips = G.GAME.blind.chips/d6_side.extra.score_increase
 			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
