@@ -4,7 +4,7 @@ local d6_side_info = SMODS.D6_Side({
 	config = {money_loss = 15},
 	atlas = "d6_side_curse",
 	icon_pos = {x=2, y=7},
-	pos = {x=0, y=5},
+	pos = {x=0, y=4},
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.money_loss}}
 	end,

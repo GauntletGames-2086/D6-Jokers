@@ -3,10 +3,10 @@ local d6_joker_info = SMODS.D6_Joker({
 	loc_txt = {},
 	discovered = true,
 	d6_sides = {
-		[1] = "payout_plus_side",
-		[2] = "payout_plus2_side",
+		[1] = "payout_side",
+		[2] = "payout_plus_side",
 		[3] = "payout_plus_side",
-		[4] = "payout_plus2_side",
+		[4] = "payout_plus_side",
 		[5] = "payout_plus_side",
 		[6] = "payout_plus2_side"
 	},
