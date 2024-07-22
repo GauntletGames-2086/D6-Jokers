@@ -12,7 +12,7 @@ local d6_side_info = SMODS.D6_Side({
 		G.hand:change_size(d6_side.extra.hand_size)
 		card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] = true
 	end,
-	remove_from_deck = function(self, card, from_debuff, other, from_copy)
+	remove_from_deck = function(self, card, from_debuff, other, d6_side)
 		if card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] or other.from_chaos then
 			G.hand:change_size(-d6_side.extra.hand_size)
 			card.ability.extra[self.key..tostring(card.ability.extra.selected_d6_face).."_triggered"] = nil
