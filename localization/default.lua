@@ -264,7 +264,7 @@ return {
 				},
 			},
 			["j_dsix_interstellar_plus_die"] = {
-				["name"] = "Interstellar Die",
+				["name"] = "Interstellar Die+",
 				["text"] = {
 					"A functioning space ship in",
 					"the shape of a die",
@@ -722,8 +722,7 @@ return {
 				["label"] = "Moon",
 				["name"] = "{C:attention}Moon{}",
 				["text"] = {
-					"{C:attention}Upgrade random poker hand", 
-					"{C:attention}random poker hand by",
+					"{C:attention}Upgrade random poker hand by", 
 					"{C:attention}#1# when rolled",
 				},
 			},
