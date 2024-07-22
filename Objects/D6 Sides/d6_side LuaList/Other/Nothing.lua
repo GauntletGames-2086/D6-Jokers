@@ -13,4 +13,8 @@ local d6_side_info = SMODS.D6_Side({
 	order = 1,
 })
 
+D6_JokerDisplay.D6_Side_Definitions[d6_side_info.key] = {
+	text = {},
+}
+
 return d6_side_info

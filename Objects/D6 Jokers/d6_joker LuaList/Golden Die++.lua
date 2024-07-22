@@ -12,6 +12,7 @@ local d6_joker_info = SMODS.D6_Joker({
 	},
 	rarity = 3,
 	cost = 10,
+	pos = {x=7, y=2},
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.Joker.register(self)

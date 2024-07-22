@@ -1,21 +1,19 @@
 local init_d6_sides = function(base_file_path)
-	local d6_side_metafiles = NFS.getDirectoryItems(base_file_path.."/d6_side LuaList")
+	local d6_side_metafiles = NFS.getDirectoryItems(SMODS.current_mod.path.."/"..base_file_path.."/d6_side LuaList")
 	local d6_sides_to_inject = {}
-	local order_list = NFS.load(base_file_path.."/d6_sides_config.lua")()
-	
+	local order_list = assert(SMODS.load_file(base_file_path.."/d6_sides_config.lua"))()
+
 	--assemble list of d6_sides_to_inject
 	for _, metafile in ipairs(d6_side_metafiles) do
-		local d6_side_files = NFS.getDirectoryItems(base_file_path.."/d6_side LuaList/"..metafile)
+		local d6_side_files = NFS.getDirectoryItems(SMODS.current_mod.path.."/"..base_file_path.."/d6_side LuaList/"..metafile)
 		for _, file in ipairs(d6_side_files) do
 			if string.find(file, ".lua") then
-				local f, err = NFS.load(base_file_path.."/d6_side LuaList/"..metafile.."/"..file)
-				if err then sendErrorMessage("Couldn't load object from D6 Jokers: "..err); sendErrorMessage("Object path: "..tostring(base_file_path.."/d6_side LuaList/"..metafile.."/"..file)) else
-					local d6_side = f()
-					d6_side.order = (order_list[d6_side.key] and order_list[d6_side.key].order) or #order_list
-					d6_side["upgrade_level"] = (order_list[d6_side.key] and order_list[d6_side.key].upgrade_level) or 1
-					if not order_list[d6_side.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..d6_side.key) end
-					d6_sides_to_inject[#d6_sides_to_inject+1] = d6_side
-				end
+				local d6_side = assert(SMODS.load_file(base_file_path.."/d6_side LuaList/"..metafile.."/"..file))()
+				if not d6_side then break end
+				d6_side.order = (order_list[d6_side.key] and order_list[d6_side.key].order) or #order_list
+				d6_side["upgrade_level"] = (order_list[d6_side.key] and order_list[d6_side.key].upgrade_level) or 1
+				if not order_list[d6_side.key] then sendErrorMessage("MISSING FROM ORDER LIST: "..d6_side.key) end
+				d6_sides_to_inject[#d6_sides_to_inject+1] = d6_side
 			end
 		end
 	end

@@ -3,6 +3,8 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
+### D6 Jokers API
+
 # set_discover_tallies()
 [[patches]]
 [patches.regex]
@@ -34,9 +36,7 @@ payload = '''
             G.DISCOVER_TALLIES.total.tally = G.DISCOVER_TALLIES.total.tally+1
         end
     end
-  end
-
-'''
+  end'''
 
 # G.UIDEF.card_h_popup()
 [[patches]]
@@ -49,28 +49,23 @@ payload = '''
 			local test_thingy = nil
             local has_d6_sides = nil
             local d6_joker_UI_code = nil
-            if card.config and (card.config.center and card.config.center.d6_sides) then
+            if card.config and (card.config.center and card.config.center.d6_sides) and not debuffed then
                 test_thingy = Moveable(88, 102, 2, 2)
                 has_d6_sides = true
                 card.ability.extra.selected_d6_face = math.clamp(1, math.round(card.ability.extra.selected_d6_face), 6)
                 local base_d6_sprite = Sprite(88, 102, 2, 2, G.ASSET_ATLAS["dsix_base_test_d6_art"], {x=0, y=0})
-                local test_d6_selector = Sprite(88, 102, 2.1, 2.1, G.ASSET_ATLAS["dsix_d6_test_selector"], {x=(card.ability.extra.selected_d6_face or 1)-1, y=0})
-
-                --Assign selector
-                base_d6_sprite.children["test_d6_selector"] = test_d6_selector
-                base_d6_sprite.children["test_d6_selector"].states.visible = true
-                base_d6_sprite.children["test_d6_selector"]:set_role({major = test_thingy, role_type = 'Minor', draw_major = test_thingy, offset = {x = 0, y = -0.12}})
-                base_d6_sprite.children["test_d6_selector"]:define_draw_steps({{shader = 'dissolve', no_tilt = true, other_obj = base_d6_sprite}})
 
                 for i, v in ipairs(card.ability.extra.local_d6_sides) do
-                    local d6_side_info = SMODS.D6_Sides[v]
+                    local d6_side_info = SMODS.D6_Sides[v.key]
                     local d6_side_sprite = Sprite(88, 102, 2, 2, G.ASSET_ATLAS[d6_side_info.atlas], {x=i-1+d6_side_info.pos.x, y=d6_side_info.pos.y})
                     base_d6_sprite.children["d6_side_"..tostring(i)] = d6_side_sprite
                     base_d6_sprite.children["d6_side_"..tostring(i)].states.visible = true
                     base_d6_sprite.children["d6_side_"..tostring(i)]:set_role({major = base_d6_sprite, role_type = 'Minor', draw_major = base_d6_sprite})
                     base_d6_sprite.children["d6_side_"..tostring(i)]:define_draw_steps({
-                        {shader = 'dissolve', no_tilt = true, other_obj = base_d6_sprite}
-                        })
+                        i ~= card.ability.extra.selected_d6_face and 
+                        {shader = v.edition and v.edition.shaders.darken or 'dsix_darken', no_tilt = true, other_obj = base_d6_sprite} or --unselected D6 side
+                        {shader = v.edition and v.edition.shaders.lighten or 'dissolve', no_tilt = true, other_obj = base_d6_sprite}, --selected D6 side
+                    })
                 end
 
                 --Assign base_d6_sprite to dummy object
@@ -82,8 +77,7 @@ payload = '''
                     })
                 
                 if not card.config.center.omit_d6_sides_desc then
-
-                    local D6_AUT = generate_card_ui(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]], nil, nil, nil, nil, nil, nil, nil, card)
+                    local D6_AUT = generate_card_ui(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key], nil, nil, nil, nil, nil, nil, nil, card)
                     AUT.main[#AUT.main+1] = D6_AUT.name
                     for k, v in pairs(D6_AUT.main) do
                         AUT.main[#AUT.main+1] = v
@@ -164,16 +158,6 @@ payload = '''
 {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = G.C.WHITE}, nodes={{n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t},d6_side_UI_config,}}
 '''
 
-# create_UIBox_your_collection()
-[[patches]]
-[patches.regex]
-target = 'functions/UI_definitions.lua'
-pattern = '''(?<indent>[\t ]*)UIBox_button\(\{button = 'your_collection_blinds', label = \{localize\('b_blinds'\)\}, count = G\.DISCOVER_TALLIES\.blinds, minw = 5, minh = 2.0, id = 'your_collection_blinds', focus_args = \{snap_to = true\}\}\),'''
-position = 'after'
-payload = '''
-SMODS.D6_Sides and UIBox_button({button = 'your_collection_d6_sides', label = {localize('b_d6_sides')}, count = G.DISCOVER_TALLIES.d6_sides, minw = 5, minh = 2.0, id = 'your_collection_d6_sides', focus_args = {snap_to = true}}) or nil,
-'''
-
 # align_h_popup()
 [[patches]]
 [patches.regex]
@@ -185,4 +169,5 @@ payload = '''
 		popup_direction = (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'cl' or 
 		(self.T.y < G.CARD_H*0.8*2) and 'bm' or
 		'tm'
-	end'''
+	end
+'''

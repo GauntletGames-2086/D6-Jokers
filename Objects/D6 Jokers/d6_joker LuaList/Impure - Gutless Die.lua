@@ -26,12 +26,7 @@ local d6_joker_info = SMODS.D6_Joker({
 				G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                 G.E_MANAGER:add_event(Event({
                     func = function() 
-						local _card = create_card('Joker', G.jokers, nil, 0, nil, nil, self.pure_upgrade)
-						_card:add_to_deck()
-						G.jokers:emplace(_card)
-						_card:start_materialize()
-						G.GAME.joker_buffer = 0
-						card:start_dissolve()
+						card.set_ability(card, G.P_CENTERS[card.config.center.pure_upgrade], true)
                         return true
                     end
 				}))

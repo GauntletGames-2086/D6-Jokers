@@ -1,0 +1,94 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+## Apply infected shader instead of debuff shader
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader)'''
+position = 'at'
+match_indent = true
+payload = '''
+if self.ability.dsix_infected then self.children.center:draw_shader('dsix_infected', nil, self.ARGS.send_to_shader)
+else self.children.center:draw_shader('debuff', nil, self.ARGS.send_to_shader) end'''
+
+## Have infected act like perma_debuff
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''if self.ability and self.ability.perma_debuff then self.debuff = true end'''
+position = 'after'
+match_indent = true
+payload = '''if self.ability and self.ability.dsix_infected then self.debuff = true end'''
+
+## Infected text part 1
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = '''elseif self.debuff then'''
+position = 'before'
+match_indent = true
+payload = '''
+elseif self.ability.dsix_infected then
+    loc_vars = { dsix_infected = true, playing_card = not not self.base.colour, value = self.base.value, suit = self.base.suit, colour = self.base.colour }
+'''
+
+## Infected text part 2
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''elseif specific_vars and specific_vars.debuffed then'''
+position = 'before'
+match_indent = true
+payload = '''
+elseif specific_vars and specific_vars.dsix_infected then
+    localize{type = 'other', key = 'infection_default', nodes = desc_nodes, vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), 2}}
+'''
+
+## Infected badge
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = '''card_type = (debuffed and AUT.card_type ~= 'Enhanced') and localize('k_debuffed') or card_type'''
+position = 'at'
+match_indent = true
+payload = '''card_type = ((card.ability and card.ability.dsix_infected) and AUT.card_type ~= 'Enhanced') and localize('k_dsix_infected') or (debuffed and AUT.card_type ~= 'Enhanced') and localize('k_debuffed') or card_type'''
+
+# Infected effect
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''G.RESET_JIGGLES = true'''
+position = "after"
+payload = ''' 
+local infectable_cards = {}
+local can_infect = nil
+for i = 1, #G.jokers.cards do
+    for k, v in ipairs(G.jokers.cards) do
+        if not v.ability.dsix_infected and not (v.config.center.impure or v.config.center.pure) then infectable_cards[#infectable_cards+1] = v 
+        elseif v.ability.dsix_infected then can_infect = true end
+    end
+    if #infectable_cards > 0 and can_infect and pseudorandom('dsix_infected_joker') > G.GAME.probabilities.normal/2 then 
+        local infected_card = pseudorandom_element(infectable_cards, pseudoseed("dsix_infect_a_card"))
+        infected_card.ability.dsix_infected = true
+    end
+    break
+end
+local infectable_cards = {}
+local can_infect = nil
+for i = 1, #G.consumeables.cards do
+    if G.consumeables.cards[i].ability.dsix_infected then 
+        for k, v in ipairs(G.consumeables.cards) do
+            if not v.ability.dsix_infected then infectable_cards[#infectable_cards+1] = v 
+            elseif v.ability.dsix_infected then can_infect = true end
+        end
+        if #infectable_cards > 0 and can_infect and pseudorandom('dsix_infected_joker') > G.GAME.probabilities.normal/2 then 
+            local infected_card = pseudorandom_element(infectable_cards, pseudoseed("dsix_infect_a_card"))
+            infected_card.ability.dsix_infected = true
+        end
+        break
+    end
+end'''
+match_indent = true

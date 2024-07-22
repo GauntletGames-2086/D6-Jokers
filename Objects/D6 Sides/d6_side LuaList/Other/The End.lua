@@ -4,7 +4,7 @@ local d6_side_info = SMODS.D6_Side({
 	config = {},
 	atlas = "d6_side_other",
 	icon_pos = {x=7, y=1},
-	add_to_deck = function(self, card, from_debuff)
+	add_to_deck = function(self, card, from_debuff, other, d6_side)
 		card.ability["perma_debuff"] = true
 		if card.ability.perishable == true then card.ability.perishable = nil end
 		card.ability.eternal = true
@@ -22,5 +22,9 @@ local d6_side_info = SMODS.D6_Side({
 	end,
 	order = 5,
 })
+
+D6_JokerDisplay.D6_Side_Definitions[d6_side_info.key] = {
+	text = {},
+}
 
 return d6_side_info

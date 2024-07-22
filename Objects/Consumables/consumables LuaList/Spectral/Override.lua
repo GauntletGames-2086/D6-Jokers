@@ -1,3 +1,4 @@
+-- D6-Jokers: Override
 local tarot_info = SMODS.Consumable({
 	key = "override",
 	set = "Spectral",
@@ -5,7 +6,7 @@ local tarot_info = SMODS.Consumable({
 	pos = {x=0, y=0},
 	cost = 4,
 	discovered = true,
-	config = {extra = {selected_d6_face = 1}},
+	config = {extra = {selected_d6_face = 1, local_d6_sides = {}}},
 	d6_sides = {
 		[1] = "nothing_side",
 		[2] = "nothing_side",
@@ -14,30 +15,27 @@ local tarot_info = SMODS.Consumable({
 		[5] = "nothing_side",
 		[6] = "nothing_side"
 	},
-	inject = function(self)
-		-- call the parent function to ensure all pools are set
-		self.super.inject(self)
-		if not self.config["extra"] then self.config.extra = {} end
-		self.config.extra["local_d6_sides"] = copy_table(self.d6_sides)
-	end,
 	set_ability = function(self, card, initial, delay_sprites)
-		card.ability.extra.selected_d6_face = pseudorandom("d6_consumable"..self.key, 1, 6)
+		for i = 1, #card.config.center.d6_sides do
+			card.ability.extra.local_d6_sides[i] = SMODS.D6_Side.create_die_side({d6_side = {key = self.d6_sides[i]}}) 
+		end
+		card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
 		local _pool, _pool_key = SMODS.Obj_Pools["d6_sides"]:get_obj_pool("D6 Side")
-		if not card.ability.extra.local_d6_sides then card.ability.extra.local_d6_sides = copy_table(self.d6_sides) end
 		for i = 1, #card.ability.extra.local_d6_sides do
-			card.ability.extra.local_d6_sides[i] = pseudorandom_element(_pool, pseudoseed("override".._pool_key))
+			local selected_d6_side = pseudorandom_element(_pool, pseudoseed("override".._pool_key))
+			card.ability.extra.local_d6_sides[i] = SMODS.D6_Side.create_die_side({d6_side = {key = selected_d6_side}})
 		end
 	end,
 	loc_vars = function(self, info_queue, card)
 		local total_die_faces = {}
 		for _, v in ipairs(card.ability.extra.local_d6_sides) do
-			if not total_die_faces[v] then total_die_faces[v] = 1
-			else total_die_faces[v] = total_die_faces[v] + 1 end
+			if not total_die_faces[v.key] then total_die_faces[v.key] = v end
 		end
+		total_die_faces[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key] = card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]
 		for k, v in pairs(total_die_faces) do
-			local d6_side_config = SMODS.D6_Side:get_obj(k)
+			local d6_side_config = SMODS.D6_Sides[k]
 			local loc_vars
-			if d6_side_config.loc_vars and type(d6_side_config.loc_vars) == "function" then loc_vars = d6_side_config:loc_vars(info_queue, card) end
+			if d6_side_config.loc_vars and type(d6_side_config.loc_vars) == "function" then loc_vars = d6_side_config:loc_vars(info_queue, card, v) end
 			info_queue[#info_queue+1] = {key = k, set = "Other", vars = loc_vars and loc_vars.vars or {}}
 		end
 	end,
@@ -75,19 +73,19 @@ local tarot_info = SMODS.Consumable({
 			if v.highlighted == true then selected_card = v end
 		end
 		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-			sendInfoMessage("Override being handled")
-			local selected_d6_face_key = card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]
+			--sendInfoMessage("Override being handled")
+			local selected_d6_face_key = card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key
 			for i = 1, #selected_card.ability.extra.local_d6_sides do
 				if i == card.ability.extra.selected_d6_face then 
-					if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i]].remove_from_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i]].remove_from_deck) == "function" then
-						SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i]]:remove_from_deck(selected_card, from_debuff, {from_roll = true})
+					if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i].key].remove_from_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i].key].remove_from_deck) == "function" then
+						SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i].key]:remove_from_deck(selected_card, from_debuff, {from_roll = true}, selected_card.ability.extra.local_d6_sides[i])
 					end
-					selected_card.ability.extra.local_d6_sides[i] = selected_d6_face_key
-					if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i]].add_to_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i]].add_to_deck) == "function" then
-						SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i]]:add_to_deck(selected_card, from_debuff, {from_roll = true})
+					selected_card.ability.extra.local_d6_sides[i] = copy_table(card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
+					if SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i].key].add_to_deck and type(SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i].key].add_to_deck) == "function" then
+						SMODS.D6_Sides[selected_card.ability.extra.local_d6_sides[i].key]:add_to_deck(selected_card, from_debuff, {from_roll = true}, selected_card.ability.extra.local_d6_sides[i])
 					end
 				else
-					selected_card.ability.extra.local_d6_sides[i] = selected_d6_face_key
+					selected_card.ability.extra.local_d6_sides[i] = copy_table(card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
 				end
 			end
             return true end }))

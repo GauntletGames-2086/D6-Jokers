@@ -12,7 +12,7 @@ local d6_joker_info = SMODS.D6_Joker({
 	},
 	rarity = 2,
 	cost = 8,
-	upgrade = "casino_plus_die",
+	upgrade = "j_dsix_casino_plus_die",
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.Joker.register(self)

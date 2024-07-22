@@ -3,7 +3,7 @@ local d6_side_info = SMODS.D6_Side({
 	loc_txt = {},
 	config = {money_loss = 15},
 	atlas = "d6_side_curse",
-	icon_pos = {x=1, y=6},
+	icon_pos = {x=3, y=7},
 	pos = {x=0, y=5},
 	register = function(self, order)
 		if order and order == self.order then
@@ -24,7 +24,7 @@ G.FUNCS.evaluate_round = function()
 			  G.GAME.blind:defeat()
 			  return true
 			end
-		  }))
+		}))
 		delay(0.2)
 		G.E_MANAGER:add_event(Event({
 			func = function()
@@ -37,5 +37,10 @@ G.FUNCS.evaluate_round = function()
 		GFUNCSevaluate_round_ref()
 	end
 end
+
+D6_JokerDisplay.D6_Side_Definitions[d6_side_info.key] = {
+	text = {},
+	name_config = { colour = G.C.PURPLE }
+}
 
 return d6_side_info

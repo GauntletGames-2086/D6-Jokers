@@ -64,8 +64,95 @@ return {
 					"选择{C:attention}#1#{}张"
 				},
 			},
+			-- TODO: translate
+			["infection_default"] = {
+				["name"] = "Infected",
+				["text"] = {
+					"Card is {C:attention}Debuffed{}",
+					"{C:green}#1# in #2#{} to infect",
+					"another card of same type"
+				},
+			},
+			["d6_side_edition_polychrome"] = {
+                ["name"] = "Polychrome",
+                ["text"] = {
+					"Selected D6 Side has",
+					"{C:dark_edition}Polychrome{} edition",
+                    "{X:mult,C:white} X#1# {} Mult"
+                }
+			},
+			["d6_side_edition_holo"] = {
+                ["name"] = "Holographic",
+                ["text"] = {
+					"Selected D6 Side has",
+					"{C:dark_edition}Holographic{} edition",
+                    "{C:mult}+#1#{} Mult"
+                }
+			},
+			["d6_side_edition_foil"] = {
+                ["name"] = "Foil",
+                ["text"] = {
+					"Selected D6 Side has",
+					"{C:dark_edition}Foil{} edition",
+                    "{C:chips}+#1#{} chips"
+                }
+			},
+			["d6_joker_linked"] = {
+				["name"] = "Linked",
+				["text"] = {
+					"This D6 Joker cannot",
+					"change selected {C:attention}D6 Side"
+				},
+			},
 		},
 		["Joker"] = {
+			-- TODO: translate
+			["j_dsix_spectral_die"] = {
+				["name"] = "Spectral Die",
+				["text"] = {
+					"You feel the presense",
+					"of ghosts",
+				},
+			},
+			["j_dsix_spectral_plus_die"] = {
+				["name"] = "Spectral Die+",
+				["text"] = {
+					"The dead will rise",
+					"by the power of this die!"
+				},
+			},
+			["j_dsix_interstellar_die"] = {
+				["name"] = "Interstellar Die",
+				["text"] = {
+					"An abandoned spacecraft in",
+					"the shape of a die",
+					"Still capable of transmitting data",
+				},
+			},
+			["j_dsix_interstellar_plus_die"] = {
+				["name"] = "Interstellar Die",
+				["text"] = {
+					"A functioning space ship in",
+					"the shape of a die",
+					"Fully capable of data collection",
+				},
+			},
+			["j_dsix_impure_plague_die"] = {
+				["name"] = "Impure: Plague Die",
+				["text"] = {
+					"All that these die wielders wanted",
+					"to do is help the best they can...",
+					"{C:inactive}Purification condition:",
+					"{C:inactive}Infected Jokers/Consumables: {C:attention}#1#{C:inactive}",
+				},
+			},
+			["j_dsix_pure_medical_die"] = {
+				["name"] = "Pure: Medical Die",
+				["text"] = {
+					"Any and all would will be healed",
+					"through the power held in this die",
+				},
+			},
 			["j_dsix_casino_die"] = {
 				["name"] = "赌场骰子",
 				["text"] = {
@@ -142,13 +229,6 @@ return {
 				["name"] = "黄金骰子",
 				["text"] = {
 					"14K金般闪闪亮",
-				},
-			},
-			["j_dsix_insurance_die"] = {
-				["name"] = "保险骰子",
-				["text"] = {
-					"保险？",
-					"我看是风险",
 				},
 			},
 			["j_dsix_impure_broke_die"] = {
@@ -233,6 +313,17 @@ return {
 				["text"] = {
 					"稀松平常的筹码骰子",
 					"但品质更佳"
+				},
+			},
+		},
+		["Enhanced"] = {
+			-- TODO: translate
+			["m_dsix_booster"] = {
+				["name"] = "Booster",
+				["text"] = {
+					"{C:chips}+#1#{} chips",
+					"{C:mult}+#2#{} Mult",
+					"{X:mult,C:white} X#3# {} Mult",
 				},
 			},
 		},
@@ -612,14 +703,6 @@ return {
 					"{C:purple}本牌遭到{C:attention}左极固定",
 					"{C:purple}且本盲注内",
 					"{C:purple}其右侧的小丑牌{C:attention}无效"
-				},
-			},
-			["blocker_side"] = {
-				["label"] = "阻隔",
-				["name"] = "{C:attention}阻隔{}",
-				["text"] = {
-					"{C:attention}阻隔右侧骰子的",
-                    "{C:attention}所有负面效果",
 				},
 			},
 			["payout_side"] = {

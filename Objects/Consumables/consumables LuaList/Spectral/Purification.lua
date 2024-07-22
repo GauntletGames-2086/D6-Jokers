@@ -1,3 +1,4 @@
+-- D6-Jokers: Purification
 local tarot_info = SMODS.Consumable({
 	key = "purification",
 	set = "Spectral",

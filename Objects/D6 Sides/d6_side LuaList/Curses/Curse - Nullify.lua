@@ -3,9 +3,9 @@ local d6_side_info = SMODS.D6_Side({
 	loc_txt = {},
 	config = {},
 	atlas = "d6_side_curse",
-	icon_pos = {x=2, y=5},
+	icon_pos = {x=4, y=6},
 	pos = {x=0, y=0},
-	add_to_deck = function(self, card, from_debuff, other)
+	add_to_deck = function(self, card, from_debuff, other, d6_side)
 		card.pinned = true
 	end,
 	remove_from_deck = function(self, card, from_debuff, other)
@@ -17,7 +17,7 @@ local d6_side_info = SMODS.D6_Side({
 			end
 		end
 	end,
-	update = function(self, card, dt)
+	update = function(self, card, dt, d6_side)
 		local other_joker = nil
 		for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i] == card then other_joker = G.jokers.cards[i+1] end
@@ -39,5 +39,10 @@ local d6_side_info = SMODS.D6_Side({
 	curse = true,
 	order = 5,
 })
+
+D6_JokerDisplay.D6_Side_Definitions[d6_side_info.key] = {
+	text = {},
+	name_config = { colour = G.C.PURPLE }
+}
 
 return d6_side_info
