@@ -291,6 +291,9 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		end
 	end,
 	update = function(self, card, dt)
+		if card.ability.extra.selected_d6_face % 1 > 0 then card.ability.extra.selected_d6_face = math.round(card.ability.extra.selected_d6_face) end
+		if card.ability.extra.selected_d6_face < 0 then card.ability.extra.selected_d6_face = card.ability.extra.selected_d6_face*-1 end
+		card.ability.extra.selected_d6_face = math.clamp(1, card.ability.extra.selected_d6_face, 6)
 		if G.jokers and card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face] then
 			local d6_side = SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key]
 			if d6_side.update and type(d6_side.update) == "function" then
