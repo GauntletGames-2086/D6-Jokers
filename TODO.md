@@ -38,6 +38,8 @@
 - [ ] Override
 - [ ] Purification
 - [ ] Lightshow
+- [ ] Duplication
+- [ ] Weighted
 ### Other
 - [x] "Boostered" Texture
 
