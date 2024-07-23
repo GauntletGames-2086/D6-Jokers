@@ -31,17 +31,17 @@
 - [ ] Pure: Exchange Die
 - [ ] Pure: Medical Die
 ### Consumables
-- [ ] Concentration
-- [ ] Reconstruction
-- [ ] The Die Wielder
-- [ ] Transplant
-- [ ] Override
-- [ ] Purification
-- [ ] Lightshow
-- [ ] Duplication
-- [ ] Weighted
+- [ ] Concentration (Spectral)
+- [ ] Reconstruction (Tarot)
+- [ ] The Die Wielder (Tarot)
+- [ ] Transplant (Tarot)
+- [ ] Override (Spectral)
+- [ ] Purification (Spectral)
+- [ ] Lightshow (Tarot)
+- [ ] Duplication (Spectral)
+- [ ] Weighted (Tarot)
 ### Other
-- [x] "Boostered" Texture
+- [x] "Boosted" Texture
 
 ## Development
 ### D6 Jokers
@@ -76,8 +76,6 @@
   - [ ] ???. Reroll all consumable cards to Planet cards at the end of the shop
   - [ ] ???. Reroll all consumable cards to Tarot cards at the end of the shop
   - [ ] ???. Destroy all consumable cards at the end of the shop
-- [x] Interstellar Die (Uncommon) *An abandoned spacecraft in the shape of a die. Still capable of transmitting data.*
-- [x] Interstellar Die+ (Rare) *A populated space station in the shape of a die. Fully capable of sustaining human life.*
 ### Consumables
 - [x] Lightshow (Tarot): All D6 Sides on selected D6 Joker gain a random edition (Foil, Holographic, Polychrome). 
 - [x] Linked (Tarot): Selected D6 Joker cannot be rerolled. 
@@ -88,8 +86,8 @@
 - [ ] Credits page
 - [ ] Config page
   - Tooltip Settings
-    - [ ] "Full Disable" (Disables the D6 Side tooltip from ever showing up)
+    - [ ] "Full Disable" (Disables the D6 Side tooltip)
     - [ ] "Disable Sprite" (Disables the sprite inside of D6 Side Tooltips)
   - JokerDisplay
-    - [ ] Disable JokerDisplay (Disabled D6 Joker's JokerDisplay, separate from disabling all of it)
+    - [ ] Disable JokerDisplay (Disables D6 Joker's JokerDisplay, separate from disabling all of it)
     - [ ] Disable D6 Side name (D6 Side name in JokerDisplay will not show up)
