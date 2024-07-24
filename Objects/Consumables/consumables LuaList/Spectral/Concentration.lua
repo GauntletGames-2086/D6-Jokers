@@ -25,7 +25,8 @@ local tarot_info = SMODS.Consumable({
 			for i, v in ipairs(selected_card.ability.extra.local_d6_sides) do
 				local d6_side_config = SMODS.D6_Sides[v.key]
 				if d6_side_config.upgrade then
-					selected_card.ability.extra.local_d6_sides[i] = SMODS.D6_Side.create_die_side({d6_side = {key = d6_side_config.upgrade}, edition = {forced_edition = selected_card.ability.extra.local_d6_sides[i].edition}})
+					local d6_side_edition = selected_card.ability.extra.local_d6_sides[i].edition
+					selected_card.ability.extra.local_d6_sides[i] = SMODS.D6_Side.create_die_side({d6_side = {key = d6_side_config.upgrade}, edition = {forced_edition = d6_side_edition and d6_side_edition.key or nil}})
 				end
 			end
             return true end 
