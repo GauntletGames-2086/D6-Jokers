@@ -4,7 +4,7 @@ local d6_side_info = SMODS.D6_Side({
 	config = {hands_leveled = 1},
 	atlas = "d6_side_moon",
 	icon_pos = {x=4, y=5},
-	upgrade = "j_dsix_moon_plus_side",
+	upgrade = "moon_plus_side",
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.hands_leveled}}
 	end,
