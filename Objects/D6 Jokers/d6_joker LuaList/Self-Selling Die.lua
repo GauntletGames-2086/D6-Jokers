@@ -10,6 +10,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		[5] = "orbital_side",
 		[6] = "orbital_side"
 	},
+	eternal_compat = false,
 	perishable_compat = false,
 	rarity = 2,
 	cost = 6,
