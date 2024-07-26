@@ -4,7 +4,7 @@
 --- MOD_AUTHOR: [ItsFlowwey]
 --- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
 --- PREFIX: dsix
---- VERSION: 0.7.0
+--- VERSION: 0.7.1
 --- LOADER_VERSION_GEQ: "1.0.0-ALPHA-0721a"
 --- PRIORITY: -900
 
@@ -37,6 +37,7 @@ SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 34, py = 34
 --Object Art
 SMODS.Atlas{key = "d6_jokers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_jokers_atlas.png"}
 SMODS.Atlas{key = "d6_boosters", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_boosters.png"}
+SMODS.Atlas{key = "d6_consumables", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_consumables.png"}
 SMODS.Atlas{key = "booster_enhancement", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "boosted_enhancement.png"}
 --Other
 SMODS.Atlas{key = "modicon", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_jokers_mod_tag.png"}
@@ -234,19 +235,19 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 				local edition = G.P_D6_EDITIONS[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].edition.key]
 				if edition.loc_vars and type(edition.loc_vars) == 'function' then edition:loc_vars(info_queue, card, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].edition) end
 			end
-			if card.ability.extra.cannot_reroll then info_queue[#info_queue+1] = {key = "d6_joker_weighted", set = "Other", vars = {}} end
+			if card.ability.extra.weighted_side then info_queue[#info_queue+1] = {key = "d6_joker_weighted", set = "Other", vars = {3*G.GAME.probabilities.normal, 4, card.ability.extra.weighted_side}} end
 		end
 	end,
 	calculate = function(self, card, context)
 		if not card.debuff and not context.sdm_adding_card then --SDM_0 compat, we don't use it anyways
 			--D6 Joker logic
 			local d6_side = SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key]
-			if context.setting_blind and not card.getting_sliced and not context.blueprint_card and not card.ability.extra.cannot_reroll then
+			if context.setting_blind and not card.getting_sliced and not context.blueprint_card then
 				if d6_side.remove_from_deck and type(d6_side.remove_from_deck) == "function" then
 					d6_side:remove_from_deck(card, nil, {from_roll = true}, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
 				end
 
-				card.ability.extra.selected_d6_face = math.clamp(1, math.round(pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
+				card.ability.extra.selected_d6_face = math.clamp(1, math.round((card.ability.extra.weighted_side and pseudorandom('weighted_chance') < (G.GAME.probabilities.normal*3)/4) and card.ability.extra.weighted_side or pseudorandom("d6_joker"..card.config.center.key, 1, 6)), 6)
 				card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize{type='variable',key='d6_joker_roll',vars={card.ability.extra.selected_d6_face}}, colour = G.C.BLUE})
 
 				if #SMODS.find_card("j_oops") > 0 and card.ability.extra.selected_d6_face ~= 6 then 

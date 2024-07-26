@@ -3,6 +3,7 @@ local tarot_info = SMODS.Consumable({
 	set = "Tarot",
 	loc_txt = {},
 	pos = {x=0, y=0},
+	atlas = "d6_consumables",
 	cost = 3,
 	discovered = true,
 	can_use = function(self, card)
@@ -33,6 +34,14 @@ local tarot_info = SMODS.Consumable({
 			end
             return true end 
 		}))
+	end,
+	in_pool = function(self)
+		local has_d6_joker
+		for i = 1, #G.jokers.cards do
+			if G.jokers.cards[i].config.center.d6_joker then has_d6_joker = true end
+		end
+		print("d6_consumable_no_d6_jokers: "..tostring((pseudorandom('d6_consumable_no_d6_jokers') >= 0.5) or has_d6_joker == true))
+		if (pseudorandom('d6_consumable_no_d6_jokers') >= 0.5) or has_d6_joker == true then return true end
 	end,
 	register = function(self, order)
 		if order and order == self.order then

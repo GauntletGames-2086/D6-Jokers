@@ -98,8 +98,9 @@ return {
 			["d6_joker_weighted"] = {
 				["name"] = "Weighted",
 				["text"] = {
-					"This D6 Joker cannot",
-					"change selected {C:attention}D6 Side"
+					"This D6 Joker has",
+					"a {C:green}#1# in #2#{} to",
+					"roll {C:attention}#3#"
 				},
 			},
 		},
@@ -357,8 +358,8 @@ return {
 			["c_dsix_weighted"] = {
 				["name"] = "Weighted",
 				["text"] = {
-					"Selected {C:attention}D6 Joker{} cannot",
-					"change selected {C:attention}D6 Side",
+					"Selected {C:attention}D6 Joker{}",
+					"becomes {C:attention}Weighted",
 				},
 			},
 		},

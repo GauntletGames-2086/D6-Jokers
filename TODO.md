@@ -35,7 +35,7 @@
 - [ ] Reconstruction (Tarot)
 - [ ] The Die Wielder (Tarot)
 - [ ] Transplant (Tarot)
-- [ ] Override (Spectral)
+- [x] Override (Spectral)
 - [ ] Purification (Spectral)
 - [ ] Lightshow (Tarot)
 - [ ] Duplication (Spectral)
