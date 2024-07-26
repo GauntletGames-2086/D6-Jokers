@@ -91,6 +91,11 @@ local tarot_info = SMODS.Consumable({
 			end
             return true end }))
 	end,
+	update = function(self, card, dt)
+		if card.ability.extra.selected_d6_face % 1 > 0 then card.ability.extra.selected_d6_face = math.round(card.ability.extra.selected_d6_face) end
+		if card.ability.extra.selected_d6_face < 0 then card.ability.extra.selected_d6_face = card.ability.extra.selected_d6_face*-1 end
+		card.ability.extra.selected_d6_face = math.clamp(1, card.ability.extra.selected_d6_face, 6)
+	end,
 	in_pool = function(self)
 		local has_d6_joker
 		for i = 1, #G.jokers.cards do
