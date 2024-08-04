@@ -39,8 +39,7 @@ local tarot_info = SMODS.Consumable({
 		for i = 1, #G.jokers.cards do
 			if G.jokers.cards[i].config.center.d6_joker then has_d6_joker = true end
 		end
-		print("d6_consumable_no_d6_jokers: "..tostring((pseudorandom('d6_consumable_no_d6_jokers') >= 0.5) or has_d6_joker == true))
-		if (pseudorandom('d6_consumable_no_d6_jokers') >= 0.5) or has_d6_joker == true then return true end
+		if has_d6_joker == true then return true else return false end
 	end,
 	d6_consumable = true,
 	order = 1,

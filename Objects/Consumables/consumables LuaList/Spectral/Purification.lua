@@ -3,7 +3,8 @@ local tarot_info = SMODS.Consumable({
 	key = "purification",
 	set = "Spectral",
 	loc_txt = {},
-	pos = {x=0, y=0},
+	pos = {x=2, y=1},
+	atlas = "d6_consumables",
 	discovered = true,
 	can_use = function(self, card)
 		if #G.jokers.cards < G.jokers.config.card_limit or self.area == G.jokers then
