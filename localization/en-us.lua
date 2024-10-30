@@ -18,6 +18,7 @@ return {
 			["k_delevel_ex"] = "Delevel!",
 			["k_boosted_ex"] = "Boosted!",
 			["d6config_dice_modifier"] = "Dice Modifiers",
+			["d6config_other_consumables"] = "Other Consumables",
 			["d6config_booster_packs"] = "Booster Pack",
 			["d6config_upgrades_in_shop"] = "D6 Joker Upgrades in Shop",
 		},

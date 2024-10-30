@@ -30,6 +30,13 @@ local tarot_info = SMODS.Consumable({
 			SMODS.Consumable.register(self)
 		end
 	end,
+	in_pool = function(self)
+		if D6Joker_ModData.config["OtherConsumables_Enabled"] then
+			return true
+		else
+			return false
+		end
+	end,
 	order = 1,
 })
 

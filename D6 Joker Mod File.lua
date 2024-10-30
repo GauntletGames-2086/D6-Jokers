@@ -819,6 +819,11 @@ D6Joker_ModData.config_tab = function()
 					ref_value = "DiceModifier_Enabled",
 				}),
 				create_toggle({
+					label = localize("d6config_other_consumables"),
+					ref_table = D6Joker_ModData.config,
+					ref_value = "OtherConsumables_Enabled",
+				}),
+				create_toggle({
 					label = localize("d6config_booster_packs"),
 					ref_table = D6Joker_ModData.config,
 					ref_value = "BoosterPacks_Enabled",
