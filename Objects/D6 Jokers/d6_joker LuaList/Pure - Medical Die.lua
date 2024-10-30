@@ -1,7 +1,6 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "pure_medical_die",
 	loc_txt = {},
-	discovered = true,
 	d6_sides = {
 		[1] = "pure_booster_side",
 		[2] = "pure_quality_care_side",
@@ -13,7 +12,9 @@ local d6_joker_info = SMODS.D6_Joker({
 	rarity = 4,
 	cost = 20,
 	yes_pool_flag = "pure_joker",
-	pure = true,
+	in_pool = function(self)
+		return false
+	end,
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.Joker.register(self)

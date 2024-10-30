@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "pure_booster_side",
 	loc_txt = {},
 	config = {},
-	atlas = "d6_side_pure",
-	icon_pos = {x=7, y=7},
-	pos = {x=0, y=4},
+	pos = {x=7, y=7}, 
 	calculate = function(self, card, context, d6_side)
 		if context.cardarea == G.jokers and context.before then
 			local cards_boosted = {}
@@ -33,6 +31,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	pure = true,
 	order = 5,

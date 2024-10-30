@@ -2,8 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "the_end_side",
 	loc_txt = {},
 	config = {},
-	atlas = "d6_side_other",
-	icon_pos = {x=7, y=1},
+	pos = {x=7, y=1},
 	add_to_deck = function(self, card, from_debuff, other, d6_side)
 		card.ability["perma_debuff"] = true
 		if card.ability.perishable == true then card.ability.perishable = nil end

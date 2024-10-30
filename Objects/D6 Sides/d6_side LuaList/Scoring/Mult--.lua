@@ -1,10 +1,8 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "mult_minus2_side",
 	loc_txt = {},
-	config = {mult = 75},
-	atlas = "d6_side_mult",
-	icon_pos = {x=6, y=1},
-	pos = {x=0, y=4},
+	config = {mult = 50},
+	pos = {x=6, y=1}, 
 	upgrade = "mult_minus_side",
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.mult}}
@@ -15,7 +13,7 @@ local d6_side_info = SMODS.D6_Side({
 				message = localize{type='variable',key='a_mult_minus',vars={d6_side.extra.mult}},
 				mult_mod = -d6_side.extra.mult,
 				colour = G.C.MULT
-			}
+			}, true
 		end
 	end,
 	register = function(self, order)

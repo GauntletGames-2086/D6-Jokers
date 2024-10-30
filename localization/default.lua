@@ -12,9 +12,14 @@ return {
 			["d6_jokers_pack"] = "D6 Jokers Pack",
 			["d6_support_pack"] = "D6 Support Pack",
 			["d6_booster_pack"] = "D6 Booster Pack",
-			["k_dsix_infected"] = "Infected",
+			["k_dice modifiers"] = "Dice Modifier",
+			["b_dice modifiers_cards"] = "Dice Modifiers",
+			["k_dsix_infected"] = "Infected!",
 			["k_delevel_ex"] = "Delevel!",
 			["k_boosted_ex"] = "Boosted!",
+			["d6config_dice_modifier"] = "Dice Modifiers",
+			["d6config_booster_packs"] = "Booster Pack",
+			["d6config_upgrades_in_shop"] = "D6 Joker Upgrades in Shop",
 		},
 	},
 	["descriptions"] = {
@@ -37,14 +42,14 @@ return {
 				["name"] = "D6 Support Pack",
 				["text"] = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:joker} D6 Consumables{}",
+					"{C:attention}#2#{C:joker} Dice Modifiers{}",
 				},
 			},
 			["p_dsix_mega_d6_support_pack"] = {
 				["name"] = "Mega D6 Support Pack",
 				["text"] = {
 					"Choose {C:attention}#1#{} of up to",
-					"{C:attention}#2#{C:joker} D6 Consumables{}",
+					"{C:attention}#2#{C:joker} Dice Modifiers{}",
 				},
 			},
 			["p_dsix_d6_booster_pack"] = {
@@ -52,7 +57,7 @@ return {
 				["text"] = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{C:joker} D6 Jokers{}",
-					"or {C:joker}D6 Consumables",
+					"or {C:joker}Dice Modifiers",
 				},
 			},
 			["p_dsix_mega_d6_booster_pack"] = {
@@ -60,9 +65,18 @@ return {
 				["text"] = {
 					"Choose {C:attention}#1#{} of up to",
 					"{C:attention}#2#{C:joker} D6 Jokers{}",
-					"or {C:joker}D6 Consumables",
+					"or {C:joker}Dice Modifiers",
 				},
 			},
+			["undiscovered_dice_modifiers"] = {
+                ["name"] = "Not Discovered",
+                ["text"] = {
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does"
+                }
+            },
 			["infection_default"] = {
 				["name"] = "Infected",
 				["text"] = {
@@ -71,12 +85,12 @@ return {
 					"another card of same type"
 				},
 			},
-			["d6_side_edition_polychrome"] = {
-                ["name"] = "Polychrome",
+			["d6_side_edition_foil"] = {
+                ["name"] = "Foil",
                 ["text"] = {
 					"Selected D6 Side has",
-					"{C:dark_edition}Polychrome{} edition",
-                    "{X:mult,C:white} X#1# {} Mult"
+					"{C:dark_edition}Foil{} edition",
+                    "{C:chips}+#1#{} chips"
                 }
 			},
 			["d6_side_edition_holo"] = {
@@ -87,12 +101,42 @@ return {
                     "{C:mult}+#1#{} Mult"
                 }
 			},
-			["d6_side_edition_foil"] = {
-                ["name"] = "Foil",
+			["d6_side_edition_polychrome"] = {
+                ["name"] = "Polychrome",
                 ["text"] = {
 					"Selected D6 Side has",
-					"{C:dark_edition}Foil{} edition",
-                    "{C:chips}+#1#{} chips"
+					"{C:dark_edition}Polychrome{} edition",
+                    "{X:mult,C:white} X#1# {} Mult"
+                }
+			},
+			["d6_side_edition_cry_glitched"] = {
+                ["name"] = "Glitched",
+                ["text"] = {
+					"Selected D6 Side has",
+					"{C:dark_edition}Glitched{} edition",
+					'All values on this D6 Side',
+					'are {C:dark_edition}randomized{}',
+					'between {C:attention}X0.1{} and {C:attention}X10{}',
+					'{C:inactive}(If possible){}',
+                }
+			},
+			["d6_side_edition_cry_oversat"] = {
+                ["name"] = "Oversaturated",
+                ["text"] = {
+					"Selected D6 Side has",
+					"{C:dark_edition}Oversaturated{} edition",
+					"All values",
+					"on this D6 Side",
+					"are {C:attention}doubled{}",
+					"{C:inactive}(If possible)"
+                }
+			},
+			["d6_side_edition_cry_mosaic"] = {
+                ["name"] = "Mosaic",
+                ["text"] = {
+					"Selected D6 Side has",
+					"{C:dark_edition}Oversaturated{} edition",
+					"{X:chips,C:white}X#1# {} Chips",
                 }
 			},
 			["d6_joker_weighted"] = {
@@ -159,7 +203,7 @@ return {
 			["j_dsix_xmult_plus_die"] = {
 				["name"] = "XMult Die+",
 				["text"] = {
-					"Just a much better xmult",
+					"Just a really good xmult",
 					"die, nothing more",
 				},
 			},
@@ -171,12 +215,6 @@ return {
 			},
 			["j_dsix_golden_plus_die"] = {
 				["name"] = "Golden Die+",
-				["text"] = {
-					"Feels like 18K gold",
-				},
-			},
-			["j_dsix_golden_plus2_die"] = {
-				["name"] = "Golden Die++",
 				["text"] = {
 					"Feels like 22K gold",
 				},
@@ -224,29 +262,21 @@ return {
 				},
 			},
 			["j_dsix_casino_die"] = {
-				["name"] = "Casino Die",
+				["name"] = "Roulette Die",
 				["text"] = {
 					"Better hedge your bets",
 				},
 			},
 			["j_dsix_casino_plus_die"] = {
-				["name"] = "Casino Die+",
+				["name"] = "Roulette Die+",
 				["text"] = {
 					"It's all or nothing",
 				},
 			},
-			["j_dsix_self_selling_die"] = {
-				["name"] = "Self-Selling Die",
+			["j_dsix_party_die"] = {
+				["name"] = "Party Die",
 				["text"] = {
-					"This die really doesn't want",
-					"to be taking up a joker slot, huh?",
-					"{C:inactive}(Cannot be Perishable)"
-				}
-			},
-			["j_dsix_support_die"] = {
-				["name"] = "Support Die",
-				["text"] = {
-					"Always willing to help!",
+					"Always down to have fun!",
 				},
 			},
 			["j_dsix_chaos_die"] = {
@@ -267,9 +297,9 @@ return {
 			["j_dsix_interstellar_plus_die"] = {
 				["name"] = "Interstellar Die+",
 				["text"] = {
-					"A functioning space ship in",
+					"A functioning spacecraft in",
 					"the shape of a die",
-					"Fully capable of data collection",
+					"Provides excellent planet observation",
 				},
 			},
 			["j_dsix_impure_gutless_die"] = {
@@ -277,7 +307,7 @@ return {
 				["text"] = {
 					"Even the pinacle of dice wielders",
 					"cower in fear",
-					"Nobody knows it's true power...",
+					"Nobody knows its true power",
 					"{C:inactive}Purification condition:",
 					"{C:inactive}Total blinds defeated: {C:attention}#1#/#2#{C:inactive}",
 				},
@@ -286,8 +316,8 @@ return {
 				["name"] = "Impure: Broke Die",
 				["text"] = {
 					"This die was \"gifted\" to die wielders",
-					"deemed responsible for the",
-					"2008 housing market crash",
+					"under the promise of fortune",
+					"It was all rigged from the start",
 					"{C:inactive}Purification condition:",
 					"{C:inactive}Dollars after payout: {C:attention}#1#{C:inactive}",
 				},
@@ -305,7 +335,7 @@ return {
 				["name"] = "Pure: Savior Die",
 				["text"] = {
 					"The pinacle of strength and might",
-					"No blind can hold it's own",
+					"No blind can hold its own",
 					"with this die in play",
 				},
 			},
@@ -314,8 +344,7 @@ return {
 				["text"] = {
 					"This die is capapble of turning",
 					"small amounts of cash into billions",
-					"Extremely popular with die wielders",
-					"who work at Wall Street",
+					"A favorite in Wall Street",
 				},
 			},
 			["j_dsix_pure_medical_die"] = {
@@ -326,15 +355,9 @@ return {
 				},
 			},
 		},
-		["Tarot"] = {
-			["c_dsix_the_die_wielder"] = {
-				["name"] = "The Die Wielder",
-				["text"] = {
-					"Spawn a random {C:attention}D6 Joker",
-				},
-			},
-			["c_dsix_reconstruction"] = {
-				["name"] = "Reconstruction",
+		["Dice Modifiers"] = {
+			["c_dsix_reconstruct"] = {
+				["name"] = "Reconstruct",
 				["text"] = {
 					"{C:attention}Upgrade{} selected {C:attention}D6 Joker{}",
 				},
@@ -362,14 +385,6 @@ return {
 					"becomes {C:attention}Weighted",
 				},
 			},
-		},
-		["Spectral"] = {
-			["c_dsix_purification"] = {
-				["name"] = "Purification",
-				["text"] = {
-					"Spawn an {C:legendary}Impure Die{}",
-				},
-			},
 			["c_dsix_override"] = {
 				["name"] = "Override",
 				["text"] = {
@@ -391,6 +406,22 @@ return {
 					"Selected {C:attention}D6 Side{} is copied",
 					"to adjacent positions on",
 					"selected {C:attention}D6 Joker",
+				},
+			},
+		},
+		["Tarot"] = {
+			["c_dsix_the_die_wielder"] = {
+				["name"] = "The Die Wielder",
+				["text"] = {
+					"Spawn a random {C:attention}D6 Joker",
+				},
+			},
+		},
+		["Spectral"] = {
+			["c_dsix_purification"] = {
+				["name"] = "Purification",
+				["text"] = {
+					"Spawn an {C:legendary}Impure Die{}",
 				},
 			},
 		},
@@ -519,16 +550,17 @@ return {
 				["label"] = "All In",
 				["name"] = "{C:attention}All In{}",
 				["text"] = {
-					"{C:attention}50% chance of {C:mult}+#1#{C:attention} Mult",
-					"{C:attention}50% chance of {C:mult}-#2#{C:attention} Mult",
+					"{C:green}#1# in #2#{C:attention} chance",
+					"{C:attention}for {C:mult}+#3#{C:attention} Mult",
 				},
 			},
 			["all_in_plus_side"] = {
 				["label"] = "All In+",
 				["name"] = "{C:attention}All In+{}",
 				["text"] = {
-					"{C:attention}50% chance of {C:mult}+#1#{C:attention} Mult",
-					"{C:attention}50% chance of {C:mult}-#2#{C:attention} Mult",
+					"{C:green}#1# in #2#{C:attention} chance",
+					"{C:attention}for {C:mult}+#3#{C:attention} Mult",
+					"{C:attention}else {C:mult}-#4#{C:attention} Mult"
 				},
 			},
 			["payout_side"] = {
@@ -552,6 +584,22 @@ return {
 				["name"] = "{C:attention}Payout++{}",
 				["text"] = {
 					"{C:attention}Earn {C:money}$#1#{C:attention} at",
+					"{C:attention}end of round"
+				},
+			},
+			["payout_minus_side"] = {
+				["label"] = "Payout-",
+				["name"] = "{C:attention}Payout-{}",
+				["text"] = {
+					"{C:attention}Lose {C:red}$#1#{C:attention} at",
+					"{C:attention}end of round"
+				},
+			},
+			["payout_minus2_side"] = {
+				["label"] = "Payout--",
+				["name"] = "{C:attention}Payout--{}",
+				["text"] = {
+					"{C:attention}Lose {C:red}$#1#{C:attention} at",
 					"{C:attention}end of round"
 				},
 			},
@@ -619,56 +667,6 @@ return {
 					"{C:attention}when die is rolled",
 				},
 			},
-			["root_beer_side"] = {
-				["label"] = "Root Beer",
-				["name"] = "{C:attention}Root Beer{}",
-				["text"] = {
-					"{C:attention}Gain #1# Double Tag",
-					"{C:attention}when this joker is sold",
-				},
-			},
-			["root_beer_plus_side"] = {
-				["label"] = "Root Beer+",
-				["name"] = "{C:attention}Root Beer+{}",
-				["text"] = {
-					"{C:attention}Gain #1# Double Tags",
-					"{C:attention}when this joker is sold",
-				},
-			},
-			["card_pack_side"] = {
-				["label"] = "Card Pack",
-				["name"] = "{C:attention}Card Pack{}",
-				["text"] = {
-					"{C:attention}Gain #1# Card Pack Tag",
-					"{C:attention}when this joker is sold",
-					"{C:inactive}(Ethereal, Standard, etc.)",
-				},
-			},
-			["card_pack_plus_side"] = {
-				["label"] = "Card Pack+",
-				["name"] = "{C:attention}Card Pack+{}",
-				["text"] = {
-					"{C:attention}Gain #1# Card Pack Tag",
-					"{C:attention}when this joker is sold",
-					"{C:inactive}(Ethereal, Standard, etc.)",
-				},
-			},
-			["orbital_side"] = {
-				["label"] = "Orbital",
-				["name"] = "{C:attention}Orbital{}",
-				["text"] = {
-					"{C:attention}Gain #1# Orbital Tag",
-					"{C:attention}when this joker is sold",
-				},
-			},
-			["orbital_plus_side"] = {
-				["label"] = "Orbital+",
-				["name"] = "{C:attention}Orbital+{}",
-				["text"] = {
-					"{C:attention}Gain #1# Orbital Tag",
-					"{C:attention}when this joker is sold",
-				},
-			},
 			["juggler_side"] = {
 				["label"] = "Juggler",
 				["name"] = "{C:attention}Juggler{}",
@@ -705,26 +703,27 @@ return {
 				["label"] = "Chaos",
 				["name"] = "{C:attention}Chaos{}",
 				["text"] = {
-					"{C:attention}Copies ability of a",
-					"{C:attention}random die when rolled",
-					"{C:inactive}(Copied die: {C:attention}#1#{C:inactive})",
+					"{C:attention}Copies ability of a random",
+					"{C:attention}D6 Side when rolled",
+					"{C:inactive}(Copied D6 Side: {C:attention}#1#{C:inactive})",
 				},
 			},
 			["chaos_plus_side"] = {
 				["label"] = "Chaos+",
 				["name"] = "{C:attention}Chaos+{}",
 				["text"] = {
-					"{C:attention}Copies ability of a",
-					"{C:attention}random leveled die when rolled",
-					"{C:inactive}(Copied die: {C:attention}#1#{C:inactive})",
+					"{C:attention}Copies ability of a random",
+					"{C:attention}max-leveled D6 Side when rolled",
+					"{C:inactive}(Copied D6 Side: {C:attention}#1#{C:inactive})",
 				},
 			},
 			["moon_side"] = {
 				["label"] = "Moon",
 				["name"] = "{C:attention}Moon{}",
 				["text"] = {
-					"{C:attention}Upgrade random poker hand by", 
-					"{C:attention}#1# when rolled",
+					"{C:attention}Upgrade level of", 
+					"{C:attention}#1# random poker hand by",
+					"{C:attention}#2# when rolled",
 				},
 			},
 			["moon_plus_side"] = {
@@ -732,8 +731,8 @@ return {
 				["name"] = "{C:attention}Moon+{}",
 				["text"] = {
 					"{C:attention}Upgrades level of", 
-					"{C:attention}all poker hands by",
-					"{C:attention}#1# when rolled",
+					"{C:attention}#1# random poker hand by",
+					"{C:attention}#2# when rolled",
 				},
 			},
 			["moon_minus_side"] = {
@@ -761,6 +760,16 @@ return {
 					"{C:attention}This joker is Debuffed",
 					"{C:attention}and set to Eternal",
 					"{C:inactive}(Bypass {C:attention}Perishable{C:inactive})",
+				},
+			},
+			["demolish_side"] = {
+				["label"] = "Demolish",
+				["name"] = "{C:attention}Demolish{}",
+				["text"] = {
+					"{C:attention}All consumables are",
+					"{C:attention}destroyed",
+					"{C:attention}Consumable slots",
+					"{C:attention}set to 0",
 				},
 			},
 			["curse_challenge_side"] = {
@@ -793,7 +802,7 @@ return {
 				["label"] = "Curse: Bear Market",
 				["name"] = "{C:purple}Curse: Bear Market{}",
 				["text"] = {
-					"{C:purple}Payout screen is {C:attention}disabled",
+					"{C:attention}Cash Out{C:purple} is {C:red}disabled",
 				},
 			},
 			["curse_confusion_side"] = {

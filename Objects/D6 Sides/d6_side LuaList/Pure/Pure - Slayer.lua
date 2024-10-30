@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "pure_slayer_side",
 	loc_txt = {},
 	config = {score_decrease = 0.5},
-	atlas = "d6_side_pure",
-	icon_pos = {x=0, y=7},
-	pos = {x=0, y=0},
+	pos = {x=0, y=7}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.score_decrease}}
 	end,
@@ -24,6 +22,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	pure = true,
 	order = 5,

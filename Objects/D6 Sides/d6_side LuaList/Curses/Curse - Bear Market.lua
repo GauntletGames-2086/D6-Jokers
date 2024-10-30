@@ -2,13 +2,14 @@ local d6_side_info = SMODS.D6_Side({
 	key = "curse_bear_market_side",
 	loc_txt = {},
 	config = {money_loss = 15},
-	atlas = "d6_side_curse",
-	icon_pos = {x=3, y=7},
-	pos = {x=0, y=5},
+	pos = {x=3, y=7}, 
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	curse = true,
 	order = 5,

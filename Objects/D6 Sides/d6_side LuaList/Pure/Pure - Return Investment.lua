@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "pure_return_investment_side",
 	loc_txt = {},
 	config = {money_gained = 1, money_to_spend = 2},
-	atlas = "d6_side_pure",
-	icon_pos = {x=6, y=7},
-	pos = {x=0, y=3},
+	pos = {x=6, y=7}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.money_gained, d6_side.extra.money_to_spend}}
 	end,
@@ -12,6 +10,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	pure = true,
 	order = 5,

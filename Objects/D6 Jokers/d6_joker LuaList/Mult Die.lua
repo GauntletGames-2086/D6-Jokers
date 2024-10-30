@@ -1,13 +1,12 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "mult_die",
 	loc_txt = {},
-	discovered = true,
 	d6_sides = {
-		[1] = "mult_side",
-		[2] = "mult_side",
+		[1] = "nothing_side",
+		[2] = "nothing_side",
 		[3] = "mult_side",
-		[4] = "mult_plus_side",
-		[5] = "mult_plus_side",
+		[4] = "mult_side",
+		[5] = "mult_side",
 		[6] = "mult_plus_side"
 	},
 	rarity = 1,

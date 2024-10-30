@@ -1,7 +1,7 @@
 local d6_joker_info = SMODS.D6_Joker({
 	key = "chaos_die",
 	loc_txt = {},
-	discovered = true,
+	pos = {x=0, y=2},
 	d6_sides = {
 		[1] = "chaos_side",
 		[2] = "chaos_side",
@@ -11,7 +11,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		[6] = "chaos_side"
 	},
 	rarity = 2,
-	cost = 8,
+	cost = 7,
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.Joker.register(self)

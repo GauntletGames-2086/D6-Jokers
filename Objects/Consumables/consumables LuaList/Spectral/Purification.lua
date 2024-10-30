@@ -1,11 +1,13 @@
--- D6-Jokers: Purification
 local tarot_info = SMODS.Consumable({
 	key = "purification",
 	set = "Spectral",
 	loc_txt = {},
-	pos = {x=2, y=1},
-	atlas = "d6_consumables",
-	discovered = true,
+	pos = {x=0, y=1},
+	atlas = "dice_modifiers",
+	hidden = {
+		soul_set = "Dice Modifier",
+		soul_rate = 0.01,
+	},
 	can_use = function(self, card)
 		if #G.jokers.cards < G.jokers.config.card_limit or self.area == G.jokers then
 			return true
@@ -16,7 +18,7 @@ local tarot_info = SMODS.Consumable({
 	use = function(self, card, area, copier)
 		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
             play_sound('timpani')
-            local _card = create_card('impure_die', G.jokers, nil, nil, nil, nil, nil, "purification_impure_spawn")
+            local _card = create_card('Impure', G.jokers, nil, nil, nil, nil, nil, "purification_impure_spawn")
             _card:add_to_deck()
             G.jokers:emplace(_card)
             card:juice_up(0.3, 0.5)
@@ -25,10 +27,9 @@ local tarot_info = SMODS.Consumable({
 	end,
 	register = function(self, order)
 		if order and order == self.order then
-			SMODS.Consumable.super.register(self)
+			SMODS.Consumable.register(self)
 		end
 	end,
-	d6_consumable = true,
 	order = 1,
 })
 

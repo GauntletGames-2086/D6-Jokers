@@ -1,20 +1,21 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "curse_bankruptcy_side",
 	loc_txt = {},
-	config = {money_loss = 15},
-	atlas = "d6_side_curse",
-	icon_pos = {x=2, y=7},
-	pos = {x=0, y=4},
+	config = {money_loss = 25},
+	pos = {x=2, y=7}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.money_loss}}
 	end,
 	calc_dollar_bonus = function(self, card, d6_side)
-		return -d6_side.extra.money_loss
+		return -d6_side.extra.money_loss, true
 	end,
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	curse = true,
 	order = 5,

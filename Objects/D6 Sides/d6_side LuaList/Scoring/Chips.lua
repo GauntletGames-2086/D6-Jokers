@@ -2,8 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "chips_side",
 	loc_txt = {},
 	config = {chips = 25},
-	atlas = "d6_side_chips",
-	icon_pos = {x=4, y=0},
+	pos = {x=4, y=0},
 	upgrade = "chips_plus_side",
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.chips}}
@@ -14,7 +13,7 @@ local d6_side_info = SMODS.D6_Side({
 				message = localize{type='variable',key='a_chips',vars={d6_side.extra.chips}},
 				chip_mod = d6_side.extra.chips,
 				colour = G.C.CHIPS
-			}
+			}, true
 		end
 	end,
 	register = function(self, order)

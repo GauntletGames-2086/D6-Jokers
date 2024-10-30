@@ -1,28 +1,26 @@
 local d6_side_info = SMODS.D6_Side({
 	key = "all_in_plus_side",
 	loc_txt = {},
-	config = {mult = 50},
-	atlas = "d6_side_all_in",
-	icon_pos = {x=3, y=4},
-	pos = {x=0, y=1},
+	config = {mult = 80, odds = 2, mult_minus = 30},
+	pos = {x=3, y=4},
 	loc_vars = function(self, info_queue, card, d6_side)
-		return {vars = {d6_side.extra.mult, d6_side.extra.mult}}
+		return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), d6_side.extra.odds, d6_side.extra.mult, d6_side.extra.mult_minus}}
 	end,
 	calculate = function(self, card, context, d6_side)
 		if context.joker_main then
-			local mult_chance = pseudorandom("all_in_plus")
-			if mult_chance >= 0.5 then
+			local mult_chance = pseudorandom("all_in")
+			if pseudorandom("all_in") > G.GAME.probabilities.normal/d6_side.extra.odds then
 				return {
 					message = localize{type='variable',key='a_mult',vars={d6_side.extra.mult}},
 					mult_mod = d6_side.extra.mult,
 					colour = G.C.MULT
-				}
-			elseif mult_chance < 0.5 then
+				}, true
+			else
 				return {
-					message = localize{type='variable',key='a_mult_minus',vars={d6_side.extra.mult}},
-					mult_mod = -d6_side.extra.mult,
+					message = localize{type='variable',key='a_mult_minus',vars={d6_side.extra.mult_minus}},
+					mult_mod = -d6_side.extra.mult_minus,
 					colour = G.C.MULT
-				}
+				}, true
 			end
 		end
 	end,
@@ -36,16 +34,22 @@ local d6_side_info = SMODS.D6_Side({
 
 D6_JokerDisplay.D6_Side_Definitions[d6_side_info.key] = {
 	text = {
-		{ text = '-' },
+		{ text = '+' },
 		{ ref_table = 'card.joker_display_values', ref_value = 'mult' },
-		{ text = ' +' },
-		{ ref_table = 'card.joker_display_values', ref_value = 'mult' },
+		{ text = ' -' },
+		{ ref_table = 'card.joker_display_values', ref_value = 'mult_minus' },
 	},
 	text_config = { colour = G.C.MULT },
 	reminder_text = {
-		{ text = '(50%)  (50%)' }
+		{ ref_table = 'card.joker_display_values', ref_value = 'mult_hit_odds' },
+		{ text = ' ' },
+		{ ref_table = 'card.joker_display_values', ref_value = 'mult_miss_odds' },
 	},
 	reminder_text_config = { colour = G.C.GREEN },
+	calc_function = function(card)
+		card.joker_display_values.mult_hit_odds = ""..((G.GAME and G.GAME.probabilities.normal or 1)/card.joker_display_values.odds*100).."%"
+		card.joker_display_values.mult_miss_odds = ""..((1-(G.GAME and G.GAME.probabilities.normal or 1)/card.joker_display_values.odds)*100).."%"
+	end,
 }
 
 return d6_side_info

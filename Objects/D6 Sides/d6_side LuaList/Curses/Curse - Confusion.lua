@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "curse_confusion_side",
 	loc_txt = {},
 	config = {odds = 2},
-	atlas = "d6_side_curse",
-	icon_pos = {x=6, y=6},
-	pos = {x=0, y=2},
+	pos = {x=6, y=6}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), d6_side.extra.odds}}
 	end,
@@ -12,6 +10,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	curse = true,
 	order = 5,

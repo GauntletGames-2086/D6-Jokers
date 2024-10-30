@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "nothing_plus3_side",
 	loc_txt = {},
 	config = {xmult = 5},
-	atlas = "d6_side_nothing",
-	icon_pos = {x=3, y=0},
-	pos = {x=0, y=3},
+	pos = {x=3, y=0}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.xmult}}
 	end,
@@ -14,7 +12,7 @@ local d6_side_info = SMODS.D6_Side({
 				message = localize{type='variable',key='a_xmult',vars={d6_side.extra.xmult}},
 				Xmult_mod = d6_side.extra.xmult,
 				colour = G.C.MULT
-			}
+			}, true
 		end
 	end,
 	register = function(self, order)

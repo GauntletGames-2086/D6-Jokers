@@ -21,7 +21,7 @@ local order_list = {
 	["j_dsix_casino_die"] = {order = 20},
 	["j_dsix_casino_plus_die"] = {order = 21},
 	["j_dsix_self_selling_die"] = {order = 22},
-	["j_dsix_support_die"] = {order = 23},
+	["j_dsix_party_die"] = {order = 23},
 	["j_dsix_impure_gutless_die"] = {order = 24},
 	["j_dsix_impure_broke_die"] = {order = 25},
 	["j_dsix_impure_plague_die"] = {order = 26},

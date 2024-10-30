@@ -11,5 +11,5 @@ pattern = '''(?<indent>[\t ]*)delay\(0\.4\)\n[\s\S]{13}G\.E_MANAGER:add_event\(E
 position = 'before'
 payload = ''' 
             for i = 1, #G.consumeables.cards do
-                G.consumeables.cards[i]:calculate_joker({setting_blind = true, blind = G.GAME.round_resets.blind})
+                G.consumeables.cards[i]:calculate_joker({dsix_setting_blind = true, blind = G.GAME.round_resets.blind})
             end'''

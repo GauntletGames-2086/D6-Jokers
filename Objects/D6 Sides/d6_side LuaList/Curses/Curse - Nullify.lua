@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "curse_nullify_side",
 	loc_txt = {},
 	config = {},
-	atlas = "d6_side_curse",
-	icon_pos = {x=4, y=6},
-	pos = {x=0, y=0},
+	pos = {x=4, y=6}, 
 	add_to_deck = function(self, card, from_debuff, other, d6_side)
 		card.pinned = true
 	end,
@@ -35,6 +33,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	curse = true,
 	order = 5,

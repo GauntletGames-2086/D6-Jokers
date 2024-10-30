@@ -213,7 +213,7 @@ return {
 					"{C:inactive}总计击败盲注数：{C:attention}#1#/#2#",
 				},
 			},
-			["j_dsix_support_die"] = {
+			["j_dsix_party_die"] = {
 				["name"] = "支援骰子",
 				["text"] = {
 					"时刻待命，乐于助人！",
@@ -327,7 +327,7 @@ return {
 				},
 			},
 		},
-		["Tarot"] = {
+		["Dice Modifiers"] = {
 			["c_dsix_concentration"] = {
 				["name"] = "专注",
 				["text"] = {
@@ -336,13 +336,7 @@ return {
                     "的所有骰面"
 				},
 			},
-			["c_dsix_the_die_wielder"] = {
-				["name"] = "掷骰者",
-				["text"] = {
-					"随机生成一张{C:attention}六面骰小丑牌",
-				},
-			},
-			["c_dsix_reconstruction"] = {
+			["c_dsix_reconstruct"] = {
 				["name"] = "重构",
 				["text"] = {
 					"{C:attention}升级{}选定的{C:attention}六面骰小丑牌"
@@ -355,19 +349,27 @@ return {
 					"将其{C:attention}第一面{}设为{C:attention}第六面"
 				},
 			},
+			["c_dsix_override"] = {
+				["name"] = "换面",
+				["text"] = {
+					"将选定骰子的所有{C:attention}六面",
+					"全部替换为本牌的{C:attention}当前面"
+				},
+			},
+		},
+		["Tarot"] = {
+			["c_dsix_the_die_wielder"] = {
+				["name"] = "掷骰者",
+				["text"] = {
+					"随机生成一张{C:attention}六面骰小丑牌",
+				},
+			},
 		},
 		["Spectral"] = {
 			["c_dsix_purification"] = {
 				["name"] = "提纯",
 				["text"] = {
 					"生成一张{C:legendary}不纯骰子",
-				},
-			},
-			["c_dsix_override"] = {
-				["name"] = "换面",
-				["text"] = {
-					"将选定骰子的所有{C:attention}六面",
-					"全部替换为本牌的{C:attention}当前面"
 				},
 			},
 		},

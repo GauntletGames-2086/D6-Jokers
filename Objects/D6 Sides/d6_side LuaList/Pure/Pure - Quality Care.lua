@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "pure_quality_care_side",
 	loc_txt = {},
 	config = {retriggers = 1},
-	atlas = "d6_side_pure",
-	icon_pos = {x=0, y=8},
-	pos = {x=0, y=5},
+	pos = {x=0, y=8}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {self.config.retriggers}}
 	end,
@@ -21,6 +19,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	pure = true,
 	order = 5,

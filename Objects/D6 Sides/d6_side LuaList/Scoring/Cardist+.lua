@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "cardist_plus_side",
 	loc_txt = {},
 	config = {hands = 2, triggered = true},
-	atlas = "d6_side_cardist",
-	icon_pos = {x=7, y=3},
-	pos = {x=0, y=1},
+	pos = {x=7, y=3}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.hands}}
 	end,

@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "pure_skyrocket_side",
 	loc_txt = {},
 	config = {interest_buff = 3},
-	atlas = "d6_side_pure",
-	icon_pos = {x=5, y=7},
-	pos = {x=0, y=2},
+	pos = {x=5, y=7}, 
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {self.config.interest_buff}}
 	end,
@@ -12,6 +10,9 @@ local d6_side_info = SMODS.D6_Side({
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	pure = true,
 	order = 5,

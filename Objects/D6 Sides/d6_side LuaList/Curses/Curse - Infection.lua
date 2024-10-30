@@ -2,9 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "curse_infection_side",
 	loc_txt = {},
 	config = {},
-	atlas = "d6_side_curse",
-	icon_pos = {x=4, y=6},
-	pos = {x=0, y=6},
+	pos = {x=4, y=6}, 
 	calculate = function(self, card, context, d6_side)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
 			--sendInfoMessage("handling infection")
@@ -20,12 +18,16 @@ local d6_side_info = SMODS.D6_Side({
 				selected_card.ability.dsix_infected = true
 			end
 			card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_dsix_infected'), colour = G.C.GREEN})
+			return nil, true
 		end
 	end,
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.GameObject.register(self)
 		end
+	end,
+	in_pool = function(self)
+		return false
 	end,
 	curse = true,
 	order = 5,

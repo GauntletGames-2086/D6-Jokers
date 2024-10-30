@@ -2,8 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "drunkard_side",
 	loc_txt = {},
 	config = {discards = 1, triggered = true},
-	atlas = "d6_side_drunkard",
-	icon_pos = {x=2, y=3},
+	pos = {x=2, y=3},
 	upgrade = "drunkard_plus_side",
 	loc_vars = function(self, info_queue, card, d6_side)
 		return {vars = {d6_side.extra.discards}}

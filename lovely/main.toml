@@ -42,7 +42,7 @@ payload = '''
 [[patches]]
 [patches.regex]
 target = 'functions/UI_definitions.lua'
-pattern = 'if AUT\.badges then'
+pattern = '''(?<indent>[\t ]*)return \{n=G\.UIT\.ROOT, config = \{align = 'cm', colour = G\.C\.CLEAR\}, nodes=\{\n[\s\S]{8}\{n=G\.UIT\.C, config=\{align = "cm"'''
 position = 'before'
 payload = '''
 			--ADDED CODE FROM D6 JOKERS
@@ -50,32 +50,40 @@ payload = '''
             local has_d6_sides = nil
             local d6_joker_UI_code = nil
             if card.config and (card.config.center and card.config.center.d6_sides) and not debuffed then
-                test_thingy = Moveable(88, 102, 2, 2)
-                has_d6_sides = true
-                card.ability.extra.selected_d6_face = math.clamp(1, math.round(card.ability.extra.selected_d6_face), 6)
-                local base_d6_sprite = Sprite(88, 102, 2, 2, G.ASSET_ATLAS["dsix_base_test_d6_art"], {x=0, y=0})
+                local test_thingy = Moveable(88, 102, 2, 2)
+                local has_d6_sides = true
+                -- TODO: Convert this to formula
+                local d6_offset_default = {
+                    [1] = {x = 0.6, y = 0.6-(0.7)},
+                    [2] = {x = 0.6+(0.6), y = 0.6-(0.6*0.6)},
+                    [3] = {x = 0.6+(0.6), y = 0.6+(0.6*0.6)},
+                    [4] = {x = 0.6, y = 0.6+(0.7)},
+                    [5] = {x = 0.6-(0.6), y = 0.6+(0.6*0.6)},
+                    [6] = {x = 0.6-(0.6), y = 0.6-(0.6*0.6)},
+                }
 
-                for i, v in ipairs(card.ability.extra.local_d6_sides) do
-                    local d6_side_info = SMODS.D6_Sides[v.key]
-                    local d6_side_sprite = Sprite(88, 102, 2, 2, G.ASSET_ATLAS[d6_side_info.atlas], {x=i-1+d6_side_info.pos.x, y=d6_side_info.pos.y})
-                    base_d6_sprite.children["d6_side_"..tostring(i)] = d6_side_sprite
-                    base_d6_sprite.children["d6_side_"..tostring(i)].states.visible = true
-                    base_d6_sprite.children["d6_side_"..tostring(i)]:set_role({major = base_d6_sprite, role_type = 'Minor', draw_major = base_d6_sprite})
-                    base_d6_sprite.children["d6_side_"..tostring(i)]:define_draw_steps({
-                        i ~= card.ability.extra.selected_d6_face and 
-                        {shader = v.edition and v.edition.shaders.darken or 'dsix_darken', no_tilt = true, other_obj = base_d6_sprite} or --unselected D6 side
-                        {shader = v.edition and v.edition.shaders.lighten or 'dissolve', no_tilt = true, other_obj = base_d6_sprite}, --selected D6 side
-                    })
+                for i = 1, #card.ability.extra.local_d6_sides do
+                    local selected_d6_side = card.ability.extra.local_d6_sides[i]
+                    local d6_side_info = SMODS.D6_Sides[selected_d6_side.key]
+                    local d6_side_icon = Sprite(34, 34, 0.75, 0.75, G.ASSET_ATLAS[d6_side_info.atlas] or G.ASSET_ATLAS["dsix_d6_side_icons"], d6_side_info.pos or {x=0, y=0})
+                    test_thingy.children["d6_side_"..tostring(i)] = d6_side_icon
+                    test_thingy.children["d6_side_"..tostring(i)].states.visible = true
+                    test_thingy.children["d6_side_"..tostring(i)]:set_role({major = test_thingy, role_type = 'Minor', offset = d6_offset_default[i]})
+
+                    local shaders_to_draw = {}
+                    if i ~= card.ability.extra.selected_d6_face then 
+                        shaders_to_draw[#shaders_to_draw+1] = {shader = selected_d6_side.edition and selected_d6_side.edition.shaders.darken or 'dsix_darken', other_obj = d6_side_icon}
+                    else
+                        shaders_to_draw[#shaders_to_draw+1] = {shader = selected_d6_side.edition and selected_d6_side.edition.shaders.lighten or 'dissolve', other_obj = d6_side_icon}
+                    end
+                    if selected_d6_side.edition and selected_d6_side.edition.shaders.other then
+                        for ii, vv in ipairs(selected_d6_side.edition.shaders.other) do
+                            shaders_to_draw[#shaders_to_draw+1] = {shader = vv}
+                        end
+                    end
+                    test_thingy.children["d6_side_"..tostring(i)]:define_draw_steps(shaders_to_draw)
                 end
 
-                --Assign base_d6_sprite to dummy object
-                test_thingy.children["d6_side_test_thing"] = base_d6_sprite
-                test_thingy.children["d6_side_test_thing"].states.visible = true
-                test_thingy.children["d6_side_test_thing"]:set_role({major = test_thingy, role_type = 'Minor', draw_major = test_thingy, offset = {x = 0, y = -0.12}})
-                test_thingy.children["d6_side_test_thing"]:define_draw_steps({
-                    {shader = 'dissolve', no_tilt = true, other_obj = base_d6_sprite}
-                    })
-                
                 if not card.config.center.omit_d6_sides_desc then
                     SMODS.compat_0_9_8.generate_UIBox_ability_table_card = card
                     local D6_AUT = generate_card_ui(SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key], nil, nil, "D6 Side", nil, nil, nil, nil, card)
@@ -85,6 +93,7 @@ payload = '''
                     end
 
                     if AUT.info then
+                        info_boxes = {} -- Note: might conflict
                         local d6_side_AUT_info_organized = {}
                         local remaining_AUT_info = {}
                         for k, v in ipairs(AUT.info) do
@@ -111,23 +120,37 @@ payload = '''
                     end
                 end
 
-                d6_joker_UI_code = {n=G.UIT.R, config={align = "cm", padding = 0.1, r = 0.1}, nodes={{n=G.UIT.O, config={object = test_thingy}}}}
-
+                local popup_object = Moveable()
+                local d6_joker_UI_code = {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={{n=G.UIT.O, config={id = "d6_joker_UI_code", align = "cm", object = test_thingy, role = {role_type = "Minor", major = card}}}}}
+                
                 return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
-                  {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = Moveable(),ref_table = next(info_boxes) and info_boxes or nil}, nodes={
-                    {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
-                      {n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
-                        name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
-                        desc_from_rows(AUT.main),
-                        d6_joker_UI_code,
-                        badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
-                      }}
-                    }}
-                  }},
+                    {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = popup_object,ref_table = next(info_boxes) and info_boxes or nil}, nodes={
+                        {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
+                            {n=G.UIT.R, config={align = "cm", padding = 0.07, r = 0.1, colour = adjust_alpha(card_type_background, 0.8)}, nodes={
+                                name_from_rows(AUT.name, is_playing_card and G.C.WHITE or nil),
+                                desc_from_rows(AUT.main),
+                                d6_joker_UI_code,
+                                badges[1] and {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=badges} or nil,
+                            }}
+                        }}
+                    }},
                 }}
             end
-			--ADDED CODE FROM D6 JOKERS
+'''
 
+# Node:hover()
+[[patches]]
+[patches.pattern]
+target = 'engine/node.lua'
+pattern = "self.children.h_popup.states.collide.can = false"
+position = 'after'
+match_indent = true
+payload = '''
+if self.children.h_popup:get_UIE_by_ID("d6_joker_UI_code") then
+   local d6_joker_UI_code = self.children.h_popup:get_UIE_by_ID("d6_joker_UI_code")
+   d6_joker_UI_code.config.role.major = d6_joker_UI_code
+   self.children.h_popup:recalculate()
+end
 '''
 
 # info_tip_from_rows()
@@ -141,8 +164,8 @@ payload = '''
 	local d6_side_UI_config = nil
 	if SMODS.D6_Sides and SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[name]] ~= nil then
         local d6_side_config = SMODS.D6_Sides[SMODS.D6_Side.reverse_lookup_name[name]]
-		local d6_side_icon_pos = d6_side_config.icon_pos
-		local d6_icon_sprite = Sprite(34, 34, 0.75, 0.75, G.ASSET_ATLAS[d6_side_config.icon_atlas] or G.ASSET_ATLAS["dsix_d6_side_icons"], d6_side_icon_pos)
+		local d6_side_pos = d6_side_config.pos
+		local d6_icon_sprite = Sprite(34, 34, 0.75, 0.75, G.ASSET_ATLAS[d6_side_config.atlas] or G.ASSET_ATLAS["dsix_d6_side_icons"], d6_side_pos)
 		d6_icon_sprite:define_draw_steps({{shader = 'dissolve', no_tilt = true}})
 		d6_side_UI_config = {n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes={{n=G.UIT.O, config={object = d6_icon_sprite}}}}
 	end
@@ -157,18 +180,4 @@ pattern = '(?<indent>[\t ]*)\{n=G\.UIT\.R, config=\{align = "cm", minw = 1\.5, m
 position = 'at'
 payload = '''
 {n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = G.C.WHITE}, nodes={{n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t},d6_side_UI_config,}}
-'''
-
-# align_h_popup()
-[[patches]]
-[patches.regex]
-target = 'card.lua'
-pattern = '''(?<indent>[\t ]*)return \{\n[\s\S]{12}major = self\.children\.focused_ui or self,'''
-position = 'before'
-payload = '''
-	if self.config.center.d6_sides then 
-		popup_direction = (self.children.buy_button or (self.area and self.area.config.view_deck) or (self.area and self.area.config.type == 'shop')) and 'cl' or 
-		(self.T.y < G.CARD_H*0.8*2) and 'bm' or
-		'tm'
-	end
 '''

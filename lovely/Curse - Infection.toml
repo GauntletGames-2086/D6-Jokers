@@ -21,7 +21,9 @@ target = 'card.lua'
 pattern = '''if self.ability and self.ability.perma_debuff then self.debuff = true end'''
 position = 'after'
 match_indent = true
-payload = '''if self.ability and self.ability.dsix_infected then self.debuff = true end'''
+payload = '''
+if self.ability and self.ability.dsix_infected and self.ability.dsix_cleansed then self.ability.dsix_infected = nil end 
+if self.ability and self.ability.dsix_infected then self.debuff = true end'''
 
 ## Infected text part 1
 [[patches]]
