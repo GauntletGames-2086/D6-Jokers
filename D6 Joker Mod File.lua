@@ -718,10 +718,10 @@ function load_compat(compat)
 						override.max = override.max * G.GAME.modifiers.cry_jkr_misprint_mod
 					end
 					if G.GAME.modifiers.cry_misprint_min or override and override.min then
-						cry_misprintize_tbl(d6_side.key, d6_side, "extra", nil, override, stack)
+						cry_misprintize_tbl(d6_side.key, d6_side, "extra", nil, override or {min=0.1*(G.GAME.modifiers.cry_misprint_min or 1),max=10*(G.GAME.modifiers.cry_misprint_max or 1)}, stack)
 					end
 				else
-					cry_misprintize_tbl(d6_side.key, d6_side, "extra", nil, override, stack)
+					cry_misprintize_tbl(d6_side.key, d6_side, "extra", nil, override or {min=0.1*(G.GAME.modifiers.cry_misprint_min or 1),max=10*(G.GAME.modifiers.cry_misprint_max or 1)}, stack)
 				end
 			elseif card.ability.extra and type(card.ability.extra) == "table" and card.ability.extra.local_d6_sides then
 				local d6_joker_extra = copy_table(card.ability.extra)
@@ -730,7 +730,7 @@ function load_compat(compat)
 						(not force_reset or G.GAME.modifiers.cry_jkr_misprint_mod)
 						and (G.GAME.modifiers.cry_misprint_min or override or card.ability.set == "Joker")
 					then
-						if G.GAME.modifiers.cry_jkr_misprint_mod and card.ability.set == "Joker" then
+						if G.GAME.modifiers.cry_jkr_misprint_mod then
 							if not override then
 								override = {}
 							end
@@ -740,10 +740,10 @@ function load_compat(compat)
 							override.max = override.max * G.GAME.modifiers.cry_jkr_misprint_mod
 						end
 						if G.GAME.modifiers.cry_misprint_min or override and override.min then
-							cry_misprintize_tbl(v.key, v, "extra", nil, override, stack)
+							cry_misprintize_tbl(v.key, v, "extra", nil, override or {min=0.1*(G.GAME.modifiers.cry_misprint_min or 1),max=10*(G.GAME.modifiers.cry_misprint_max or 1)}, stack)
 						end
 					else
-						cry_misprintize_tbl(v.key, v, "extra")
+						cry_misprintize_tbl(v.key, v, "extra", nil, override or {min=0.1*(G.GAME.modifiers.cry_misprint_min or 1),max=10*(G.GAME.modifiers.cry_misprint_max or 1)}, stack)
 					end
 				end
 				cry_misprintize_ref(card, override, force_reset, stack)
