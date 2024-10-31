@@ -1,15 +1,4 @@
---- STEAMODDED HEADER
---- MOD_NAME: D6 Jokers
---- MOD_ID: D6Joker
---- MOD_AUTHOR: [ItsFlowwey]
---- MOD_DESCRIPTION: Adds D6 Jokers that have their effects determined by a die roll. 
---- PREFIX: dsix
---- VERSION: 0.7.2
---- PRIORITY: -100
---- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-1030c]
-
-----------------------------------------------
-------------MOD CODE -------------------------
+--- MAIN D6 JOKER FILE
 
 D6Joker_ModData = SMODS.current_mod
 local mod_path = D6Joker_ModData.path
@@ -19,7 +8,7 @@ SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 34, py = 34
 SMODS.Atlas{key = "d6_jokers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_jokers_atlas.png"}
 SMODS.Atlas{key = "d6_boosters", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_boosters.png"}
 SMODS.Atlas{key = "dice_modifiers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_consumables.png"}
-SMODS.UndiscoveredSprite{key = 'Dice Modifier', atlas = 'dsix_d6_consumables', pos = {x=1, y=0}}
+SMODS.UndiscoveredSprite{key = 'Dice Modifier', atlas = 'dsix_dice_modifiers', pos = {x=1, y=0}}
 SMODS.Atlas{key = "booster_enhancement", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "boosted_enhancement.png"}
 --Other
 SMODS.Atlas{key = "modicon", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_jokers_mod_tag.png"}

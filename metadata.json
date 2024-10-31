@@ -1,0 +1,16 @@
+{
+    "id": "D6Joker",
+    "author": ["ItsFlowwey"],
+    "name": "D6 Jokers",
+    "description": "Adds D6 Jokers that have their effects determined by a die roll",
+    "prefix": "dsix",
+    "version": "0.7.2",
+    "main_file": "D6 Joker Mod File.lua",
+    "priority": -100,
+	"dependencies": [
+		{
+			"id": "Steamodded",
+			"min_version": "1.0.0~ALPHA-1030c"
+		}
+	]
+}
