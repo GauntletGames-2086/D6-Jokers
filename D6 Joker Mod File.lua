@@ -8,7 +8,7 @@ SMODS.Atlas{key = "d6_side_icons", atlas_table = "ASSET_ATLAS", px = 34, py = 34
 SMODS.Atlas{key = "d6_jokers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_jokers_atlas.png"}
 SMODS.Atlas{key = "d6_boosters", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_boosters.png"}
 SMODS.Atlas{key = "dice_modifiers", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "d6_consumables.png"}
-SMODS.UndiscoveredSprite{key = 'Dice Modifier', atlas = 'dsix_dice_modifiers', pos = {x=1, y=0}}
+SMODS.UndiscoveredSprite{key = 'Dice Modifiers', atlas = 'dice_modifiers', pos = {x=1, y=0}}
 SMODS.Atlas{key = "booster_enhancement", atlas_table = "ASSET_ATLAS", px = 71, py = 95, path = "boosted_enhancement.png"}
 --Other
 SMODS.Atlas{key = "modicon", atlas_table = "ASSET_ATLAS", px = 34, py = 34, path = "d6_jokers_mod_tag.png"}

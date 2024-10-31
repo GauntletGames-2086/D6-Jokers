@@ -49,7 +49,7 @@ payload = '''
 			local test_thingy = nil
             local has_d6_sides = nil
             local d6_joker_UI_code = nil
-            if card.config and (card.config.center and card.config.center.d6_sides) and not debuffed then
+            if card.config and (card.config.center and card.config.center.d6_sides and card.config.center.discovered) and not debuffed then
                 local test_thingy = Moveable(88, 102, 2, 2)
                 local has_d6_sides = true
                 -- TODO: Convert this to formula

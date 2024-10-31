@@ -69,7 +69,7 @@ return {
 					"or {C:joker}Dice Modifiers",
 				},
 			},
-			["undiscovered_dice_modifiers"] = {
+			["undiscovered_dice modifiers"] = {
                 ["name"] = "Not Discovered",
                 ["text"] = {
                     "Purchase or use",
