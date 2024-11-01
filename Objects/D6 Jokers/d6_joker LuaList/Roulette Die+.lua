@@ -14,7 +14,7 @@ local d6_joker_info = SMODS.D6_Joker({
 	cost = 10,
 	in_pool = function(self, extra)
 		if D6Joker_ModData.config["D6Joker_Upgrades_Shop"] then return true end
-		if extra.source and (extra.source == "dsix_booster" or extra.source == "dsix_jokers" or extra.source == "dsix_mega_booster") then
+		if extra and extra.source and (extra.source == "dsix_booster" or extra.source == "dsix_jokers" or extra.source == "dsix_mega_booster") then
 			return true
 		end
 		return false

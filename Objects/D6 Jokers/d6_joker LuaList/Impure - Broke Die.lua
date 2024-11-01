@@ -39,7 +39,7 @@ local d6_joker_info = SMODS.D6_Joker({
 		end
 	end,
 	in_pool = function(self, extra)
-		if extra.source and extra.source == "purification_impure_spawn" then 
+		if extra and extra.source and extra.source == "purification_impure_spawn" then 
 			return true 
 		end
 		return false
