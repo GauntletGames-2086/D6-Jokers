@@ -3,6 +3,8 @@ local booster_info = SMODS.Booster({
 	weight = 0.25,
 	cost = 8,
 	config = {extra = 4, choose = 2},
+	pos = {x=3, y=0},
+	atlas = "d6_boosters",
 	create_card = function(self, card)
 		local card_to_make = nil
 		if not card.ability.cards_made then card.ability.cards_made = 0 end
