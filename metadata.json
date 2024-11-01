@@ -7,11 +7,5 @@
     "prefix": "dsix",
     "version": "0.7.21",
     "main_file": "D6 Joker Mod File.lua",
-    "priority": -100,
-	"dependencies": [
-		{
-			"id": "Steamodded",
-			"min_version": "1.0.0~ALPHA-1030c"
-		}
-	]
+    "priority": -100
 }
