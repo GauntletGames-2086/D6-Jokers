@@ -296,19 +296,18 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 local get_edition_ref = Card.get_edition
 function Card:get_edition()
 	local orig_ret = get_edition_ref(self)
-	if not orig_ret then
-		orig_ret = {card = self}
-		orig_ret.card.edition = {}
-	end
 	if self.ability.set == "Joker" and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.local_d6_sides and self.ability.extra.local_d6_sides[self.ability.extra.selected_d6_face].edition then
 		local edition = self.ability.extra.local_d6_sides[self.ability.extra.selected_d6_face].edition
 		if edition.config.xmult then
+			orig_ret = {card = self}
 			orig_ret.x_mult_mod = (orig_ret.x_mult_mod or 1) * edition.config.xmult
 		end
 		if edition.config.mult then
+			orig_ret = {card = self}
 			orig_ret.mult_mod = (orig_ret.mult_mod or 0) + edition.config.mult
 		end
 		if edition.config.chips then
+			orig_ret = {card = self}
 			orig_ret.chip_mod = (orig_ret.chip_mod or 0) + edition.config.chips
 		end
 	end
