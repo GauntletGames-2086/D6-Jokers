@@ -7,6 +7,5 @@
     "prefix": "dsix",
     "version": "0.7.21",
     "main_file": "D6 Joker Mod File.lua",
-    "priority": -100,
-    "dependencies": []
+    "priority": -100
 }
