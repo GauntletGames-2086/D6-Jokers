@@ -826,6 +826,10 @@ D6Joker_ModData.config_tab = function()
     }
 end
 
+to_number = to_number or function(n)
+	return n
+end
+
 --File loading setup
 local file_groups = NFS.getDirectoryItems(mod_path.."Objects")
 local function init_file_groups()

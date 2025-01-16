@@ -20,7 +20,7 @@ local d6_side_info = SMODS.D6_Side({
 
 local ease_dollars_ref = ease_dollars
 function ease_dollars(mod, instant)
-	if mod < 0 and #SMODS.D6_Side.get_die_info("count", "pure_return_investment_side") > 0 then ease_dollars_ref((mod*-1)/2) end
+	if to_number(mod) < 0 and #SMODS.D6_Side.get_die_info("count", "pure_return_investment_side") > 0 then ease_dollars_ref((to_number(mod)*-1)/2) end
 	return ease_dollars_ref(mod, instant)
 end
 
