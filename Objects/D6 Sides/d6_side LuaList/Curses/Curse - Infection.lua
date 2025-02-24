@@ -2,7 +2,7 @@ local d6_side_info = SMODS.D6_Side({
 	key = "curse_infection_side",
 	loc_txt = {},
 	config = {},
-	pos = {x=4, y=6}, 
+	pos = {x=4, y=7}, 
 	calculate = function(self, card, context, d6_side)
 		if context.end_of_round and not context.individual and not context.repetition and not context.blueprint then
 			--sendInfoMessage("handling infection")

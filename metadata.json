@@ -5,7 +5,10 @@
     "badge_colour": "4BC292",
     "description": "Adds D6 Jokers that have their effects determined by a die roll",
     "prefix": "dsix",
-    "version": "0.7.21",
+    "version": "0.7.22",
     "main_file": "D6 Joker Mod File.lua",
-    "priority": -100
+    "priority": -100,
+    "dependencies": [
+        "Steamodded (>=1.0.0~ALPHA-1423a)"
+    ]
 }

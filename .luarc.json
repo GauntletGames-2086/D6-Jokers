@@ -1,0 +1,17 @@
+{
+    "workspace.library": [
+        "~\\Documents\\Balatro Mods\\GitHub Repos\\Steamodded (global)\\smods\\lsp_def",
+        "${3rd}/love2d/library",
+        "~\\Documents\\Balatro Mods\\Balatro Source Code\\1N"
+    ],
+    "diagnostics.disable": [
+        "undefined-global",
+        "lowercase-global",
+        "need-check-nil",
+        "duplicate-set-field",
+        "inject-field",
+        "undefined-field",
+        "redundant-parameter",
+        "param-type-mismatch"
+    ]
+}

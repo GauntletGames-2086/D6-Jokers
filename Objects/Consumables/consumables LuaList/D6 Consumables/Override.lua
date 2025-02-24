@@ -33,7 +33,7 @@ local tarot_info = SMODS.Consumable({
 	end,
 	loc_vars = function(self, info_queue, card)
 		local total_die_faces = {}
-		for _, v in ipairs(card.ability.extra.local_d6_sides) do
+		for _, v in pairs(card.ability.extra.local_d6_sides) do
 			if not total_die_faces[v.key] then total_die_faces[v.key] = v end
 		end
 		total_die_faces[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key] = card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face]

@@ -123,6 +123,30 @@ payload = '''
                 local popup_object = Moveable()
                 local d6_joker_UI_code = {n=G.UIT.R, config={align = "cm", padding = 0.1}, nodes={{n=G.UIT.O, config={id = "d6_joker_UI_code", align = "cm", object = test_thingy, role = {role_type = "Minor", major = card}}}}}
                 
+                local cols
+                if #info_boxes <= 3 then
+                    cols = 1
+                elseif #info_boxes <= 10 then
+                    cols = 2
+                elseif #info_boxes <= 24 then
+                    cols = 3
+                else
+                    cols = 4
+                end
+                local nodes_per_col = math.ceil(#info_boxes/cols)
+                local info_cols = {}
+                for i = 0, cols-1 do
+                    local col = {}
+                    for j = 1, nodes_per_col do
+                        local info_box = info_boxes[i*nodes_per_col+j]
+                        if info_box then
+                            table.insert(col, info_box)
+                        else break end
+                    end
+                    table.insert(info_cols, {n=G.UIT.C, config = {align="cm"}, nodes = col})
+                end
+                info_boxes = {{n=G.UIT.R, config = {align="cm", padding = 0.05, card_pos = card.T.x }, nodes = info_cols}}
+
                 return {n=G.UIT.ROOT, config = {align = 'cm', colour = G.C.CLEAR}, nodes={
                     {n=G.UIT.C, config={align = "cm", func = 'show_infotip',object = popup_object,ref_table = next(info_boxes) and info_boxes or nil}, nodes={
                         {n=G.UIT.R, config={padding = outer_padding, r = 0.12, colour = lighten(G.C.JOKER_GREY, 0.5), emboss = 0.07}, nodes={
@@ -176,8 +200,40 @@ payload = '''
 [[patches]]
 [patches.regex]
 target = 'functions/UI_definitions.lua'
-pattern = '(?<indent>[\t ]*)\{n=G\.UIT\.R, config=\{align = "cm", minw = 1\.5, minh = 0\.4, r = 0\.1, padding = 0\.05, colour = G\.C\.WHITE\}, nodes=\{\{n=G\.UIT\.R, config=\{align = "cm", padding = 0\.03\}, nodes=t\}\}\}'
+pattern = '(?<indent>[\t ]*)\{n=G\.UIT\.R, config=\{align = "cm", minw = 1\.5, minh = 0\.4, r = 0\.1, padding = 0\.05, colour = desc_nodes\.background_colour or G\.C\.WHITE\}, nodes=\{\{n=G\.UIT\.R, config=\{align = "cm", padding = 0\.03\}, nodes=t\}\}\}'
 position = 'at'
 payload = '''
-{n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = G.C.WHITE}, nodes={{n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t},d6_side_UI_config,}}
+{n=G.UIT.R, config={align = "cm", minw = 1.5, minh = 0.4, r = 0.1, padding = 0.05, colour = desc_nodes.background_colour or G.C.WHITE}, nodes={{n=G.UIT.R, config={align = "cm", padding = 0.03}, nodes=t},d6_side_UI_config,}}
+'''
+
+# eval_card()
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = "-- TARGET: evaluate your own general effects"
+position = 'before'
+match_indent = true
+payload = '''
+if card.config.center and card.config.center.d6_joker and card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].edition then
+    local edition = card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].edition
+    if G.P_D6_EDITIONS[edition.key].calculate and type(G.P_D6_EDITIONS[edition.key].calculate) == "function" then
+        local d6_o = G.P_D6_EDITIONS[edition.key]:calculate(card, context, edition)
+        sendInfoMessage("pre ret.edition"..tprint(ret.edition or {}))
+        sendInfoMessage(tprint(d6_o or {}))
+        if d6_o then
+            if ret.edition then
+                for k, v in pairs(d6_o) do
+                    if ret.edition[k] then 
+                        if type(ret.edition[k]) == "number" and type(v) == "number" then ret.edition[k] = ret.edition[k] + v end
+                    else
+                        ret.edition[k] = v
+                    end
+                end
+            else
+                ret.edition = d6_o
+            end
+        end
+        sendInfoMessage("post ret.edition"..tprint(ret.edition or {}))
+    end
+end
 '''

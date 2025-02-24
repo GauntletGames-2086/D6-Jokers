@@ -54,7 +54,14 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 				},
 				loc_vars = function(self, info_queue, card, edition)
 					info_queue[#info_queue+1] = {key = "d6_side_edition_polychrome", set = "Other", vars = {edition.config.xmult}}
-				end
+				end,
+				calculate = function(self, card, context, edition)
+					if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
+						return {
+							x_mult = edition.config.xmult
+						}
+					end
+				end,
 			},
 			e_holo = {
 				config = {mult = 10},
@@ -65,7 +72,14 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 				},
 				loc_vars = function(self, info_queue, card, edition)
 					info_queue[#info_queue+1] = {key = "d6_side_edition_holo", set = "Other", vars = {edition.config.mult}}
-				end
+				end,
+				calculate = function(self, card, context, edition)
+					if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
+						return {
+							mult = edition.config.mult
+						}
+					end
+				end,
 			},
 			e_foil = {
 				config = {chips = 50},
@@ -76,7 +90,14 @@ SMODS.D6_Side = SMODS.GameObject:extend {
 				},
 				loc_vars = function(self, info_queue, card, edition)
 					info_queue[#info_queue+1] = {key = "d6_side_edition_foil", set = "Other", vars = {edition.config.chips}}
-				end
+				end,
+				calculate = function(self, card, context, edition)
+					if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
+						return {
+							chips = edition.config.chips
+						}
+					end
+				end,
 			}
 		}
 		if SMODS.Mods["Cryptid"] and SMODS.Mods["Cryptid"].can_load then 
@@ -253,7 +274,6 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 					d6_side:add_to_deck(card, from_debuff, {from_roll = true}, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
 				end
 			end
-			--D6 Sides calculate
 			if d6_side.calculate and type(d6_side.calculate) == "function" then
 				local o, retrigger = d6_side:calculate(card, context, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
 				if o or retrigger then return o, retrigger end
@@ -275,8 +295,8 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 	calc_dollar_bonus = function(self, card)
 		local d6_side = SMODS.D6_Sides[card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face].key]
 		if d6_side.calc_dollar_bonus and type(d6_side.calc_dollar_bonus) == "function" then
-			local o, retrigger = d6_side:calc_dollar_bonus(card, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
-			if o or retrigger then return o, retrigger end
+			local o = d6_side:calc_dollar_bonus(card, card.ability.extra.local_d6_sides[card.ability.extra.selected_d6_face])
+			if o then return o end
 		end
 	end,
 	update = function(self, card, dt)
@@ -291,28 +311,6 @@ SMODS.D6_Joker = SMODS.Joker:extend {
 		end
 	end,
 }
-
---Basic support for Foil/Holo/Poly
-local get_edition_ref = Card.get_edition
-function Card:get_edition()
-	local orig_ret = get_edition_ref(self)
-	if self.ability.set == "Joker" and self.ability.extra and type(self.ability.extra) == 'table' and self.ability.extra.local_d6_sides and self.ability.extra.local_d6_sides[self.ability.extra.selected_d6_face].edition then
-		local edition = self.ability.extra.local_d6_sides[self.ability.extra.selected_d6_face].edition
-		if edition.config.xmult then
-			orig_ret = {card = self}
-			orig_ret.x_mult_mod = (orig_ret.x_mult_mod or 1) * edition.config.xmult
-		end
-		if edition.config.mult then
-			orig_ret = {card = self}
-			orig_ret.mult_mod = (orig_ret.mult_mod or 0) + edition.config.mult
-		end
-		if edition.config.chips then
-			orig_ret = {card = self}
-			orig_ret.chip_mod = (orig_ret.chip_mod or 0) + edition.config.chips
-		end
-	end
-	return orig_ret
-end
 
 function table.contains(table, element)
 	for _, value in pairs(table) do
@@ -340,7 +338,6 @@ SMODS.Enhancement{
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.bonus, card.ability.mult, card.ability.Xmult}}
 	end,
-	loc_subtract_extra_chips = 50,
 	in_pool = function(self)
 		return false
 	end,
@@ -422,63 +419,6 @@ function Card:align_h_popup()
 	else
 		return align_h_popup_ref(self)
 	end
-end
-
---""""borrowing"""" the reserve button from Cryptid
-local G_UIDEF_use_and_sell_buttons_ref=G.UIDEF.use_and_sell_buttons
-function G.UIDEF.use_and_sell_buttons(card)
-	if (card.area == G.pack_cards and G.pack_cards) and card.ability.consumeable then --Add a use button
-		if card.config.center.key == 'c_dsix_override' then
-			return {
-				n=G.UIT.ROOT, config = {padding = -0.1,  colour = G.C.CLEAR}, nodes={
-				{n=G.UIT.R, config={ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5*card.T.w - 0.15, minh = 0.7*card.T.h, maxw = 0.7*card.T.w - 0.15, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'use_card', func = 'can_reserve_card'}, nodes={
-					{n=G.UIT.T, config={text = "RESERVE",colour = G.C.UI.TEXT_LIGHT, scale = 0.55, shadow = true}}
-				}},
-				{n=G.UIT.R, config={ref_table = card, r = 0.08, padding = 0.1, align = "bm", minw = 0.5*card.T.w - 0.15, maxw = 0.9*card.T.w - 0.15, minh = 0.1*card.T.h, hover = true, shadow = true, colour = G.C.UI.BACKGROUND_INACTIVE, one_press = true, button = 'Do you know that this parameter does nothing?', func = 'can_use_consumeable'}, nodes={
-					{n=G.UIT.T, config={text = localize('b_use'),colour = G.C.UI.TEXT_LIGHT, scale = 0.45, shadow = true}}
-				}},
-				{n=G.UIT.R, config = {align = "bm", w=7.7*card.T.w}},
-				{n=G.UIT.R, config = {align = "bm", w=7.7*card.T.w}},
-				{n=G.UIT.R, config = {align = "bm", w=7.7*card.T.w}},
-				{n=G.UIT.R, config = {align = "bm", w=7.7*card.T.w}},
-				-- Betmma can't explain it, _Mathisfun can't explain it, neither can I
-			}}
-		end
-	end
-	return G_UIDEF_use_and_sell_buttons_ref(card)
-end
-
-G.FUNCS.can_reserve_card = function(e)
-	if #G.consumeables.cards < G.consumeables.config.card_limit then 
-		e.config.colour = G.C.RED
-		e.config.button = 'reserve_card'
-	else
-		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
-		e.config.button = nil
-	end
-end
-
-G.FUNCS.reserve_card = function(e)
-	local c1 = e.config.ref_table
-	G.E_MANAGER:add_event(Event({
-		trigger = 'after',
-		delay = 0.1,
-		func = function()
-		c1.area:remove_card(c1)
-		c1:add_to_deck()
-		if c1.children.price then c1.children.price:remove() end
-		c1.children.price = nil
-		if c1.children.buy_button then c1.children.buy_button:remove() end
-		c1.children.buy_button = nil
-		remove_nils(c1.children)
-		G.consumeables:emplace(c1)
-		G.GAME.pack_choices = G.GAME.pack_choices - 1
-		if G.GAME.pack_choices <= 0 then
-			G.FUNCS.end_consumeable(nil, delay_fac)
-		end
-		return true
-		end
-	}))
 end
 
 -- D6 Sides UI
@@ -658,7 +598,7 @@ function create_UIBox_d6_side_popup(d6_side, vars)
 end
 
 --JokerDisplay support
-if _G["JokerDisplay"] and SMODS.Mods["JokerDisplay"] then
+if _G["JokerDisplay"] and next(SMODS.find_mod("JokerDisplay")) then
 	D6_JokerDisplay = JokerDisplay
 	D6_JokerDisplay.D6_Side_Definitions = {}
 else

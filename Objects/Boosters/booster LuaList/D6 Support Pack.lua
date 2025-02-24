@@ -9,6 +9,11 @@ local booster_info = SMODS.Booster({
 		return create_card("Dice Modifiers", G.pack_cards, nil, nil, true, true, nil, 'dsix_support')
 	end,
 	group_key = "d6_support_pack",
+	select_card = {
+		["Dice Modifiers"] = "consumeables",
+		["Tarot"] = "consumeables",
+		["Spectral"] = "consumeables"
+	},
 	register = function(self, order)
 		if order and order == self.order then
 			SMODS.Booster.register(self)
